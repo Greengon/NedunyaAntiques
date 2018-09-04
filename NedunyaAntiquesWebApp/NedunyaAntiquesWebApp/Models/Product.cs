@@ -10,7 +10,11 @@ namespace NedunyaAntiquesWebApp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Substance { get; set; }
-        public String Category { get; set; }
+        public string Category { get; set; }
         public double Height { get; set; }
+        public double Width { get; set; }
+        public double  Depth { get; set; }
+        public bool Sale { get; set; }
+        public string Description { get; set; }
     }
 }
