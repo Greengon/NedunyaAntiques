@@ -159,15 +159,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809070829171_InitialCreate.cs" />
-    <Compile Include="Migrations\201809070829171_InitialCreate.Designer.cs">
-      <DependentUpon>201809070829171_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809070919564_121907092018.cs" />
-    <Compile Include="Migrations\201809070919564_121907092018.Designer.cs">
-      <DependentUpon>201809070919564_121907092018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
@@ -188,6 +179,7 @@
     <Content Include="fonts\classy.svg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="functions in nuget.txt" />
     <Content Include="Global.asax" />
     <Content Include="img\bg-img\bg-1.jpg" />
     <Content Include="img\bg-img\bg-2.jpg" />
@@ -261,6 +253,7 @@
     <Content Include="Content\core-style.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\classy-nav.min.js" />
+    <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -315,14 +308,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809070829171_InitialCreate.resx">
-      <DependentUpon>201809070829171_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809070919564_121907092018.resx">
-      <DependentUpon>201809070919564_121907092018.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
