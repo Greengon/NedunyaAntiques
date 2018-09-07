@@ -216,6 +216,7 @@
     <Content Include="img\core-img\favicon.ico" />
     <Content Include="img\core-img\heart-fill.svg" />
     <Content Include="img\core-img\heart.svg" />
+    <Content Include="img\core-img\logo-wide.png" />
     <Content Include="img\core-img\logo.png" />
     <Content Include="img\core-img\logo2.png" />
     <Content Include="img\core-img\long-arrow-left.svg" />
