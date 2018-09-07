@@ -159,15 +159,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809051828381_InitialCreate.cs" />
-    <Compile Include="Migrations\201809051828381_InitialCreate.Designer.cs">
-      <DependentUpon>201809051828381_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809070852081_stam.cs" />
-    <Compile Include="Migrations\201809070852081_stam.Designer.cs">
-      <DependentUpon>201809070852081_stam.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
@@ -175,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap-rtl.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\classy-nav.min.css" />
     <Content Include="Content\core-style.css" />
@@ -316,14 +308,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809051828381_InitialCreate.resx">
-      <DependentUpon>201809051828381_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809070852081_stam.resx">
-      <DependentUpon>201809070852081_stam.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
