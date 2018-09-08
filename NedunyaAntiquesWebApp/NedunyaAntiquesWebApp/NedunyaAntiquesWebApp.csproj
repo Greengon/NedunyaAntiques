@@ -230,6 +230,7 @@
     <Content Include="img\core-img\search.svg" />
     <Content Include="img\core-img\user.svg" />
     <Content Include="img\core-img\view.svg" />
+    <Content Include="img\place-holders.img\640X480.png" />
     <Content Include="img\product-img\product-1.jpg" />
     <Content Include="img\product-img\product-2.jpg" />
     <Content Include="img\product-img\product-3.jpg" />
