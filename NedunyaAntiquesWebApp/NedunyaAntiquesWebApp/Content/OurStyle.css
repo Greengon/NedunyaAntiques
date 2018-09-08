@@ -1,6 +1,6 @@
 ﻿.img-responsive {
-    max-width: 50px;
-    max-height: 100px;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .brand {
@@ -17,8 +17,7 @@
 }
 
 .img-bg-1 {
-    background-image: url(../../img/bg-img/bg-1.jpg);
-    object-fit: contain;
+    object-fit: cover;
     padding: 0;
     display: block;
     margin: 0 auto;
