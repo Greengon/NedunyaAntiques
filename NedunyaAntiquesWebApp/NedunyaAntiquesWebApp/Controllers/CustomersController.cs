@@ -123,5 +123,9 @@ namespace NedunyaAntiquesWebApp.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult CustomerForm()
+        {
+            return View();
+        }
     }
 }

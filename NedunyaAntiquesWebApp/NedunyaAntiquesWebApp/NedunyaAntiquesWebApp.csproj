@@ -315,6 +315,7 @@
     <Content Include="scss\_responsive.scss" />
     <Content Include="scss\_theme_color.scss" />
     <Content Include="scss\_variables.scss" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
