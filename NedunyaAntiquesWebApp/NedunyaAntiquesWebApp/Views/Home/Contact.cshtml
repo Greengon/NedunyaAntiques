@@ -4,14 +4,42 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
+<address class="text-right">
+    Nedunya Antiques<br />
+    בן יהודה 116, תל אביב<br />
+
+    <mail title="דוא" ל">דוא"ל : </mail>
+    Nedunyatlv@gmail.com
 </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<!--Google map-->
+
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px; /* The height is 400 pixels */
+        width: 50%; /* The width is the width of the web page */
+        background-color: grey;
+        margin: auto;
+        border: 3px solid grey;
+        padding: 10px;
+    }
+</style>
+
+<!--The div element for the map-->
+<div id="map"></div>
+<script>
+    // Initialize and add the map
+    function initMap() {
+        // The location of Neduniya
+        var NedunyaLocation = { lat: 32.083476, lng: 34.771842 };
+        // The map, centered at Neduniya
+        var map = new google.maps.Map(
+            document.getElementById('map'), { zoom: 14, center: NedunyaLocation });
+        // The marker, positioned at Neduniya
+        var marker = new google.maps.Marker({ position: NedunyaLocation, map: map });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACkjJTb3AhOX95sMgoOVIkZPVxDPsrkCQ&callback=initMap">
+</script>
