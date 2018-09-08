@@ -13,6 +13,13 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
+        public ActionResult shop()
+        {
+            ViewBag.Message = "Your product shop page.";
+
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -26,5 +33,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             return View();
         }
+
+
     }
 }
