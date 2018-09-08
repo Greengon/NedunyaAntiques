@@ -13,5 +13,7 @@ namespace NedunyaAntiquesWebApp.Models
         [StringLength(255)]
         public string Name { get; set; }
         public bool IsSubscribed { get; set; }
+        [Display(Name =  "תאריך הלידה שלך")]
+        public DateTime? Birthdate { get; set; }
     }
 }
