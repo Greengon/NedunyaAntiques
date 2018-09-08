@@ -121,6 +121,10 @@ namespace NedunyaAntiquesWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult CustomerForm()
+        {
+            return View();
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -130,9 +134,6 @@ namespace NedunyaAntiquesWebApp.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult CustomerForm()
-        {
-            return View();
-        }
+       
     }
 }

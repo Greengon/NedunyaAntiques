@@ -11,6 +11,7 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "נא הזן את שמך")]
         public string Name { get; set; }
         public bool IsSubscribed { get; set; }
         [Display(Name =  "תאריך הלידה שלך")]

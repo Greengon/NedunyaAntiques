@@ -8,23 +8,33 @@
 
 @using (Html.BeginForm("Save", "Customers"))
 {   @Html.AntiForgeryToken()
-<div class="form-group">
-    @Html.LabelFor(m => m.Name)
-    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-    @Html.ValidationMessageFor(m => m.Name)
-</div>
-<div class="form-group">
-    @Html.LabelFor(m => m.Birthdate)
-    @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}",new { @class = "form-control" })
-</div>
+<div class="container h-100">
+    <div class="row h-100 align-items-center">
+        <div class="col-12">
+            <div class="hero-content text-right">
+                <div class="form-group">
+                    <br />
+                    <br />
+                    <br />
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Birthdate)
+                    @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" })
+                </div>
 
-<div class="form-check">
-    <label>
-        @Html.CheckBoxFor(m => m.IsSubscribed)  האם הינך מנוי?
-    </label>
-</div>
-    @Html.HiddenFor(m => m.Id)
-<button type="submit" class="btn btn-primary">Save</button>
-
-}
+                <div class="form-check">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsSubscribed)  האם הינך מנוי?
+                    </label>
+                </div>
+                @Html.HiddenFor(m => m.Id)
+                <button type="submit" class="btn btn-primary">שמור</button>
+            </div>
+            </div>
+        </div>
+ </div>
+    }
 
