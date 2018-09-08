@@ -35,22 +35,29 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Create
-        public ActionResult Create()
+        // GET: Customers/Save
+        public ActionResult Save()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Customers/Save
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,IsSubscribed")] Customer customer)
+        public ActionResult Save([Bind(Include = "Id,Name,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
-            {
+            {   if(customer.Id==0)
                 db.Customers.Add(customer);
+                else
+                {
+                    var customerInDb = db.Customers.Single(c => c.Id == customer.Id);
+                    customerInDb.Name = customer.Name;
+                    customerInDb.Birthdate = customer.Birthdate;
+                    customerInDb.IsSubscribed = customer.IsSubscribed;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

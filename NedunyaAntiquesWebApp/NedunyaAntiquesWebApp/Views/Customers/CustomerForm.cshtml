@@ -1,27 +1,29 @@
 ﻿@model NedunyaAntiquesWebApp.Models.Customer
 @{
     ViewBag.Title = "CustomerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>לקוח חדש</h2>
 
-@using (Html.BeginForm("Create", "Customers"))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Birthdate)
-        @Html.TextBoxFor(m => m.Birthdate, new { @class = "form-control" })
-    </div>
+@using (Html.BeginForm("Save", "Customers"))
+{   @Html.AntiForgeryToken()
+<div class="form-group">
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(m => m.Birthdate)
+    @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}",new { @class = "form-control" })
+</div>
 
-    <div class="form-check">
-        <label>
-            @Html.CheckBoxFor(m => m.IsSubscribed)  האם הינך מנוי?
-        </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+<div class="form-check">
+    <label>
+        @Html.CheckBoxFor(m => m.IsSubscribed)  האם הינך מנוי?
+    </label>
+</div>
+    @Html.HiddenFor(m => m.Id)
+<button type="submit" class="btn btn-primary">Save</button>
 
 }
 
