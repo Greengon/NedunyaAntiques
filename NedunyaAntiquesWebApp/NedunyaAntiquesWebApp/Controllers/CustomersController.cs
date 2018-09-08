@@ -61,8 +61,8 @@ namespace NedunyaAntiquesWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(customer);
+            
+            return View("CustomerForm", customer);
         }
 
         // GET: Customers/Edit/5
