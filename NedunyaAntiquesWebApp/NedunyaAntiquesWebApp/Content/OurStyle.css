@@ -1,5 +1,20 @@
-﻿
+﻿body {
+}
+
 .About-text {
+    background-image: url("~/img/product-img/product-6.jpg");
+}
+
+.img-responsive {
+    max-width: 50px;
+    max-height: 100px;
+}
+
+.brand {
+    height: 35px;
+}
+
+About-text {
     background-image: url("product-9.gif");
     background-color: #cccccc;
 }
@@ -9,7 +24,7 @@
     src: url(/fonts/pfennigbold-webfont.ttf);
 }
 
-.pfennig-bold-font{
+.pfennig-bold-font {
     font-family: Pfennig-bold;
 }
 
