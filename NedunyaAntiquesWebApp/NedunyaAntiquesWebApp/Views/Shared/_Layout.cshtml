@@ -36,9 +36,13 @@
     <!-- Classy Nav js -->
     <script src="~/Scripts/classy-nav.min.js"></script>
     <!-- Active js-->
-    <script src="~/Scripts/active.js"></script>
+    <!--Active script must be loaded after the html or it will crush-->
+    <!--defer is the syntax word for that in script class-->
+    <script src="~/Scripts/active.js" defer></script>
 
+</head>
 
+<body>
     <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
             <!-- Classy Menu -->
@@ -124,9 +128,7 @@
 
         </div>
     </header>
-</head>
+    @RenderBody()
 
-<body>
-        @RenderBody()
 </body>
 </html>
