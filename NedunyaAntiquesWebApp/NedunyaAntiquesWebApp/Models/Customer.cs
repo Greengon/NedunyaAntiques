@@ -16,6 +16,6 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "האם הינך מנוי?")]
         public bool IsSubscribed { get; set; }
         [Display(Name =  "תאריך הלידה שלך")]
-        public DateTime? Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
     }
 }
