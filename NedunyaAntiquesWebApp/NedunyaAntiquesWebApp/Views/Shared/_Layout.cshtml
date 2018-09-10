@@ -36,12 +36,11 @@
     <!-- Classy Nav js -->
     <script src="~/Scripts/classy-nav.min.js"></script>
     <!-- Active js-->
-    <script src="~/Scripts/active.js"></script>
+    <!--Active script must be loaded after the html or it will crush-->
+    <!--defer is the syntax word for that in script class-->
+    <script src="~/Scripts/active.js" defer></script>
 
-
-    
 </head>
-
 
 <body>
     <header class="header_area">
@@ -63,7 +62,7 @@
                     <div class="classynav" style="margin-right:1px">
                         <ul>
                             <li>
-                                <a href="/home/shop">חנות</a>
+                                <a href="#">חנות</a>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">ריהוט</li>
@@ -95,7 +94,7 @@
                                 </div>
                             </li>
                             <li><a href="/home/about">אודות</a></li>
-                            <li><a href="/home/contact">צור קשר</a></li>
+                            <li><a href="/home">צור קשר</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -129,7 +128,7 @@
 
         </div>
     </header>
-
     @RenderBody()
+
 </body>
 </html>
