@@ -15,6 +15,7 @@ namespace NedunyaAntiquesWebApp.Models
         public double? Width { get; set; }
         public double?  Depth { get; set; }
         public bool Sale { get; set; }
+        public bool Rented { get; set; }
         public string Description { get; set; }
     }
 }

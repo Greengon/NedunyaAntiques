@@ -167,6 +167,10 @@
     <Compile Include="Migrations\201809101340054_try1.Designer.cs">
       <DependentUpon>201809101340054_try1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809102008317_RentedProp.cs" />
+    <Compile Include="Migrations\201809102008317_RentedProp.Designer.cs">
+      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -419,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809101340054_try1.resx">
       <DependentUpon>201809101340054_try1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809102008317_RentedProp.resx">
+      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
