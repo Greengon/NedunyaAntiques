@@ -5,14 +5,14 @@ namespace NedunyaAntiquesWebApp.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<NedunyaAntiquesWebApp.Models.ProductsContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<NedunyaAntiquesWebApp.Models.ApplicationContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(NedunyaAntiquesWebApp.Models.ProductsContext context)
+        protected override void Seed(NedunyaAntiquesWebApp.Models.ApplicationContext context)
         {
             //  This method will be called after migrating to the latest version.
 

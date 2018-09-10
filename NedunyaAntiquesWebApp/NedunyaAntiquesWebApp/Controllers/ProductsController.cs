@@ -12,7 +12,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 {
     public class ProductsController : Controller
     {
-        private ProductsContext db = new ProductsContext();
+        private ApplicationContext db = new ApplicationContext();
         public string Dummy()
         {
  
