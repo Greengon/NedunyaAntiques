@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: Pfennig-bold;
-    src: url(/fonts/pfennigbold-webfont.ttf);
+    src: url(/fonts/pfennigbold-webfont.ttf) format('truetype');
 }
 
 .pfennig-bold-font {
