@@ -9,11 +9,20 @@
 
 @font-face {
     font-family: Pfennig-bold;
-    src: url(/fonts/pfennigbold-webfont.ttf);
+    src: url(/fonts/pfennigbold-webfont.ttf) format('truetype');
 }
 
 .pfennig-bold-font {
     font-family: Pfennig-bold;
+}
+.ourlogo{
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.titles {
+    margin-top: 15px;
+    padding-right: 30px;
 }
 
 .img-bg-1 {
@@ -24,6 +33,7 @@
     max-height: 100%;
     max-width: 100%;
 }
+
 
 .pagetextheb {
     padding: 50px 30px 50px 80px;

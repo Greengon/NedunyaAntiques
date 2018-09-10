@@ -5,15 +5,12 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>"נדוניה" עתיקות</title>
-</head>
-<body>
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <!-- Title  -->
-    
+    <title>"נדוניה" עתיקות</title>
 
     <!-- Favicon  -->
-    <link rel="icon" href="~/img/core-img/favicon.ico">
+    <link rel="icon" href="~/img/core-img/icon.ico">
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="~/Content/core-style.css" />
@@ -39,9 +36,13 @@
     <!-- Classy Nav js -->
     <script src="~/Scripts/classy-nav.min.js"></script>
     <!-- Active js-->
-    <script src="~/Scripts/active.js"></script>
+    <!--Active script must be loaded after the html or it will crush-->
+    <!--defer is the syntax word for that in script class-->
+    <script src="~/Scripts/active.js" defer></script>
 
+</head>
 
+<body>
     <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
             <!-- Classy Menu -->
@@ -51,6 +52,8 @@
                 <div class="classy-navbar-toggler">
                     <span class="navbarToggler"><span></span><span></span><span></span></span>
                 </div>
+                <!-- Logo -->
+                <a class="ourlogo" href="/home/index"><img class="img-responsive brand" src="~/img/core-img/logo-wide.png" alt=""></a>
                 <!-- Menu -->
                 <div class="classy-menu">
                     <!-- close btn -->
@@ -58,9 +61,10 @@
                         <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                     </div>
                     <!-- Nav Start -->
-                    <div class="classynav" style="margin-right:1px">
+                    <div class="classynav titles" style="margin-right:1px">
                         <ul>
-                            <li><a href="#">חנות</a>
+                            <li>
+                                <a href="/home/shop">חנות</a>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">ריהוט</li>
@@ -101,8 +105,6 @@
 
             <!-- Header Meta Data -->
             <div class="header-meta d-flex clearfix justify-content-end">
-                <!-- Logo -->
-                <a href="/home/index"><img class="img-responsive brand" src="~/img/core-img/logo-wide.png" alt=""></a>
                 <!-- Search Area -->
                 <div class="search-area">
                     <form action="#" method="post">
@@ -126,9 +128,72 @@
 
         </div>
     </header>
+    <!-- ##### Right Side Cart Area ##### -->
+    <div class="cart-bg-overlay"></div>
 
+    <div class="right-side-cart-area">
 
+        <!-- Cart Button -->
+        <div class="cart-button">
+            <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span>3</span></a>
+        </div>
 
-        @RenderBody()
+        <div class="cart-content d-flex">
+
+            <!-- Cart List Area -->
+            <div class="cart-list text-right">
+                <!-- Single Cart Item -->
+                <div class="single-cart-item">
+                    <a href="#" class="product-image">
+                        <img src="img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" class="cart-thumb" alt="">
+                        <!-- Cart Item Desc -->
+                        <div class="cart-item-desc">
+                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="badge">כד מים</span>
+                            <h6>כד מים צרפתי</h6>
+                            <p class="size">גודל: גדול</p>
+                            <p class="color">צבע: לבן</p>
+                            <p class="price">ש"ח 120</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Single Cart Item -->
+                <div class="single-cart-item">
+                    <a href="#" class="product-image">
+                        <img src="img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה ראשונה.jpeg" class="cart-thumb" alt="">
+                        <!-- Cart Item Desc -->
+                        <div class="cart-item-desc">
+                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
+                            <span class="badge">כד מים</span>
+                            <h6>כד מים קטן מעוטר צרפת</h6>
+                            <p class="size">גודל: קטן</p>
+                            <p class="color">צבע: חום</p>
+                            <p class="price">80 ש"ח</p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-amount-summary">
+
+                <h2 class="text-right">סיכום</h2>
+                <ul class="summary-table">
+                    <li><span>סכום כולל:</span> <span>200 ש"ח</span></li>
+                    <li><span>משלוח:</span> <span>חינם</span></li>
+                    <li><span>הנחה:</span> <span>-10%</span></li>
+                    <li><span>סה"כ:</span> <span>180 ש"ח</span></li>
+                </ul>
+                <div class="checkout-btn mt-100">
+                    <a href="*" class="btn essence-btn">מעבר לתשלום</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Right Side Cart End ##### -->
+    @RenderBody()
+
 </body>
 </html>
