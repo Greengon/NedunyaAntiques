@@ -39,6 +39,11 @@
     <script src="~/Scripts/active.js"></script>
 
 
+    
+</head>
+
+
+<body>
     <header class="header_area">
         <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
             <!-- Classy Menu -->
@@ -58,7 +63,7 @@
                     <div class="classynav" style="margin-right:1px">
                         <ul>
                             <li>
-                                <a href="#">חנות</a>
+                                <a href="/home/shop">חנות</a>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">ריהוט</li>
@@ -90,7 +95,7 @@
                                 </div>
                             </li>
                             <li><a href="/home/about">אודות</a></li>
-                            <li><a href="/home">צור קשר</a></li>
+                            <li><a href="/home/contact">צור קשר</a></li>
                         </ul>
                     </div>
                     <!-- Nav End -->
@@ -124,9 +129,7 @@
 
         </div>
     </header>
-</head>
 
-<body>
-        @RenderBody()
+    @RenderBody()
 </body>
 </html>
