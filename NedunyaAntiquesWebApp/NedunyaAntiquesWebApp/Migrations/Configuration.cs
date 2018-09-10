@@ -10,7 +10,6 @@ namespace NedunyaAntiquesWebApp.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "NedunyaAntiquesWebApp.Models.ProductsContext";
         }
 
         protected override void Seed(NedunyaAntiquesWebApp.Models.ProductsContext context)
