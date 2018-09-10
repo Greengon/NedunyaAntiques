@@ -13,6 +13,12 @@ namespace NedunyaAntiquesWebApp.Controllers
     public class ProductsController : Controller
     {
         private ProductsContext db = new ProductsContext();
+        public string Dummy()
+        {
+ 
+            return "OK!";
+
+        }
 
         // GET: Products
         public ActionResult Index()
@@ -34,6 +40,23 @@ namespace NedunyaAntiquesWebApp.Controllers
             }
             return View(product);
         }
+
+        //GET : Products/Show
+        public ActionResult ShowCategory(string category)
+        {
+            var addedProducts = new List<Product>
+            {
+                new Product { Id = 1,Category = "furniture",Depth=10.0,Description = "Something nice",Height = 15.0,Name="Chair",Sale=true,Substance = "Wood",Width=100},
+                new Product { Id = 2,Category = "tools",Depth=10.0,Description = "to eat",Height = 15.0,Name="Cup",Sale=false,Substance = "Porcelain",Width=100},
+                new Product { Id = 3,Category = "cutlery",Depth=10.0,Description = "to eat",Height = 15.0,Name="Fork",Sale=false,Substance = "Steel",Width=100}
+            };
+            addedProducts.ForEach(s => db.Products.Add(s));
+            db.SaveChanges();
+            // List<Product> _productList;
+            var productList = from p in db.Products where p.Category.Equals("furniture") select p;
+            return View(productList.ToList());
+         }
+
 
         // GET: Products/Save
         public ActionResult Create()
