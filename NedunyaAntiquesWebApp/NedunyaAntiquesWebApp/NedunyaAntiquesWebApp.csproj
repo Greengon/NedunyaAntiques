@@ -171,10 +171,15 @@
     <Compile Include="Migrations\201809102008317_RentedProp.Designer.cs">
       <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809102101311_RentalToDb.cs" />
+    <Compile Include="Migrations\201809102101311_RentalToDb.Designer.cs">
+      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809102008317_RentedProp.resx">
       <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809102101311_RentalToDb.resx">
+      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
