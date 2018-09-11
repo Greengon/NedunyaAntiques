@@ -1,4 +1,4 @@
-function ($) {
++function ($) {
     'use strict';
 
     var $window = $(window);
@@ -148,4 +148,4 @@ function ($) {
         $.preventDefault();
     });
 
-})(jQuery);
+}(jQuery);
