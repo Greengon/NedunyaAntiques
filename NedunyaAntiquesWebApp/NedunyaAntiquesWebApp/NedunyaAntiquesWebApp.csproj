@@ -156,6 +156,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,10 +168,19 @@
     <Compile Include="Migrations\201809101340054_try1.Designer.cs">
       <DependentUpon>201809101340054_try1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809102008317_RentedProp.cs" />
+    <Compile Include="Migrations\201809102008317_RentedProp.Designer.cs">
+      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809102101311_RentalToDb.cs" />
+    <Compile Include="Migrations\201809102101311_RentalToDb.Designer.cs">
+      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
+    <Compile Include="Models\Rental.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -404,6 +414,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Rental\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -420,6 +431,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809101340054_try1.resx">
       <DependentUpon>201809101340054_try1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809102008317_RentedProp.resx">
+      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809102101311_RentalToDb.resx">
+      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace NedunyaAntiquesWebApp.Models
 {
-    public class ProductsContext : DbContext
+    public class ApplicationContext : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -15,7 +15,7 @@ namespace NedunyaAntiquesWebApp.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
     
-  //      public ProductsContext() : base("name=ProductsContext")
+  //      public ApplicationContext() : base("name=ApplicationContext")
   //      {
   //      }
 
