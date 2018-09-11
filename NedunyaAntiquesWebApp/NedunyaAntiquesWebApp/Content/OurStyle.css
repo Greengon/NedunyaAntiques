@@ -25,16 +25,6 @@
     padding-right: 30px;
 }
 
-.img-bg-1 {
-    object-fit: cover;
-    padding: 0;
-    display: block;
-    margin: 0 auto;
-    max-height: 100%;
-    max-width: 100%;
-}
-
-
 .pagetextheb {
     padding: 50px 30px 50px 80px;
 }

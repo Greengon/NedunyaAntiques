@@ -196,6 +196,7 @@
     <Content Include="functions in nuget.txt" />
     <Content Include="Global.asax" />
     <Content Include="img\bg-img\bg-1.jpg" />
+    <Content Include="img\bg-img\bg-100.jpg" />
     <Content Include="img\bg-img\bg-2.jpg" />
     <Content Include="img\bg-img\bg-3.jpg" />
     <Content Include="img\bg-img\bg-4.jpg" />
