@@ -19,7 +19,9 @@
     padding-left: 30px;
     padding-right: 30px;
 }
-
+.guest {
+    nav-down: auto;
+}
 .titles {
     margin-top: 15px;
     padding-right: 30px;
