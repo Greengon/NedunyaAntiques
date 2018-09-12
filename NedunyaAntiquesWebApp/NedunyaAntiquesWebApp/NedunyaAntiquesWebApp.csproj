@@ -410,10 +410,11 @@
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Home\shop.cshtml" />
     <Content Include="Views\Products\ShowCategory.cshtml" />
+    <Content Include="Views\Rental\RentalView.cshtml" />
+    <Content Include="Views\Rental\RentalViewForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Rental\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
