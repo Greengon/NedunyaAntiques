@@ -13,23 +13,23 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Required]
         [StringLength(255)]
-        [Display(Name = "נא ציין/י את שמך")]
+        [Display(Name = "שמך")]
         public string FisrtName { get; set; }
 
-        [Display(Name = "נא ציין/י את שם משפחתך")]
+        [Display(Name = "שם משפחתך")]
         public string LastName { get; set; }
 
-        [Display(Name = "נא ציין/י את עיר מגוריך")]
+        [Display(Name = "עיר מגוריך")]
         public string CityAddress { get; set; }
 
-        [Display(Name = "נא ציין/י את רחוב מגוריך")]
+        [Display(Name = "רחוב מגוריך")]
         public string StreetAddress { get; set; }
 
-        [Display(Name = "נא ציין/י את מספר ביתך")]
+        [Display(Name = "מספר בית")]
         public int HomeNum { get; set; }
 
-        [Display(Name = "נא ציין/י את מספר דירתך")]
-        public int AptNum { get; set; }
+        [Display(Name = "מספר דירה(אם לא בית פרטי)")]
+        public int? AptNum { get; set; }
 
         [Required(ErrorMessage = "מספר הטלפון אינו חוקי")]
         [Display(Name = "מספר הטלפון שלך")]
