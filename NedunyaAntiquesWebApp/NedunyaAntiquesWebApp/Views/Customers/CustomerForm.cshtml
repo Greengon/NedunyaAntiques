@@ -15,54 +15,54 @@
             <div class="hero-content text-right">
                 <div class="form-group">
                     @Html.LabelFor(m => m.FisrtName)
-                    @Html.TextBoxFor(m => m.FisrtName, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.FisrtName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.FisrtName)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.LastName)
-                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.LastName, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.LastName)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.CityAddress)
-                    @Html.TextBoxFor(m => m.CityAddress, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.CityAddress, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.CityAddress)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.StreetAddress)
-                    @Html.TextBoxFor(m => m.StreetAddress, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.StreetAddress, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.StreetAddress)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.HomeNum)
-                    @Html.TextBoxFor(m => m.HomeNum, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.HomeNum, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.HomeNum)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Birthdate)
-                    @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" })
+                    @Html.EditorFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email)
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" })
                     @Html.ValidationMessageFor(m => m.Email)
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.PhoneNum)
-                    @Html.TextBoxFor(m => m.PhoneNum, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.PhoneNum)
-                </div>
-
-                <div class="form-check">
-                    <label>
-                        @Html.CheckBoxFor(m => m.AdvertiseSalesNotification)  האם הינך מעוניין/ת שנעדכן אותך על מבצעים?
-                    </label>
-                </div>
-                @Html.HiddenFor(m => m.Id)
-                <button type="submit" class="btn btn-primary">הבא</button>
-            </div>
-            </div>
-        </div>
- </div>
-    }
+                 <div class="form-group">
+                       @Html.LabelFor(m => m.PhoneNum)
+                       @Html.EditorFor(m => m.PhoneNum, new { @class = "form-control" })
+                       @Html.ValidationMessageFor(m => m.PhoneNum)
+                   </div>
+              
+                   <div class="form-check">
+                       <label>
+                           @Html.CheckBoxFor(m => m.AdvertiseSalesNotification)  האם הינך מעוניין/ת שנעדכן אותך על מבצעים?
+                       </label>
+                   </div>
+                   @Html.HiddenFor(m => m.Id)
+                   <button type="submit" class="btn btn-primary">הבא</button>
+               </div>
+               </div>
+           </div>
+    </div>
+       }
 
