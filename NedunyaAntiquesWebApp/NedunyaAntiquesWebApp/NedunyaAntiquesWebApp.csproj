@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201809131342293_AdvertiseNot.Designer.cs">
       <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809131358404_PhoneNumber.cs" />
+    <Compile Include="Migrations\201809131358404_PhoneNumber.Designer.cs">
+      <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -489,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809131342293_AdvertiseNot.resx">
       <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131358404_PhoneNumber.resx">
+      <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
