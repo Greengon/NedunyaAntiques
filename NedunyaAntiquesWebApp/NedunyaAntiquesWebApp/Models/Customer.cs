@@ -19,6 +19,18 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "נא ציין/י את שם משפחתך")]
         public string LastName { get; set; }
 
+        [Display(Name = "נא ציין/י את עיר מגוריך")]
+        public string CityAddress { get; set; }
+
+        [Display(Name = "נא ציין/י את רחוב מגוריך")]
+        public string StreetAddress { get; set; }
+
+        [Display(Name = "נא ציין/י את מספר ביתך")]
+        public int HomeNum { get; set; }
+
+        [Display(Name = "נא ציין/י את מספר דירתך")]
+        public int AptNum { get; set; }
+
         [Display(Name = "האם הינך מנוי/ה?")]
         public bool IsSubscribed { get; set; }
 

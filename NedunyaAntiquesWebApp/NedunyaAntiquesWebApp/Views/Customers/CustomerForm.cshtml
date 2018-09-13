@@ -19,6 +19,11 @@
                     @Html.ValidationMessageFor(m => m.FisrtName)
                 </div>
                 <div class="form-group">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName)
+                </div>
+                <div class="form-group">
                     @Html.LabelFor(m => m.Birthdate)
                     @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" })
                 </div>
