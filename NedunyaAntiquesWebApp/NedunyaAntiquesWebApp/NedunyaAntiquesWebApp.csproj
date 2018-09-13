@@ -157,6 +157,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RentalController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,11 +209,20 @@
     <Compile Include="Migrations\201809131358404_PhoneNumber.Designer.cs">
       <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809132134295_TransactionToDb.cs" />
+    <Compile Include="Migrations\201809132134295_TransactionToDb.Designer.cs">
+      <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809132154195_NewTransactionToDb.cs" />
+    <Compile Include="Migrations\201809132154195_NewTransactionToDb.Designer.cs">
+      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
     <Compile Include="Models\Rental.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -447,6 +457,11 @@
     <Content Include="Views\Home\shop.cshtml" />
     <Content Include="Views\Products\ShowCategory.cshtml" />
     <Content Include="Views\Rental\RentalView.cshtml" />
+    <Content Include="Views\Transactions\Create.cshtml" />
+    <Content Include="Views\Transactions\Delete.cshtml" />
+    <Content Include="Views\Transactions\Details.cshtml" />
+    <Content Include="Views\Transactions\Edit.cshtml" />
+    <Content Include="Views\Transactions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -496,6 +511,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809131358404_PhoneNumber.resx">
       <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809132134295_TransactionToDb.resx">
+      <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809132154195_NewTransactionToDb.resx">
+      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

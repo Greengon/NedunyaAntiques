@@ -10,7 +10,7 @@ namespace NedunyaAntiquesWebApp.Models
     {
         [Key]
         public int Id { get; set; }
-
+        
         [Required]
         [StringLength(255)]
         [Display(Name = "שמך")]
