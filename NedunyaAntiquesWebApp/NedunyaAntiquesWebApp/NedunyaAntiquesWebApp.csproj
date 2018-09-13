@@ -180,6 +180,22 @@
     <Compile Include="Migrations\201809120909432_ProductChanges.Designer.cs">
       <DependentUpon>201809120909432_ProductChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809131148214_CustomerProp.cs" />
+    <Compile Include="Migrations\201809131148214_CustomerProp.Designer.cs">
+      <DependentUpon>201809131148214_CustomerProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809131153020_CustomerPropEdit.cs" />
+    <Compile Include="Migrations\201809131153020_CustomerPropEdit.Designer.cs">
+      <DependentUpon>201809131153020_CustomerPropEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809131215153_CustomerPropEdit2.cs" />
+    <Compile Include="Migrations\201809131215153_CustomerPropEdit2.Designer.cs">
+      <DependentUpon>201809131215153_CustomerPropEdit2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809131222550_Edit3.cs" />
+    <Compile Include="Migrations\201809131222550_Edit3.Designer.cs">
+      <DependentUpon>201809131222550_Edit3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -447,6 +463,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809120909432_ProductChanges.resx">
       <DependentUpon>201809120909432_ProductChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131148214_CustomerProp.resx">
+      <DependentUpon>201809131148214_CustomerProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131153020_CustomerPropEdit.resx">
+      <DependentUpon>201809131153020_CustomerPropEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131215153_CustomerPropEdit2.resx">
+      <DependentUpon>201809131215153_CustomerPropEdit2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131222550_Edit3.resx">
+      <DependentUpon>201809131222550_Edit3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

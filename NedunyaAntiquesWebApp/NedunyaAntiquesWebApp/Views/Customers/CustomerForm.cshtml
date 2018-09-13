@@ -14,13 +14,18 @@
         <div class="col-12">
             <div class="hero-content text-right">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Name)
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Name)
+                    @Html.LabelFor(m => m.FisrtName)
+                    @Html.TextBoxFor(m => m.FisrtName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FisrtName)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Birthdate)
                     @Html.TextBoxFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
                 </div>
 
                 <div class="form-check">

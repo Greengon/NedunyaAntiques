@@ -46,7 +46,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Id,Name,IsSubscribed")] Customer customer)
+        public ActionResult Save([Bind(Include = "Id,FisrtName,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
             {   if(customer.Id==0)
@@ -54,7 +54,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 else
                 {
                     var customerInDb = db.Customers.Single(c => c.Id == customer.Id);
-                    customerInDb.Name = customer.Name;
+                    customerInDb.FisrtName = customer.FisrtName;
                     customerInDb.Birthdate = customer.Birthdate;
                     customerInDb.IsSubscribed = customer.IsSubscribed;
                 }
@@ -85,7 +85,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,IsSubscribed")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FisrtName,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
             {
