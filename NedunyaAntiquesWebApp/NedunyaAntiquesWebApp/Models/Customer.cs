@@ -31,6 +31,9 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "נא ציין/י את מספר דירתך")]
         public int AptNum { get; set; }
 
+        [Display(Name = "האם הינך מעוניין/ת שנעדכן אותך על מבצעים?")]
+        public bool AdvertiseSalesNotification { get; set; }
+
         [Display(Name = "האם הינך מנוי/ה?")]
         public bool IsSubscribed { get; set; }
 

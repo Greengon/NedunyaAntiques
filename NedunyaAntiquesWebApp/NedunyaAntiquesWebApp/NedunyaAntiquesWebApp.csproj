@@ -200,6 +200,10 @@
     <Compile Include="Migrations\201809131238461_FullyUpgradedCust.Designer.cs">
       <DependentUpon>201809131238461_FullyUpgradedCust.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809131342293_AdvertiseNot.cs" />
+    <Compile Include="Migrations\201809131342293_AdvertiseNot.Designer.cs">
+      <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -482,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809131238461_FullyUpgradedCust.resx">
       <DependentUpon>201809131238461_FullyUpgradedCust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131342293_AdvertiseNot.resx">
+      <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
