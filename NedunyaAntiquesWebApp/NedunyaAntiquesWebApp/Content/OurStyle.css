@@ -15,13 +15,22 @@
 .pfennig-bold-font {
     font-family: Pfennig-bold;
 }
-.ourlogo{
+
+.ourlogo {
     padding-left: 30px;
     padding-right: 30px;
 }
-.guest {
-    nav-down: auto;
+
+.header-meta {
+    left: 35px;
 }
+
+.guest {
+    position: relative;
+    top: 30px;
+    right: 13px;
+}
+
 .titles {
     margin-top: 15px;
     padding-right: 30px;
