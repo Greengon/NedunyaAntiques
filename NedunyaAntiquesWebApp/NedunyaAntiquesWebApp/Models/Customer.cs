@@ -13,16 +13,16 @@ namespace NedunyaAntiquesWebApp.Models
         
         [Required]
         [StringLength(255)]
-        [Display(Name = "שמך")]
+        [Display(Name = "שם פרטי")]
         public string FisrtName { get; set; }
 
-        [Display(Name = "שם משפחתך")]
+        [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
-        [Display(Name = "עיר מגוריך")]
+        [Display(Name = "עיר מגורים")]
         public string CityAddress { get; set; }
 
-        [Display(Name = "רחוב מגוריך")]
+        [Display(Name = "רחוב מגורים")]
         public string StreetAddress { get; set; }
 
         [Display(Name = "מספר בית")]
@@ -32,7 +32,7 @@ namespace NedunyaAntiquesWebApp.Models
         public int? AptNum { get; set; }
 
         [Required(ErrorMessage = "מספר הטלפון אינו חוקי")]
-        [Display(Name = "מספר הטלפון שלך")]
+        [Display(Name = "פלאפון")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "מספר הטלפון אינו חוקי")]
         public int PhoneNum { get; set; }
