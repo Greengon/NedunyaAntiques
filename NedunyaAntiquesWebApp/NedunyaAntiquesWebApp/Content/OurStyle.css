@@ -85,23 +85,24 @@
     margin:0 auto;
 }
 
-.ourrightstext{
-    font:normal 14px alef;
-    color: #000000;
-    line-height: 130%;
-    text-align:center;
-    margin-top:40px;
-}
-
 .emailcontactarea {
     height: 400px; /* The height is 400 pixels */
     width: 50%; /* The width is the width of the web page */
-    background-color: grey;
+    background-color: #F5F5DC;
     margin: auto;
-    border: 3px solid grey;
+    border: 3px solid white;
     padding: 10px;
 }
 
 .messageforuser {
     margin: 25px;
 }
+
+.ourrightstext {
+    font: normal 14px alef;
+    color: #000000;
+    line-height: 130%;
+    text-align: center;
+    margin-top: 40px;
+}
+
