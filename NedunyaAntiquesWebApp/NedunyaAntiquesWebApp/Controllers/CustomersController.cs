@@ -54,7 +54,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Id,FisrtName,IsSubscribed")] Customer customer)
+        public ActionResult Save([Bind(Include = "Id,FisrtName")] Customer customer)
         {
             if (ModelState.IsValid)
             {   if(customer.Id==0)
@@ -64,7 +64,6 @@ namespace NedunyaAntiquesWebApp.Controllers
                     var customerInDb = db.Customers.Single(c => c.Id == customer.Id);
                     customerInDb.FisrtName = customer.FisrtName;
                     customerInDb.Birthdate = customer.Birthdate;
-                    customerInDb.IsSubscribed = customer.IsSubscribed;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -144,6 +143,10 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
+        public ActionResult Customerlog()
+        {
+            return View();
+        }
 
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live

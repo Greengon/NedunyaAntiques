@@ -13,7 +13,17 @@
     <div class="row h-100 align-items-center">
         <div class="col-12">
             <div class="hero-content text-right">
-                <a class="register">
+                <div class="register">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.username)
+                        <p> @Html.EditorFor(m => m.username, new { @class = "form-control" })</p>
+                        @Html.ValidationMessageFor(m => m.username)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.password)
+                        <p> @Html.EditorFor(m => m.password, new { @class = "form-control" })</p>
+                        @Html.ValidationMessageFor(m => m.password)
+                    </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.FisrtName)
                         <p> @Html.EditorFor(m => m.FisrtName, new { @class = "form-control" })</p>
@@ -66,7 +76,7 @@
                     </div>
                     @Html.HiddenFor(m => m.Id)
                     <button type="submit" class="btn btn-primary">הבא</button>
-                </a>
+                </div>
             </div>
                </div>
            </div>
