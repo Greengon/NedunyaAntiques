@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201809152021580_ConfPass.Designer.cs">
       <DependentUpon>201809152021580_ConfPass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809152052224_ProductDiscount.cs" />
+    <Compile Include="Migrations\201809152052224_ProductDiscount.Designer.cs">
+      <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -516,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809152021580_ConfPass.resx">
       <DependentUpon>201809152021580_ConfPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809152052224_ProductDiscount.resx">
+      <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,6 +14,7 @@ namespace NedunyaAntiquesWebApp.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Double Price { get; set; }
+        public Double? PriceAfterDiscount { get; set; }
         public string Substance { get; set; }
         public string Category { get; set; }
         public double? Height { get; set; }

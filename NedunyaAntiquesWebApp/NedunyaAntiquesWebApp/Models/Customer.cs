@@ -14,7 +14,7 @@ namespace NedunyaAntiquesWebApp.Models
         [Required]
         [StringLength(255)]
         [Display(Name = "שם משתמש")]
-        public string username { get; set; }
+        public string Username { get; set; }
         [Display(Name = "סיסמה")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
