@@ -21,6 +21,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Products
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
             return View(db.Products.ToList());
@@ -59,12 +61,16 @@ namespace NedunyaAntiquesWebApp.Controllers
 
 
         // GET: Products/Save
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: Products/Save
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -82,6 +88,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Products/Edit/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,6 +105,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // POST: Products/Edit/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -113,6 +123,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Products/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -128,6 +140,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // POST: Products/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -138,6 +152,9 @@ namespace NedunyaAntiquesWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -15,12 +15,16 @@ namespace NedunyaAntiquesWebApp.Controllers
         private ApplicationContext db = new ApplicationContext();
 
         // GET: Customers
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
         }
 
         // GET: Customers/Details/5
+        // Using filter to allow access only to login users.
+        //[Authorize] - TODO: uncomment before you go live
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,12 +40,16 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Customers/Save
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Save()
         {
             return View();
         }
 
         // POST: Customers/Save
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,6 +74,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Customers/Edit/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +91,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // POST: Customers/Edit/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -97,6 +109,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Customers/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +126,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // POST: Customers/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -121,11 +137,16 @@ namespace NedunyaAntiquesWebApp.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
         public ActionResult CustomerForm()
         {
             return View();
         }
 
+
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         protected override void Dispose(bool disposing)
         {
             if (disposing)
