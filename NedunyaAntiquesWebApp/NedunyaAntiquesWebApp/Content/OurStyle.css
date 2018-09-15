@@ -45,6 +45,12 @@
     }
 }
 
+@media screen and (max-width: 821px) {
+    .guest-text {
+        line-height: 30px;
+    }
+}
+
 @media screen and (max-width: 421px) {
     .guest-text {
         display:none;
