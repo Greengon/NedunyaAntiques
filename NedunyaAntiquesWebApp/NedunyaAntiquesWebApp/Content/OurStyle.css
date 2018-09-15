@@ -25,11 +25,34 @@
     left: 35px;
 }
 
-.guest {
-    position: relative;
+.guest-area {
     top: 30px;
     right: 13px;
+    line-height: 40px;
+    width: 250px;
+    -webkit-box-flex: 0;
 }
+
+.guest-text {
+    text-align: center;
+    line-height: 80px;
+}
+
+@media screen and (max-width: 967px) {
+    .guest-text {
+        text-align: center;
+        line-height: 40px;
+    }
+}
+
+@media screen and (max-width: 421px) {
+    .guest-text {
+        display:none;
+    }
+}
+
+
+
 
 .titles {
     margin-top: 15px;
