@@ -17,5 +17,13 @@ namespace NedunyaAntiquesWebApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //default error page where user will be redirected if unexpected error happens
+        protected void Application_Error(object sender , EventArgs e)
+        {
+            Exception exc = Server.GetLastError();
+            Server.ClearError();
+            Response.Redirect("/ErrorPage/ErrorMessage");
+        }
     }
 }
