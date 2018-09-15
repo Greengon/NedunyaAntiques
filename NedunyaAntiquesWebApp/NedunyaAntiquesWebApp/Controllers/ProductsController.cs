@@ -53,13 +53,21 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
 
             // List<Product> _productList;
-            var productList = from p in db.Products where p.Category.Equals("furniture") select p;
+            var productList = from p in db.Products where p.Category.Equals(category) select p;
+            if (!productList.Any())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(productList.ToList());
          }
 
         public ActionResult ShowProdOnSale()
         {
             var productList = from p in db.Products where p.Sale.Equals(true) select p;
+            if (!productList.Any())
+             {
+                return RedirectToAction("Index","Home");
+             }
             return View(productList.ToList());
         }
 
