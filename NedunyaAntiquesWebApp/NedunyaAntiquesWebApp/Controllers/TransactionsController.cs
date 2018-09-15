@@ -37,6 +37,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Transactions/Create
+        // Using filter to allow access only to login users.
+        //[Authorize] - TODO: uncomment before you go live
         public ActionResult Create()
         {
             return View();
@@ -60,6 +62,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Transactions/Edit/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,6 +95,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Transactions/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -106,6 +112,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // POST: Transactions/Delete/5
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
@@ -116,6 +124,9 @@ namespace NedunyaAntiquesWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+
+        // Using filter to allow access only to admin users.
+        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         protected override void Dispose(bool disposing)
         {
             if (disposing)

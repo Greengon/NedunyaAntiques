@@ -29,11 +29,19 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.TheMessage = "זיהיתה בעיה באתר? שלח לנו הודעה.";
 
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Contact(string message)
+        {
+            //TODO: send messaage to HQ
+            ViewBag.TheMessage = "תודה. הודעתך התקבלה.";
+
+            return View();
+        }
 
     }
 }
