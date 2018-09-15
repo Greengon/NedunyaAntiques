@@ -147,6 +147,19 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Register(Customer model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // TODO: Map the view model to a domain model and pass to a repository
+            // Personally I use and like AutoMapper very much (http://automapper.codeplex.com)
+
+            return RedirectToAction("Success");
+        }
 
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
