@@ -1,21 +1,21 @@
 ﻿@model IEnumerable<NedunyaAntiquesWebApp.Models.Product>
 
 @{
-    ViewBag.Title = "Show By Category";
+    ViewBag.Title = "On Sale";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>
-    @Model.FirstOrDefault().Category
+    On Sale!!!
 </h2>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
- <th></th>
-    </tr>
+<tr>
+    <th>
+        @Html.DisplayNameFor(model => model.Name)
+    </th>
+    <th></th>
+</tr>
 
 @foreach (var item in Model) {
     <tr>
@@ -27,5 +27,3 @@
         </td>
     </tr>
 }
-
-</table>

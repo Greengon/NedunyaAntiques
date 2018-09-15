@@ -9,7 +9,8 @@
         <div class="row h-100 align-items-center">
             <div class="col-12">
                 <div class="hero-content text-right" style="margin-top:230px;">
-                    <a href="#" class="btn essence-btn">לכל המבצעים לחצו כאן!</a>
+                 <input type="button" class="btn essence-btn" value="לכל המבצעים לחצו כאן!" onclick="location.href='@Url.Action("ShowProdOnSale", "Products")'" />
+                    <!--   <a href="#" class="btn essence-btn">לכל המבצעים לחצו כאן!</a>-->
                 </div>
             </div>
         </div>
@@ -23,15 +24,16 @@
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(/img/bg-img/nd-4.jpeg);">
                     <div class="catagory-content">
-                        <a href="#">ריהוט</a>
+                        <!-- <a href="#">ריהוט</a> -->
+                        @Html.ActionLink("ריהוט", "ShowCategory", "Products", new { category = "furniture" }, null);
                     </div>
-                </div>
             </div>
             <!-- Single Catagory -->
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(/img/bg-img/nd-5.jpeg);">
                     <div class="catagory-content">
-                        <a href="#">כלי מטבח</a>
+                        <!-- <a href="#">כלי מטבח</a>-->
+                        @Html.ActionLink("כלי מטבח", "ShowCategory", "Products", new { category = "kitchenware" }, null);
                     </div>
                 </div>
             </div>
@@ -39,7 +41,8 @@
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img" style="background-image: url(/img/bg-img/nd-6.jpeg);">
                     <div class="catagory-content">
-                        <a href="#">דקורציות</a>
+                        <!--   <a href="#">דקורציות</a>-->
+                            @Html.ActionLink("דקורציות", "ShowCategory", "Products", new { category = "decorations" }, null);
                     </div>
                 </div>
             </div>
@@ -124,7 +127,7 @@
                         </div>
                     </div>
 
-                    <!-- Single Product -->
+                   <!-- Single Product -->
                     <div class="single-product-wrapper">
                         <!-- Product Image -->
                         <div class="product-img">
