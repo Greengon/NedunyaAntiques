@@ -25,24 +25,24 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult LogIn(Customer customer)
+        public ActionResult LogIn(string Email, string Password)
         {
             
-            Customer cust = db.Customers.Find(customer.Id);
-            if (customer == null)
+            Customer cust = db.Customers.Find(Email);
+            if (cust == null)
             {
                 return HttpNotFound();
             }
 
             string message = string.Empty;
-            if (cust.Password != customer.Password)
+            if (cust.Password != Password)
                 message = "הסיסמא אינה תקינה";
-            if (cust.Email != customer.Email)
+            if (cust.Email != Email)
                 message = "האימייל אינו תקין";
-            FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
+            FormsAuthentication.SetAuthCookie(Email, cust.RememberMe);
 
             ViewBag.Message = message;
-            return View(customer);
+            return View(cust);
         }
 
         [HttpPost]

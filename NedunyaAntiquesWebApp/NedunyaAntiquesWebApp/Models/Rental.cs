@@ -10,8 +10,8 @@ namespace NedunyaAntiquesWebApp.Models
         public int Id { get; set; }
 
         public Customer Customer { get; set; }
-        
-        public Product Product { get; set; }
+
+        public ICollection<Product> Products { get; set; }
 
         public DateTime DateRented { get; set; }
 
