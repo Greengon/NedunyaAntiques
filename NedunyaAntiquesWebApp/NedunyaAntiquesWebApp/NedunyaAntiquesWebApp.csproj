@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201809171905585_SubCut.Designer.cs">
       <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171948566_LoginInfo.cs" />
+    <Compile Include="Migrations\201809171948566_LoginInfo.Designer.cs">
+      <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -530,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809171905585_SubCut.resx">
       <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171948566_LoginInfo.resx">
+      <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

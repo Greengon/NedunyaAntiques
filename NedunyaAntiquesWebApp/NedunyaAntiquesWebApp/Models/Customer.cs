@@ -61,5 +61,11 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "אימייל")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        public System.DateTime CreatedDate { get; set; }
+
+        public Nullable<System.DateTime> LastLoginDate { get; set; }
+
+        public bool RememberMe { get; set; }
     }
 }

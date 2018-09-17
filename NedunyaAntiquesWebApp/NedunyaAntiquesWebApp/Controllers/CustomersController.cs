@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
 
@@ -20,6 +21,36 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LogIn(Customer customer)
+        {
+            
+            Customer cust = db.Customers.Find(customer.Id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            string message = string.Empty;
+            if (cust.Password != customer.Password)
+                message = "הסיסמא אינה תקינה";
+            if (cust.Email != customer.Email)
+                message = "האימייל אינו תקין";
+            FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
+
+            ViewBag.Message = message;
+            return View(customer);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Details/5
