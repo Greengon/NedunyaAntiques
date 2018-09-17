@@ -58,7 +58,7 @@ namespace NedunyaAntiquesWebApp.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Birthdate { get; set; }
 
-        [Display(Name = "האימייל שלך")]
+        [Display(Name = "אימייל")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
     }
