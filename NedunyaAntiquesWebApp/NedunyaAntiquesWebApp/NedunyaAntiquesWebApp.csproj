@@ -226,6 +226,10 @@
     <Compile Include="Migrations\201809152052224_ProductDiscount.Designer.cs">
       <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809171905585_SubCut.cs" />
+    <Compile Include="Migrations\201809171905585_SubCut.Designer.cs">
+      <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
@@ -523,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809152052224_ProductDiscount.resx">
       <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171905585_SubCut.resx">
+      <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
