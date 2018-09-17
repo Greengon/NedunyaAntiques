@@ -1,8 +1,38 @@
-﻿
+﻿@model NedunyaAntiquesWebApp.Models.Customer
 @{
     ViewBag.Title = "Customerlog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Customerlog</h2>
+@using (Html.BeginForm())
+{
+    <div class="container h-100" style="margin-top:100px;">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="hero-content text-right">
+
+                    
+                    <div class="form-group centerlook">
+                        <label>שם משתמש: </label>
+                        @Html.EditorFor(model => model.Username)*
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </div>
+                    <div class="form-group centerlook">
+                        <label>סיסמא: </label>
+                        @Html.EditorFor(model => model.Password) *
+                        @Html.ValidationMessageFor(model => model.Password)
+
+                    </div>
+                    
+                    <div class="loginbtn">
+
+                        <input type="submit" value="Login" class="btn btn-primary" />
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+}
 
