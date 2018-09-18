@@ -122,12 +122,7 @@
                     <!-- Register and log in area -->
                     <div class="guest-area">
                         <div>
-                            <p id="gh-ug-flex" class="guest-text">
-                                שלום אורח!
-                                @Html.ActionLink("התחבר", "CustomerLog", "Customers", null, null)
-                                או
-                                @Html.ActionLink("הרשם", "customerForm", "Customers", null, null)
-                            </p>
+                            @Html.Partial("_LoginPartial")
                         </div>
                     </div>
                 </div>

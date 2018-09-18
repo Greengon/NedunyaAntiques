@@ -1,0 +1,23 @@
+﻿@if (Request.IsAuthenticated)
+{ // TODO: change this so it will fit our project
+    using (Html.BeginForm("LogOff", "Acoount", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a herf="javascript:document.getElementById('logoutForm').sumbit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <p id="gh-ug-flex" class="guest-text">
+        שלום אורח!
+        @Html.ActionLink("התחבר", "CustomerLog", "Customers", null, null)
+        או
+        @Html.ActionLink("הרשם", "customerForm", "Customers", null, null)
+    </p>
+}
