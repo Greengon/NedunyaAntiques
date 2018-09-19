@@ -66,7 +66,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.PhoneNum)
                     <p> @Html.EditorFor(m => m.PhoneNum, new { @class = "form-control" }) </p>
-                    @Html.ValidationMessageFor(m => m.PhoneNum)
+
                 </div>
 
                 <div class="form-check">
@@ -75,7 +75,8 @@
                     </label>
                 </div>
                 @Html.HiddenFor(m => m.Email)
-                <button type="submit" class="btn btn-primary">הבא</button>
+                <input type="button" class="btn essence-btn" value="התחבר" onclick="location.href='@Url.Action("Save", "Customers")'" />
+
             </div>
         </div>
     </div>

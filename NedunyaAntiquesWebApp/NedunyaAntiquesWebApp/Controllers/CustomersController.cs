@@ -85,18 +85,11 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Id,FirstName,IsSubscribed")] Customer customer)
+        public ActionResult Save([Bind(Include = "FirstName,LastName,Password,ConfirmPassword,CityAddress,StreetAddress,HomeNum,AptNum,Birthdate,Email,PhoneNum,AdvertiseSalesNotification")] Customer customer)
         {
-            if (ModelState.IsValid)
-            {   if(customer.Email==null)
+            if (ModelState.IsValid && customer.Email!=null)
+            {   
                 db.Customers.Add(customer);
-                else
-                {
-                    var customerInDb = db.Customers.Single(c => c.Email == customer.Email);
-                    customerInDb.FirstName = customer.FirstName;
-                    customerInDb.Birthdate = customer.Birthdate;
-                    customerInDb.IsSubscribed = customer.IsSubscribed;
-                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
