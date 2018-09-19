@@ -7,13 +7,13 @@ namespace NedunyaAntiquesWebApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RentalToDb : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RentalToDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809102101311_RentalToDb"; }
+            get { return "201809192112412_init"; }
         }
         
         string IMigrationMetadata.Source

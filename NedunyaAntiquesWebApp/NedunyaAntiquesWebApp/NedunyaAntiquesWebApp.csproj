@@ -161,84 +161,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809091335392_init.cs" />
-    <Compile Include="Migrations\201809091335392_init.Designer.cs">
-      <DependentUpon>201809091335392_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809101340054_try1.cs" />
-    <Compile Include="Migrations\201809101340054_try1.Designer.cs">
-      <DependentUpon>201809101340054_try1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809102008317_RentedProp.cs" />
-    <Compile Include="Migrations\201809102008317_RentedProp.Designer.cs">
-      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809102101311_RentalToDb.cs" />
-    <Compile Include="Migrations\201809102101311_RentalToDb.Designer.cs">
-      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809120909432_ProductChanges.cs" />
-    <Compile Include="Migrations\201809120909432_ProductChanges.Designer.cs">
-      <DependentUpon>201809120909432_ProductChanges.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131148214_CustomerProp.cs" />
-    <Compile Include="Migrations\201809131148214_CustomerProp.Designer.cs">
-      <DependentUpon>201809131148214_CustomerProp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131153020_CustomerPropEdit.cs" />
-    <Compile Include="Migrations\201809131153020_CustomerPropEdit.Designer.cs">
-      <DependentUpon>201809131153020_CustomerPropEdit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131215153_CustomerPropEdit2.cs" />
-    <Compile Include="Migrations\201809131215153_CustomerPropEdit2.Designer.cs">
-      <DependentUpon>201809131215153_CustomerPropEdit2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131222550_Edit3.cs" />
-    <Compile Include="Migrations\201809131222550_Edit3.Designer.cs">
-      <DependentUpon>201809131222550_Edit3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131238461_FullyUpgradedCust.cs" />
-    <Compile Include="Migrations\201809131238461_FullyUpgradedCust.Designer.cs">
-      <DependentUpon>201809131238461_FullyUpgradedCust.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131342293_AdvertiseNot.cs" />
-    <Compile Include="Migrations\201809131342293_AdvertiseNot.Designer.cs">
-      <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809131358404_PhoneNumber.cs" />
-    <Compile Include="Migrations\201809131358404_PhoneNumber.Designer.cs">
-      <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809132134295_TransactionToDb.cs" />
-    <Compile Include="Migrations\201809132134295_TransactionToDb.Designer.cs">
-      <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809132154195_NewTransactionToDb.cs" />
-    <Compile Include="Migrations\201809132154195_NewTransactionToDb.Designer.cs">
-      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809152021580_ConfPass.cs" />
-    <Compile Include="Migrations\201809152021580_ConfPass.Designer.cs">
-      <DependentUpon>201809152021580_ConfPass.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809152052224_ProductDiscount.cs" />
-    <Compile Include="Migrations\201809152052224_ProductDiscount.Designer.cs">
-      <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809171905585_SubCut.cs" />
-    <Compile Include="Migrations\201809171905585_SubCut.Designer.cs">
-      <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809171948566_LoginInfo.cs" />
-    <Compile Include="Migrations\201809171948566_LoginInfo.Designer.cs">
-      <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809190950355_BooleanProp.cs" />
-    <Compile Include="Migrations\201809190950355_BooleanProp.Designer.cs">
-      <DependentUpon>201809190950355_BooleanProp.cs</DependentUpon>
+    <Compile Include="Migrations\201809192112412_init.cs" />
+    <Compile Include="Migrations\201809192112412_init.Designer.cs">
+      <DependentUpon>201809192112412_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductsContext.cs" />
     <Compile Include="Models\Rental.cs" />
@@ -475,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -488,62 +418,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809091335392_init.resx">
-      <DependentUpon>201809091335392_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809101340054_try1.resx">
-      <DependentUpon>201809101340054_try1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809102008317_RentedProp.resx">
-      <DependentUpon>201809102008317_RentedProp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809102101311_RentalToDb.resx">
-      <DependentUpon>201809102101311_RentalToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809120909432_ProductChanges.resx">
-      <DependentUpon>201809120909432_ProductChanges.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131148214_CustomerProp.resx">
-      <DependentUpon>201809131148214_CustomerProp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131153020_CustomerPropEdit.resx">
-      <DependentUpon>201809131153020_CustomerPropEdit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131215153_CustomerPropEdit2.resx">
-      <DependentUpon>201809131215153_CustomerPropEdit2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131222550_Edit3.resx">
-      <DependentUpon>201809131222550_Edit3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131238461_FullyUpgradedCust.resx">
-      <DependentUpon>201809131238461_FullyUpgradedCust.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131342293_AdvertiseNot.resx">
-      <DependentUpon>201809131342293_AdvertiseNot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809131358404_PhoneNumber.resx">
-      <DependentUpon>201809131358404_PhoneNumber.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809132134295_TransactionToDb.resx">
-      <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809132154195_NewTransactionToDb.resx">
-      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809152021580_ConfPass.resx">
-      <DependentUpon>201809152021580_ConfPass.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809152052224_ProductDiscount.resx">
-      <DependentUpon>201809152052224_ProductDiscount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809171905585_SubCut.resx">
-      <DependentUpon>201809171905585_SubCut.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809171948566_LoginInfo.resx">
-      <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809190950355_BooleanProp.resx">
-      <DependentUpon>201809190950355_BooleanProp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809192112412_init.resx">
+      <DependentUpon>201809192112412_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

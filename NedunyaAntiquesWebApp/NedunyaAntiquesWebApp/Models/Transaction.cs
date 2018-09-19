@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -7,11 +9,15 @@ namespace NedunyaAntiquesWebApp.Models
 {
     public class Transaction
     {
-        public int Id { get; set; }
-        public ICollection<Product> Products { get; set; }
-        public Customer Customer { get; set; }
-        public bool Rented { get; set; }
-        public bool Soled { get; set; }
-        public DateTime TransacDate { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int TransactionId { get; set; }
+        public int CustomerId { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime TransDate { get; set; }
+        public Decimal Amount { get; set; }
+
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

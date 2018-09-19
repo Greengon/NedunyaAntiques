@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
-using System.Web.Security;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
 
@@ -21,36 +20,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Index()
         {
             return View(db.Customers.ToList());
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult LogIn(string Email, string Password)
-        {
-            
-            Customer cust = db.Customers.Find(Email);
-            if (cust == null)
-            {
-                return HttpNotFound();
-            }
-
-            string message = string.Empty;
-            if (cust.Password != Password)
-                message = "הסיסמא אינה תקינה";
-            else if (cust.Email != Email)
-                message = "האימייל אינו תקין";
-           else FormsAuthentication.SetAuthCookie(Email, cust.RememberMe);
-
-            ViewBag.Message = message;
-            return View(cust);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index");
         }
 
         // GET: Customers/Details/5
@@ -85,16 +54,17 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "Id,FisrtName")] Customer customer)
+        public ActionResult Save([Bind(Include = "Id,FirstName,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
-            {   if(customer.Id==0)
+            {   if(customer.CustomerId==0)
                 db.Customers.Add(customer);
                 else
                 {
-                    var customerInDb = db.Customers.Single(c => c.Id == customer.Id);
-                    customerInDb.FisrtName = customer.FisrtName;
+                    var customerInDb = db.Customers.Single(c => c.CustomerId == customer.CustomerId);
+                    customerInDb.FirstName = customer.FirstName;
                     customerInDb.Birthdate = customer.Birthdate;
+                    customerInDb.IsSubscribed = customer.IsSubscribed;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,7 +97,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FisrtName,IsSubscribed")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -174,23 +144,6 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
-        public ActionResult Customerlog()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Register(Customer model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // TODO: Map the view model to a domain model and pass to a repository
-            // Personally I use and like AutoMapper very much (http://automapper.codeplex.com)
-
-            return RedirectToAction("Success");
-        }
 
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
