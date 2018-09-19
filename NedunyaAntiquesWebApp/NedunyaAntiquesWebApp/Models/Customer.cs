@@ -21,9 +21,12 @@ namespace NedunyaAntiquesWebApp.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "סיסמא")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Required]
+        [Display(Name = "אשר סיסמא")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "הסיסמאות אינן תואמות, אנא נסה שנית")]
         public string ConfirmPassword { get; set; }
