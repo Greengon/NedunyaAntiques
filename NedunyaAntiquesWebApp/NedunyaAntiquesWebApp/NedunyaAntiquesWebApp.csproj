@@ -165,6 +165,10 @@
     <Compile Include="Migrations\201809192112412_init.Designer.cs">
       <DependentUpon>201809192112412_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809192155272_PassAndConfirm.cs" />
+    <Compile Include="Migrations\201809192155272_PassAndConfirm.Designer.cs">
+      <DependentUpon>201809192155272_PassAndConfirm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -420,6 +424,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809192112412_init.resx">
       <DependentUpon>201809192112412_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809192155272_PassAndConfirm.resx">
+      <DependentUpon>201809192155272_PassAndConfirm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

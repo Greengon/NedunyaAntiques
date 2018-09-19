@@ -20,6 +20,14 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "הסיסמאות אינן תואמות, אנא נסה שנית")]
+        public string ConfirmPassword { get; set; }
+
         [Display(Name = "עיר מגורים")]
         public string CityAddress { get; set; }
 
@@ -50,6 +58,7 @@ namespace NedunyaAntiquesWebApp.Models
         public DateTime Birthdate { get; set; }
 
         [Display(Name = "האימייל שלך")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
