@@ -11,10 +11,7 @@ namespace NedunyaAntiquesWebApp.Models
         
         public int Id { get; set; }
         
-        [Required]
-        [StringLength(255)]
-        [Display(Name = "שם משתמש")]
-        public string Username { get; set; }
+        
 
         [Required]
         [Display(Name = "סיסמא")]
@@ -27,12 +24,17 @@ namespace NedunyaAntiquesWebApp.Models
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "שם פרטי")]
+        [StringLength(50)]
+        [Required]
         public string FisrtName { get; set; }
 
         [Display(Name = "שם משפחה")]
+        [StringLength(50)]
+        [Required]
         public string LastName { get; set; }
 
         [Display(Name = "עיר מגורים")]
+        [Required]
         public string CityAddress { get; set; }
 
         [Display(Name = "רחוב מגורים")]
