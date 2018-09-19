@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201809192216072_Rememberme.Designer.cs">
       <DependentUpon>201809192216072_Rememberme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809192300219_Pkchanged.cs" />
+    <Compile Include="Migrations\201809192300219_Pkchanged.Designer.cs">
+      <DependentUpon>201809192300219_Pkchanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -434,6 +438,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809192216072_Rememberme.resx">
       <DependentUpon>201809192216072_Rememberme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809192300219_Pkchanged.resx">
+      <DependentUpon>201809192300219_Pkchanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
