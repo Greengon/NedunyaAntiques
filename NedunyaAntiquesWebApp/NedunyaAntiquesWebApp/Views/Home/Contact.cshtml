@@ -12,12 +12,7 @@
     Nedunyatlv@gmail.com
 </address>
 
-<!--Leaving a message-->
-<h3 class="text-right">@ViewBag.TheMessage</h3>
-<form method="post" class="text-right">
-    <textarea name="message"></textarea>
-    <input type="submit" value="send"/>
-</form>
+
 
 
 <!--Google map-->
@@ -51,3 +46,25 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACkjJTb3AhOX95sMgoOVIkZPVxDPsrkCQ&callback=initMap">
 </script>
+
+
+
+
+<!--Leaving a message-->
+<!--This is done by using formspree API-->
+<h3 class="messageforuser text-right">@ViewBag.TheMessage</h3>
+
+<div class="container mail-area-container">
+    <form action="https://formspree.io/greengon1991@gmail.com" method="post" class="text-right">
+        <label for="name">שם מלא: </label>
+        <input type="text" id="username" name="name" placeholder="שם...">
+       
+        <label for="email">מייל: </label>
+        <input type="email" id="mail" name="_replyto" placeholder="השאר מייל לחזרה">
+        
+        <textarea id="subject" class="mail-textarea" name="subject" placeholder="כתוב כאן..."></textarea>  
+        
+        <input type="submit" value="שלח">
+        <input type="hidden" name="_next" value="/Home/contact" />
+    </form>
+</div>
