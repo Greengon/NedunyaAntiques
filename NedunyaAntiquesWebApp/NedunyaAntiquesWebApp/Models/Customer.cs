@@ -9,9 +9,13 @@ namespace NedunyaAntiquesWebApp.Models
 {
     public class Customer
     {
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerId { get; set; }
+        [Display(Name = "האימייל שלך")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
         [Required]
         [StringLength(255)]
         [Display(Name = "שם פרטי")]
@@ -60,9 +64,9 @@ namespace NedunyaAntiquesWebApp.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Birthdate { get; set; }
 
-        [Display(Name = "האימייל שלך")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+
+        [Display(Name = "זכור אותי")]
+        public bool RememberMe { get; set; }
 
         public virtual ICollection<Transaction> Transactions { get; set; }
     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using NedunyaAntiquesWebApp.Models;
 
 namespace NedunyaAntiquesWebApp.Controllers
@@ -22,16 +23,46 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(db.Customers.ToList());
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult LogIn(string Email, string Password)
+        {
+
+            Customer cust = db.Customers.Find(Email);
+            if (cust == null)
+            {
+                return HttpNotFound();
+            }
+
+            string message = string.Empty;
+            if (cust.Password != Password)
+                message = "הסיסמא אינה תקינה";
+            if (cust.Email !=Email)
+                message = "האימייל אינו תקין";
+            FormsAuthentication.SetAuthCookie(cust.Email, cust.RememberMe);
+
+            ViewBag.Message = message;
+            return View(cust);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index");
+        }
+
         // GET: Customers/Details/5
         // Using filter to allow access only to login users.
         //[Authorize] - TODO: uncomment before you go live
-        public ActionResult Details(int? id)
+        public ActionResult Details(string Email)
         {
-            if (id == null)
+            if (Email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -57,11 +88,11 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Save([Bind(Include = "Id,FirstName,IsSubscribed")] Customer customer)
         {
             if (ModelState.IsValid)
-            {   if(customer.CustomerId==0)
+            {   if(customer.Email==null)
                 db.Customers.Add(customer);
                 else
                 {
-                    var customerInDb = db.Customers.Single(c => c.CustomerId == customer.CustomerId);
+                    var customerInDb = db.Customers.Single(c => c.Email == customer.Email);
                     customerInDb.FirstName = customer.FirstName;
                     customerInDb.Birthdate = customer.Birthdate;
                     customerInDb.IsSubscribed = customer.IsSubscribed;
@@ -76,13 +107,13 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Edit/5
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string Email)
         {
-            if (id == null)
+            if (Email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -111,13 +142,13 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Delete/5
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string Email)
         {
-            if (id == null)
+            if (Email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -130,9 +161,9 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string Email)
         {
-            Customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(Email);
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
