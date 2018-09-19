@@ -90,21 +90,25 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,Rented,Description")] Product product, IEnumerable<HttpPostedFileBase> images)
+        public ActionResult Create([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,Rented,Description")] Product product, IEnumerable<HttpPostedFileBase> images)
         {
             if (ModelState.IsValid)
             {
                 if (images!= null)
                 {
+                    var imageList = new List<Image>();
                     foreach (var image in images)
                     {
                         string imageName = System.IO.Path.GetFileName(image.FileName);
                         string physicalPath = Server.MapPath("~/Images/" + imageName);
                         image.SaveAs(physicalPath);
-                        product.Images.Add(imageName);
+                        var img = new Image { ProductId = product.ProductId};
+                        img.Name = imageName;
+                        imageList.Add(img);
                      }
 
-                 }
+                    product.Images = imageList;
+                }
 
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -138,7 +142,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Substance,Category,SubCategory,Height,Width,Depth,Sale,Description")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,Name,Substance,Category,SubCategory,Height,Width,Depth,Sale,Description")] Product product)
         {
             if (ModelState.IsValid)
             {

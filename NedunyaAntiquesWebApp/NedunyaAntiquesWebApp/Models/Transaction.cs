@@ -11,9 +11,13 @@ namespace NedunyaAntiquesWebApp.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int TransId { get; set; }
+        public int TransactionId { get; set; }
         public int CustomerId { get; set; }
+        [DataType(DataType.Date)]
         public DateTime TransDate { get; set; }
+        public Decimal Amount { get; set; }
+
+        public virtual Customer Customer { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }

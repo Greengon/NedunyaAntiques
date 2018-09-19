@@ -16,7 +16,7 @@ namespace NedunyaAntiquesWebApp.Models
         [StringLength(255)]
         [Display(Name = "שם פרטי")]
         public string FirstName { get; set; }
-
+        [Required]
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
@@ -51,5 +51,7 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Display(Name = "האימייל שלך")]
         public string Email { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

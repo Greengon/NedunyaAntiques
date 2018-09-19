@@ -13,19 +13,20 @@ namespace NedunyaAntiquesWebApp.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
+        [Required]
         [Display(Name = "שם המוצר")]
         public string Name { get; set; }
 
         [Display(Name = "מחיר")]
         [DataType(DataType.Currency)]
         public Decimal Price { get; set; }
-
+        [Required]
         [Display(Name = "חומר גלם")]
         public string Substance { get; set; }
-
+        [Required]
         [Display(Name = "קטגוריה")]
         public string Category { get; set; }
-
+        [Required]
         [Display(Name = "תת-קטגוריה")]
         public string SubCategory { get; set; }
 
@@ -47,11 +48,13 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Display(Name = "האם ניתן להשכרה")]
         public bool Rented { get; set; }
-
+        [Required]
         [Display(Name = "תיאור המוצר")]
         public string Description { get; set; }
 
+        public virtual Transaction Transaction { get; set; }
+
         [Display(Name = "הוסף תמונה/ות")]
-        public virtual ICollection<string> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
     }
 }
