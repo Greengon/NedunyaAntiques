@@ -157,7 +157,6 @@
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -233,6 +232,10 @@
     <Compile Include="Migrations\201809171948566_LoginInfo.cs" />
     <Compile Include="Migrations\201809171948566_LoginInfo.Designer.cs">
       <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809190950355_BooleanProp.cs" />
+    <Compile Include="Migrations\201809190950355_BooleanProp.Designer.cs">
+      <DependentUpon>201809190950355_BooleanProp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -537,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809171948566_LoginInfo.resx">
       <DependentUpon>201809171948566_LoginInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809190950355_BooleanProp.resx">
+      <DependentUpon>201809190950355_BooleanProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

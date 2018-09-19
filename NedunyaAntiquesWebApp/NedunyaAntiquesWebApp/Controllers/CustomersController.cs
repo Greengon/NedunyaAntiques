@@ -37,9 +37,9 @@ namespace NedunyaAntiquesWebApp.Controllers
             string message = string.Empty;
             if (cust.Password != Password)
                 message = "הסיסמא אינה תקינה";
-            if (cust.Email != Email)
+            else if (cust.Email != Email)
                 message = "האימייל אינו תקין";
-            FormsAuthentication.SetAuthCookie(Email, cust.RememberMe);
+           else FormsAuthentication.SetAuthCookie(Email, cust.RememberMe);
 
             ViewBag.Message = message;
             return View(cust);

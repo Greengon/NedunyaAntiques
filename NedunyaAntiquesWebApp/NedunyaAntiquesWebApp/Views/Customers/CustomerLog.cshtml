@@ -7,34 +7,43 @@
 <h2>Customerlog</h2>
 @using (Html.BeginForm())
 {
-    <div class="container h-100" style="margin-top:100px;">
-        <div class="row h-100 align-items-center">
-            <div class="col-12">
-                <div class="hero-content text-right">
-
-                    
-                    <div class="form-group centerlook">
-                        
-                        @Html.LabelFor(m => m.Email)
-                        <p>  @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" })* </p>
-                        @Html.ValidationMessageFor(m => m.Email)
-                    </div>
-                    <div class="form-group centerlook">
-                        <label>סיסמא </label>
-                        <p>@Html.PasswordFor(m => m.Password)*</p>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
-
-                    </div>
-                    
-                    <div class="loginbtn">
-
-                        <input type="button" class="btn btn-info" value="התחבר" onclick="location.href='@Url.Action("LogIn", "CustomersController")'" />
+<div class="container h-100" style="margin-top:100px;">
+    <div class="row h-100 align-items-center">
+        <div class="col-12">
+            <div class="hero-content text-right">
 
 
-                    </div>
+                <div class="form-group centerlook">
+
+                    @Html.LabelFor(m => m.Email)
+                    <p>  @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" })* </p>
+                    @Html.ValidationMessageFor(m => m.Email)
                 </div>
+                <div class="form-group centerlook">
+                    <label>סיסמא </label>
+                    <p>@Html.PasswordFor(m => m.Password)*</p>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+
+                </div>
+
+                <div class="loginbtn">
+
+                    <input type="button" class="btn essence-btn" value="התחבר" onclick="location.href='@Url.Action("LogIn", "Customers")'" />
+                    
+
                 </div>
             </div>
         </div>
+    </div>
+    @if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
+</div>
+
 }
 
