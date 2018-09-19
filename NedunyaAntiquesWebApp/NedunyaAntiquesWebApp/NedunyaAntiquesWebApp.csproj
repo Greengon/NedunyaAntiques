@@ -485,6 +485,7 @@
     <Content Include="Views\Products\ShowProdOnSale.cshtml" />
     <Content Include="Views\ErrorPage\ErrorMessage.cshtml" />
     <Content Include="Views\Customers\CustomerLog.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809091335392_init.resx">

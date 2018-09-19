@@ -47,15 +47,24 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACkjJTb3AhOX95sMgoOVIkZPVxDPsrkCQ&callback=initMap">
 </script>
 
+
+
+
 <!--Leaving a message-->
 <!--This is done by using formspree API-->
 <h3 class="messageforuser text-right">@ViewBag.TheMessage</h3>
-<div class="emailcontactarea">
+
+<div class="container mail-area-container">
     <form action="https://formspree.io/greengon1991@gmail.com" method="post" class="text-right">
-        <input type="text" name="name" placeholder="שם מלא">
-        <input type="email" name="_replyto" placeholder="השאר מייל לחזרה">
-        <input type="text" size="35" name="message" placeholder="כתוב לנו">
-        <input type="submit" value="Send">
+        <label for="name">שם מלא: </label>
+        <input type="text" id="username" name="name" placeholder="שם...">
+       
+        <label for="email">מייל: </label>
+        <input type="email" id="mail" name="_replyto" placeholder="השאר מייל לחזרה">
+        
+        <textarea id="subject" class="mail-textarea" name="subject" placeholder="כתוב כאן..."></textarea>  
+        
+        <input type="submit" value="שלח">
         <input type="hidden" name="_next" value="/Home/contact" />
     </form>
 </div>
