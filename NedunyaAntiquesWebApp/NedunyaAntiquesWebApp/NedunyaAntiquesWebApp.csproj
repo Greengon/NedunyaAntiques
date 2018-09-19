@@ -156,7 +156,6 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\RentalController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,9 +212,9 @@
     <Compile Include="Migrations\201809132134295_TransactionToDb.Designer.cs">
       <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809132154195_NewTransactionToDb.cs" />
-    <Compile Include="Migrations\201809132154195_NewTransactionToDb.Designer.cs">
-      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
+    <Compile Include="Migrations\201809181147500_Rescaffold_db.cs" />
+    <Compile Include="Migrations\201809181147500_Rescaffold_db.Designer.cs">
+      <DependentUpon>201809181147500_Rescaffold_db.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -455,6 +454,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -504,8 +504,8 @@
     <EmbeddedResource Include="Migrations\201809132134295_TransactionToDb.resx">
       <DependentUpon>201809132134295_TransactionToDb.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809132154195_NewTransactionToDb.resx">
-      <DependentUpon>201809132154195_NewTransactionToDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809181147500_Rescaffold_db.resx">
+      <DependentUpon>201809181147500_Rescaffold_db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

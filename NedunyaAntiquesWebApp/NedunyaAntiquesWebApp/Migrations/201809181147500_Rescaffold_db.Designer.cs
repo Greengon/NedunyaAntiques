@@ -7,13 +7,13 @@ namespace NedunyaAntiquesWebApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class NewTransactionToDb : IMigrationMetadata
+    public sealed partial class Rescaffold_db : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(NewTransactionToDb));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Rescaffold_db));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809132154195_NewTransactionToDb"; }
+            get { return "201809181147500_Rescaffold_db"; }
         }
         
         string IMigrationMetadata.Source
