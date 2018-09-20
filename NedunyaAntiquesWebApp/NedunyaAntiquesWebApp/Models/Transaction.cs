@@ -12,7 +12,9 @@ namespace NedunyaAntiquesWebApp.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
-        public int CustomerEmail { get; set; }
+        public string CustomerEmail { get; set; }
+
+        public bool Delivery { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime TransDate { get; set; }

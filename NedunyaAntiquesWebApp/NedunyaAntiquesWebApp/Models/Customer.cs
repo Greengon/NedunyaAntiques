@@ -56,8 +56,6 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "האם הינך מעוניין/ת שנעדכן אותך על מבצעים?")]
         public bool AdvertiseSalesNotification { get; set; }
 
-        [Display(Name = "האם הינך מנוי/ה?")]
-        public bool IsSubscribed { get; set; }
 
         [Display(Name =  "תאריך הלידה שלך")]
         [DataType(DataType.Date)]

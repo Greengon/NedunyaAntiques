@@ -168,6 +168,11 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
+        public ActionResult CustomerLog()
+        {
+            return View();
+        }
+
 
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live

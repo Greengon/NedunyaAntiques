@@ -177,6 +177,26 @@
     <Compile Include="Migrations\201809192300219_Pkchanged.Designer.cs">
       <DependentUpon>201809192300219_Pkchanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809200821401_DelSub.cs" />
+    <Compile Include="Migrations\201809200821401_DelSub.Designer.cs">
+      <DependentUpon>201809200821401_DelSub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809200842425_RentalProp.cs" />
+    <Compile Include="Migrations\201809200842425_RentalProp.Designer.cs">
+      <DependentUpon>201809200842425_RentalProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809200845519_RentalPropNull.cs" />
+    <Compile Include="Migrations\201809200845519_RentalPropNull.Designer.cs">
+      <DependentUpon>201809200845519_RentalPropNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809200847025_RentalPriceName.cs" />
+    <Compile Include="Migrations\201809200847025_RentalPriceName.Designer.cs">
+      <DependentUpon>201809200847025_RentalPriceName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809200854221_Deliveryprop.cs" />
+    <Compile Include="Migrations\201809200854221_Deliveryprop.Designer.cs">
+      <DependentUpon>201809200854221_Deliveryprop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -441,6 +461,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809192300219_Pkchanged.resx">
       <DependentUpon>201809192300219_Pkchanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809200821401_DelSub.resx">
+      <DependentUpon>201809200821401_DelSub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809200842425_RentalProp.resx">
+      <DependentUpon>201809200842425_RentalProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809200845519_RentalPropNull.resx">
+      <DependentUpon>201809200845519_RentalPropNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809200847025_RentalPriceName.resx">
+      <DependentUpon>201809200847025_RentalPriceName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809200854221_Deliveryprop.resx">
+      <DependentUpon>201809200854221_Deliveryprop.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
