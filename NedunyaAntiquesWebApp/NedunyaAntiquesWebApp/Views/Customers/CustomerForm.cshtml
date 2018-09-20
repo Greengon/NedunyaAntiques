@@ -6,7 +6,7 @@
 
 <h2>לקוח חדש</h2>
 
-@using (Html.BeginForm("Save", "Customers"))
+@using (Html.BeginForm("Save", "Customers", FormMethod.Post))
 {@Html.AntiForgeryToken()
 
 <div class="container h-100" style="margin-top:100px;">
@@ -75,7 +75,7 @@
                     </label>
                 </div>
                 @Html.HiddenFor(m => m.Email)
-                <input type="button" class="btn essence-btn" value="התחבר" onclick="location.href='@Url.Action("Save", "Customers")'" />
+                <input type="button" class="btn essence-btn" value="צור משתמש" onclick="location.href='@Url.Action("Save", "Customers")'" formmethod="post" />
 
             </div>
         </div>

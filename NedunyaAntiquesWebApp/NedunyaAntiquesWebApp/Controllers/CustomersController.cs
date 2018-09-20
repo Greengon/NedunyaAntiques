@@ -25,19 +25,19 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult LogIn(string Email, string Password)
+        public ActionResult LogIn([Bind(Include = "Email,Password")] Customer customer)
         {
 
-            Customer cust = db.Customers.Find(Email);
+            Customer cust = db.Customers.Find(customer.Email);
             if (cust == null)
             {
                 return HttpNotFound();
             }
 
             string message = string.Empty;
-            if (cust.Password != Password)
+            if (cust.Password != customer.Password)
                 message = "הסיסמא אינה תקינה";
-            if (cust.Email !=Email)
+            if (cust.Email !=customer.Email)
                 message = "האימייל אינו תקין";
             FormsAuthentication.SetAuthCookie(cust.Email, cust.RememberMe);
 
@@ -84,6 +84,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AcceptVerbs("POST")]
         [ValidateAntiForgeryToken]
         public ActionResult Save([Bind(Include = "FirstName,LastName,Password,ConfirmPassword,CityAddress,StreetAddress,HomeNum,AptNum,Birthdate,Email,PhoneNum,AdvertiseSalesNotification")] Customer customer)
         {
