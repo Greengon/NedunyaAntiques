@@ -45,8 +45,10 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(cust);
         }
 
+        // POST: /Customers/Logout
         [HttpPost]
         [Authorize]
+        // TODO: check if [ValidateAntiForgeryToken] is needed here.
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
