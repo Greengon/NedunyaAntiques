@@ -4,15 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>לקוח חדש</h2>
 
-@using (Html.BeginForm("Save", "Customers", FormMethod.Post))
-{@Html.AntiForgeryToken()
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @Html.AntiForgeryToken()
 
 <div class="container h-100" style="margin-top:100px;">
     <div class="row h-100 align-items-center">
         <div class="col-12">
             <div class="hero-content text-right">
+                <h2>לקוח חדש</h2>
                 <div class="form-group">
                     @Html.LabelFor(m => m.FirstName)
                     <p> @Html.EditorFor(m => m.FirstName, new { @class = "form-control" })</p>
@@ -80,6 +82,14 @@
             </div>
         </div>
     </div>
+    @if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
 </div>
 }
 
