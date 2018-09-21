@@ -5,7 +5,8 @@
 }
 
 @using (Html.BeginForm("Save", "Customers", FormMethod.Post))
-{@Html.AntiForgeryToken()
+{
+    @Html.AntiForgeryToken()
 
 <div class="container h-100" style="margin-top:100px;">
     <div class="row h-100 align-items-center">
@@ -79,6 +80,14 @@
             </div>
         </div>
     </div>
+    @if (@ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            $(function () {
+                alert("@ViewBag.Message")
+            });
+        </script>
+    }
 </div>
 }
 
