@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
 
@@ -90,26 +92,28 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,Rented,Description")] Product product, IEnumerable<HttpPostedFileBase> images)
+        public ActionResult Create([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
             {
-                if (images!= null)
+                if (Images!= null)
                 {
                     var imageList = new List<Image>();
-                    foreach (var image in images)
+                    foreach (var image in Images)
                     {
                         string imageName = System.IO.Path.GetFileName(image.FileName);
                         string physicalPath = Server.MapPath("~/Images/" + imageName);
                         image.SaveAs(physicalPath);
-                        var img = new Image { ProductId = product.ProductId};
+                        WebImage photo = new WebImage(physicalPath);
+                        photo.Resize(640, 480, preserveAspectRatio: true);
+                        photo.Save("~/Images/Thumbs/" + imageName);
+                        var img = new Image { ProductId = product.ProductId};                        
                         img.Name = imageName;
                         imageList.Add(img);
                      }
-
+                   
                     product.Images = imageList;
                 }
-
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -142,7 +146,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,Name,Substance,Category,SubCategory,Height,Width,Depth,Sale,Description")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product)
         {
             if (ModelState.IsValid)
             {

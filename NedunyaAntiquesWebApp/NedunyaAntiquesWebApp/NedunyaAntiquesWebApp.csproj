@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201809200854221_Deliveryprop.Designer.cs">
       <DependentUpon>201809200854221_Deliveryprop.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809212024405_productModelChanges.cs" />
+    <Compile Include="Migrations\201809212024405_productModelChanges.Designer.cs">
+      <DependentUpon>201809212024405_productModelChanges.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -435,7 +439,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\Thumbs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -475,6 +479,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809200854221_Deliveryprop.resx">
       <DependentUpon>201809200854221_Deliveryprop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809212024405_productModelChanges.resx">
+      <DependentUpon>201809212024405_productModelChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

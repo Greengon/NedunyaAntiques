@@ -49,7 +49,6 @@ namespace NedunyaAntiquesWebApp.Models
         public bool Sale { get; set; }
 
         [Display(Name = "אחוז הנחה")]
-        [Range(1, 100)]
         public uint DiscountPercentage { get; set; }
 
         [Display(Name = "האם ניתן להשכרה")]

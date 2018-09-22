@@ -13,7 +13,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
-        public ActionResult shop()
+        public ActionResult Shop()
         {
             ViewBag.Message = "Your product shop page.";
 
