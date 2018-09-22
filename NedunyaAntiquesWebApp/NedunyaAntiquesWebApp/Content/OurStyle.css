@@ -143,3 +143,19 @@ input[type=submit] {
     margin-top : 20px;
     margin-left: 10%;
 }
+
+.fb-like{
+    margin-top:25px;
+}
+
+@media screen and (max-width: 821px) {
+    .fb-like {
+        margin: auto;
+    }
+}
+
+@media screen and (max-width: 421px) {
+    .fb-like {
+        display: none;
+    }
+}
