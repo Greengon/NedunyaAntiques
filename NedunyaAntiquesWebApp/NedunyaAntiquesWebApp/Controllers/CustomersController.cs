@@ -25,6 +25,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult LogIn([Bind(Include = "Email,Password")] Customer customer)
         {
 
@@ -48,7 +49,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // POST: /Customers/Logout
         [HttpPost]
         [Authorize]
-        // TODO: check if [ValidateAntiForgeryToken] is needed here.
+        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -75,6 +76,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Save
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
+        
         public ActionResult Save()
         {
             return View();
@@ -86,15 +88,21 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [AcceptVerbs("POST")]
         [ValidateAntiForgeryToken]
-        public ActionResult Save([Bind(Include = "FirstName,LastName,Password,ConfirmPassword,CityAddress,StreetAddress,HomeNum,AptNum,Birthdate,Email,PhoneNum,AdvertiseSalesNotification")] Customer customer)
+        public ActionResult SaveClient([Bind(Include = "FirstName,LastName,Password,ConfirmPassword,CityAddress,StreetAddress,HomeNum,AptNum,Birthdate,Email,PhoneNum,AdvertiseSalesNotification")] Customer customer)
         {
             if (ModelState.IsValid && customer.Email!=null)
-            {   
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            {
+                Customer cust = db.Customers.Find(customer.Email);
+                if (cust == null)
+                {
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                string message = string.Empty;
+                message = "כתובת האימייל שהזנת כבר קיימת במערכת";
+                ViewBag.Message = message;
             }
             
             return View("CustomerForm", customer);
@@ -124,7 +132,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,IsSubscribed")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
         {
             if (ModelState.IsValid)
             {
