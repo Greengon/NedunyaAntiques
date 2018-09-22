@@ -32,8 +32,7 @@ namespace NedunyaAntiquesWebApp
                      "~/Scripts/classy-nav.min.js",
                      "~/Scripts/popper.min.js",
                      "~/Scripts/plugins.js",
-                     "~/Scripts/active.js",
-                     "~/Scripts/map-active.js"
+                     "~/Scripts/active.js"
                 ));
 
             // our css
@@ -53,7 +52,7 @@ namespace NedunyaAntiquesWebApp
           ));
 
             // Bundle Optimization - minifize all scripts
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 
             // From here on there are pre made bundels by VS
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
