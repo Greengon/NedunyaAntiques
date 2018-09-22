@@ -29,7 +29,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.TheMessage = "זיהתה בעיה באתר? שלח לנו הודעה.";
+            ViewBag.TheMessage = "זיהית בעיה באתר? שלח לנו הודעה.";
 
             return View();
         }

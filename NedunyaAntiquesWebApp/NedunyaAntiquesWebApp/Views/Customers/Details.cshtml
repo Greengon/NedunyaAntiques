@@ -5,23 +5,126 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>Customer</h4>
+    <h4 class="text-right">פרטי לקוח</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <dl class="dl-horizontal">
+                @* Showing all the Customer data if not null to screen else shows
+            "Ungiven Data" *@
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
 
-        <dd>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-    </dl>
-</div>
-<p>
+                @if (Model.FirstName != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                }
+
+                @if (Model.LastName != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                }
+
+
+                @if (Model.CityAddress != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CityAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CityAddress)
+                    </dd>
+                }
+
+                @if (Model.StreetAddress != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StreetAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StreetAddress)
+                    </dd>
+                }
+
+                @if (Model.HomeNum > 0 && Model.HomeNum < 10000)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HomeNum)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HomeNum)
+                    </dd>
+                }
+
+                @if (Model.HomeNum > 0 && Model.AptNum < 10000)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AptNum)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AptNum)
+                    </dd>
+                }
+
+                @if (Model.PhoneNum != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PhoneNum)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PhoneNum)
+                    </dd>
+                }
+
+                @if (Model.Birthdate != null)
+                {
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Birthdate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Birthdate)
+                    </dd>
+                }
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AdvertiseSalesNotification)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AdvertiseSalesNotification)
+                </dd>
+
+
+            </dl>
+        </div>
+    </div>
+ </div>
+<p class="centerd-text">
     @Html.ActionLink("Edit", "Edit", new { id = Model.Email }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -138,3 +138,8 @@ input[type=submit] {
 .messageforuser{
     margin:50px
 }
+
+.centerd-text{
+    margin-top : 20px;
+    margin-left: 10%;
+}

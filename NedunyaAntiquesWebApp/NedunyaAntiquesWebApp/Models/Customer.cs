@@ -16,10 +16,11 @@ namespace NedunyaAntiquesWebApp.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Required]
+        [Required] 
         [StringLength(255)]
         [Display(Name = "שם פרטי")]
         public string FirstName { get; set; }
+
         [Required]
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
@@ -51,7 +52,7 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "פלאפון")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "מספר הטלפון אינו חוקי")]
-        public int PhoneNum { get; set; }
+        public String PhoneNum { get; set; }
 
         [Display(Name = "האם הינך מעוניין/ת שנעדכן אותך על מבצעים?")]
         public bool AdvertiseSalesNotification { get; set; }
