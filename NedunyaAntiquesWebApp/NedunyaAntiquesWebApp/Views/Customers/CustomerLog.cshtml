@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("LogIn", "Customers"))
+@using (Html.BeginForm("LogIn", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="container h-100" style="margin-top:100px;">
@@ -26,12 +26,15 @@
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
 
                     </div>
+                    <div class="form-check">
+                        <label>
+                            @Html.CheckBoxFor(m => m.RememberMe)  זכור אותי
+                        </label>
+                    
+                    </div>
 
-                    <div class="loginbtn">
-
-                        <input type="button" class="btn essence-btn" value="התחבר" onclick="location.href='@Url.Action("LogIn", "Customers")'" />
-
-
+                    <div class="form-group">
+                        <button type="submit" value="LogIn" class="btn btn-success">התחבר</button>
                     </div>
                 </div>
             </div>

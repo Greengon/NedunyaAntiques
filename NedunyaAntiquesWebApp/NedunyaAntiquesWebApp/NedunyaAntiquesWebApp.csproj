@@ -204,6 +204,14 @@
     <Compile Include="Migrations\201809212024405_productModelChanges.Designer.cs">
       <DependentUpon>201809212024405_productModelChanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809221104279_NullBool.cs" />
+    <Compile Include="Migrations\201809221104279_NullBool.Designer.cs">
+      <DependentUpon>201809221104279_NullBool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809221126460_BoolException.cs" />
+    <Compile Include="Migrations\201809221126460_BoolException.Designer.cs">
+      <DependentUpon>201809221126460_BoolException.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -485,6 +493,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809212024405_productModelChanges.resx">
       <DependentUpon>201809212024405_productModelChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809221104279_NullBool.resx">
+      <DependentUpon>201809221104279_NullBool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809221126460_BoolException.resx">
+      <DependentUpon>201809221126460_BoolException.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

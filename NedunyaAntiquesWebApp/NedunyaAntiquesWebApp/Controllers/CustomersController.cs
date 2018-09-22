@@ -26,24 +26,25 @@ namespace NedunyaAntiquesWebApp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn([Bind(Include = "Email,Password")] Customer customer)
+        public ActionResult LogIn([Bind(Include = "Email,Password,RememberMe")] Customer customer)
         {
 
             Customer cust = db.Customers.Find(customer.Email);
-            if (cust == null)
-            {
-                return HttpNotFound();
-            }
-
             string message = string.Empty;
-            if (cust.Password != customer.Password)
-                message = "הסיסמא אינה תקינה";
-            if (cust.Email !=customer.Email)
-                message = "האימייל אינו תקין";
-            FormsAuthentication.SetAuthCookie(cust.Email, cust.RememberMe);
+            if (cust != null)
+            {
+                if (cust.Password != customer.Password)
+                    message = "הסיסמא אינה תקינה";
+               
+                FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
 
+                ViewBag.Message = message;
+                return RedirectToAction("Index");
+            }
+            message = "האימייל שהזנת אינו נמצא במערכת";
             ViewBag.Message = message;
-            return View(cust);
+            return View("CustomerLog", customer);
+
         }
 
         // POST: /Customers/Logout
@@ -91,7 +92,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveClient([Bind(Include = "FirstName,LastName,Password,ConfirmPassword,CityAddress,StreetAddress,HomeNum,AptNum,Birthdate,Email,PhoneNum,AdvertiseSalesNotification")] Customer customer)
         {
-            if (ModelState.IsValid && customer.Email!=null)
+            if (ModelState.IsValid)
             {
                 Customer cust = db.Customers.Find(customer.Email);
                 if (cust == null)
