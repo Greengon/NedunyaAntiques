@@ -212,6 +212,10 @@
     <Compile Include="Migrations\201809221126460_BoolException.Designer.cs">
       <DependentUpon>201809221126460_BoolException.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809221214273_StringPhone.cs" />
+    <Compile Include="Migrations\201809221214273_StringPhone.Designer.cs">
+      <DependentUpon>201809221214273_StringPhone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -499,6 +503,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809221126460_BoolException.resx">
       <DependentUpon>201809221126460_BoolException.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809221214273_StringPhone.resx">
+      <DependentUpon>201809221214273_StringPhone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
