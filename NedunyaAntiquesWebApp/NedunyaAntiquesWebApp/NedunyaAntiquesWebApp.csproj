@@ -173,6 +173,10 @@
     <Compile Include="Migrations\201809231746338_Identity.Designer.cs">
       <DependentUpon>201809231746338_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809241508444__Carts.cs" />
+    <Compile Include="Migrations\201809241508444__Carts.Designer.cs">
+      <DependentUpon>201809241508444__Carts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -437,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809231746338_Identity.resx">
       <DependentUpon>201809231746338_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809241508444__Carts.resx">
+      <DependentUpon>201809241508444__Carts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
