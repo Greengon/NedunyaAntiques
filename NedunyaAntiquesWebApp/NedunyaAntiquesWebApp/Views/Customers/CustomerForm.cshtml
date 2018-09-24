@@ -14,6 +14,11 @@
         <div class="hero-content text-right">
             <h2>לקוח חדש</h2>
             <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                <p>  @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" }) </p>
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(m => m.FirstName)
                 <p> @Html.EditorFor(m => m.FirstName, new { @class = "form-control" })</p>
                 @Html.ValidationMessageFor(m => m.FirstName)
@@ -58,29 +63,20 @@
                 @Html.LabelFor(m => m.Birthdate)
                 <p> @Html.EditorFor(m => m.Birthdate, "{0:d MMM yyy}", new { @class = "form-control" }) </p>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Email)
-                <p>  @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" }) </p>
-                @Html.ValidationMessageFor(m => m.Email)
-            </div>
+
             <div class="form-group">
                 @Html.LabelFor(m => m.PhoneNum)
                 <p> @Html.EditorFor(m => m.PhoneNum, new { @class = "form-control" }) </p>
-
+                @Html.ValidationMessageFor(model => model.PhoneNum)
             </div>
 
             <div class="form-check">
                 <label>
                     @Html.CheckBoxFor(m => m.AdvertiseSalesNotification)  האם הינך מעוניין/ת שנעדכן אותך על מבצעים?
                 </label>
-                    
+
             </div>
-            <div class="form-check">
-                <label>
-                    @Html.CheckBoxFor(m => m.RememberMe)  זכור אותי
-                </label>
-                    
-            </div>
+            
             <div class="form-group">
                 <button type="submit" value="SaveClient" class="btn btn-success">צור משתמש</button>
             </div>

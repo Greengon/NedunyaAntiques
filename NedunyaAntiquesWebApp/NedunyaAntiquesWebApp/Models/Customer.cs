@@ -10,7 +10,7 @@ namespace NedunyaAntiquesWebApp.Models
     public class Customer
     {
         
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Display(Name = "האימייל שלך")]
         [DataType(DataType.EmailAddress)]
@@ -56,7 +56,7 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Display(Name = "האם הינך מעוניין/ת שנעדכן אותך על מבצעים?")]
         public bool AdvertiseSalesNotification { get; set; }
-
+        
 
         [Display(Name =  "תאריך הלידה שלך")]
         [DataType(DataType.Date)]

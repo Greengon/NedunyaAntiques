@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201809230852581_init.Designer.cs">
       <DependentUpon>201809230852581_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809231746338_Identity.cs" />
+    <Compile Include="Migrations\201809231746338_Identity.Designer.cs">
+      <DependentUpon>201809231746338_Identity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -430,6 +434,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809230852581_init.resx">
       <DependentUpon>201809230852581_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809231746338_Identity.resx">
+      <DependentUpon>201809231746338_Identity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
