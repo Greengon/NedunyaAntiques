@@ -181,6 +181,10 @@
     <Compile Include="Migrations\201809240917293_Transction_AddToCart.Designer.cs">
       <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809252024496_customer_key.cs" />
+    <Compile Include="Migrations\201809252024496_customer_key.Designer.cs">
+      <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -452,6 +456,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809240917293_Transction_AddToCart.resx">
       <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809252024496_customer_key.resx">
+      <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

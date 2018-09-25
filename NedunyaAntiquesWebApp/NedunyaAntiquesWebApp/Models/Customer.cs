@@ -10,7 +10,7 @@ namespace NedunyaAntiquesWebApp.Models
     public class Customer
     {
         
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         [Display(Name = "האימייל שלך")]
         [DataType(DataType.EmailAddress)]
