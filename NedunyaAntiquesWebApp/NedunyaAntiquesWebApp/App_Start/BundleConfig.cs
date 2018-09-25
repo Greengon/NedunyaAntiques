@@ -32,11 +32,13 @@ namespace NedunyaAntiquesWebApp
                      "~/Scripts/classy-nav.min.js",
                      "~/Scripts/popper.min.js",
                      "~/Scripts/plugins.js",
-                     "~/Scripts/active.js"
+                     "~/Scripts/active.js",
+                     "~/Scripts/global.js"
                 ));
 
             // our css
             bundles.Add(new StyleBundle("~/bundles/our-css").Include(
+          "~/Content/ourstyle.css",
           "~/Content/bootstrap.min.css",
           "~/Content/animate.css",
           "~/Content/bootstrap-rtl.css",
@@ -47,7 +49,6 @@ namespace NedunyaAntiquesWebApp
           "~/Content/jquery-ui.min.css",
           "~/Content/magnific-popup.css",
           "~/Content/nice-select.css",
-          "~/Content/ourstyle.css",
           "~/Content/owl.carousel.css"
           ));
 

@@ -15,19 +15,7 @@ namespace NedunyaAntiquesWebApp.Controllers
     public class ProductsController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
-        public string Dummy()
-        {
-            var addedProducts = new List<Product>
-            {
-                new Product { ProductId = 1,Category = "furniture",Depth=10.0,Description = "Something nice",Height = 15.0,Name="Chair",Sale=true,Substance = "Wood",Width=100},
-                new Product { ProductId = 2,Category = "tools",Depth=10.0,Description = "to eat",Height = 15.0,Name="Cup",Sale=false,Substance = "Porcelain",Width=100},
-                new Product { ProductId = 3,Category = "cutlery",Depth=10.0,Description = "to eat",Height = 15.0,Name="Fork",Sale=false,Substance = "Steel",Width=100}
-            };
-            addedProducts.ForEach(s => db.Products.Add(s));
-            db.SaveChanges();
-            return "OK!";
 
-        }
 
         // GET: Products
         // Using filter to allow access only to admin users.
@@ -62,9 +50,11 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            ViewBag.Category=category;
             return View(productList.ToList());
          }
-
+        
         public ActionResult ShowProdOnSale()
         {
             var productList = from p in db.Products where p.Sale.Equals(true) select p;
@@ -105,7 +95,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                         string physicalPath = Server.MapPath("~/Images/" + imageName);
                         image.SaveAs(physicalPath);
                         WebImage photo = new WebImage(physicalPath);
-                        photo.Resize(640, 480, preserveAspectRatio: true);
+                        photo.Resize(640, 480);
                         photo.Save("~/Images/Thumbs/" + imageName);
                         var img = new Image { ProductId = product.ProductId};                        
                         img.Name = imageName;
@@ -146,7 +136,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product)
+        public ActionResult Edit([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
             {

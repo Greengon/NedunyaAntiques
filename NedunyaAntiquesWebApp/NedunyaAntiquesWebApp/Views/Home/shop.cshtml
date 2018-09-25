@@ -49,115 +49,31 @@
             <div class="col-12 col-md-8 col-lg-9">
                 <div class="shop_grid_product_area">
                     <div class="row">
+                        @*foreach (var product in Model.Products)
+                        {
 
-                        <!--Single Product-->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../img/place-holders.img/640X480.png" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
+                            <!--Single Product-->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-product-wrapper">
+                                    <!--Single Image-->
+                                    <div class="product-img">
+                                        <img src="../img/place-holders.img/640X480.png" />
+                                    </div>
+                                    <!--Product Description-->
+                                    <div class="product-description">
+                                        <p>
+                                            <b>Name:</b> <span>@product.Name</span>
+                                        </p>
+                                        <p>
+                                            <b>Price:</b> <span>@product.Price USD</span>
+                                        </p>
+                                        <p class="text-center">
+                                            @Html.ActionLink("Add to cart", "AddToCart", "Transactions", new { id = product.productId }, new { @class = "btn btn-info" })
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!--Single Product-->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../img/place-holders.img/640X480.png" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Single Product-->
-
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../img/place-holders.img/640X480.png" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Single Product-->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../img/place-holders.img/640X480.png" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Single Product-->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../img/place-holders.img/640X480.png" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--Single Product-->
-                        <div class="col-12 col-sm-6 col-lg-4">
-                            <div class="single-product-wrapper">
-                                <!--Single Image-->
-                                <div class="product-img">
-                                    <img src="../Images/cup2.jpg" />
-                                </div>
-                                <!--Product Description-->
-                                <div class="product-description">
-                                    <h6>דוגמה לפריט</h6>
-                                    <p class="product-price">
-                                        <span class="old-price">16.50</span>
-                                        15.00
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
+                        }*@
                     </div>
                 </div>
                 </div>

@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201809221214273_StringPhone.Designer.cs">
       <DependentUpon>201809221214273_StringPhone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809240917293_Transction_AddToCart.cs" />
+    <Compile Include="Migrations\201809240917293_Transction_AddToCart.Designer.cs">
+      <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -409,6 +413,7 @@
     <Content Include="fonts\pfennigitalic-webfont.ttf" />
     <Content Include="fonts\pfennigitalic-webfont.woff" />
     <Content Include="Scripts\classy-nav.min.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\map-active.js" />
@@ -506,6 +511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809221214273_StringPhone.resx">
       <DependentUpon>201809221214273_StringPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809240917293_Transction_AddToCart.resx">
+      <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

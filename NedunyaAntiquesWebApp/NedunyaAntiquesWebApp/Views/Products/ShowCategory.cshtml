@@ -1,31 +1,214 @@
-﻿@model IEnumerable<NedunyaAntiquesWebApp.Models.Product>
+﻿@using System.ComponentModel
+@using NedunyaAntiquesWebApp.Models
+@model IEnumerable<NedunyaAntiquesWebApp.Models.Product>
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="~/Content/ourstyle.css">
+<script type="text/javascript" src="~/Scripts/global.js"></script>
 
 @{
-    ViewBag.Title = "Show By Category";
+    ViewBag.Title = "ShowByCategory";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>
-    @Model.FirstOrDefault().Category
-</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
- <th></th>
-    </tr>
+<!--Shop headline-->
+<div class="breadcumb_area bg-img" style="background-image: url(../../img/bg-img/breadcumb.jpg);">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12">
+                <div class="page-title text-center">
+                    <h4>חנות</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+<section class="shop_grid_area section-padding-80 text-right">
+    <!--Shop page itself-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="shop_sidebar_area" style="border-left: 1px solid gray; left:50%">
+                    <!--Side bar widget-->
+                    <div class="widget catagories-menu mb-50">
+                        <!--widget title-->
+                        <h5 class="widget-title mb-50">קטגוריות</h5>
+                        <!--Catagories-->
+                        <div class="catagories-menu">
+                            <ul id="tabs">
 
-</table>
+                                <li data-toggle="collapse" data-target="#furntiure">
+                                    @Html.ActionLink("ריהוט", "ShowCategory", "Products", new { category = "furniture" }, null)
+                                </li>
+                                <li data-toggle="collapse" data-target="#kitchenware">
+                                    @Html.ActionLink("כלי מטבח", "ShowCategory", "Products", new { category = "kitchenware" }, null)
+                                </li>
+                                <li data-toggle="collapse" data-target="#decoration">
+                                    @Html.ActionLink("דקורציות", "ShowCategory", "Products", new { category = "decoration" }, null)
+                                </li>
+                                <!--Single Item-->
+                                @*if (ViewBag.category == "furniture")
+                                    {
+                                        <li class="active" data-toggle="collapse" data-target="#furntiure">
+                                            <a herf="#">ריהוט</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li data-toggle="collapse" data-target="#furntiure">
+                                            <a herf="#">ריהוט</a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.category == "kitchenware")
+                                    {
+                                        <li class="active" data-toggle="collapse" data-target="#kitchenware">
+                                            <a herf="#">כלי מטבח</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li  data-toggle="collapse" data-target="#kitchenware">
+                                            <a herf="#">כלי מטבח</a>
+                                        </li>
+                                    }
+                                    @if (ViewBag.category == "kitchenware")
+                                    {
+                                        <li class="active" data-toggle="collapse" data-target="#decoration">
+                                            <a herf="#">דקורציה</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li  data-toggle="collapse" data-target="#decoration">
+                                            <a herf="#">דקורציה</a>
+                                        </li>
+                                    }
+                                *@
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="shop_grid_product_area">
+                    <div class="row">
+
+
+                        @foreach (var item in Model)
+                        {
+
+
+                            <!--Single Product-->
+                            <div class="col-12 col-sm-6 col-lg-4">
+                                <div class="single-product-wrapper">
+                                    <!--Single Image-->
+                                    <div class="product-img">
+                                        <img src="~/Images/Thumbs/@(item.Images.ElementAt(0).Name)" />
+                                    </div>
+                                    <!--Product Description-->
+                                    <div class="product-description">
+                                        <p>
+                                            <b>שם המוצר:</b> @Html.DisplayFor(modelItem => item.Name)
+                                        </p>
+                                        <p>
+                                            <b>מחיר:</b> @Html.DisplayFor(modelItem => item.Price) ש"ח
+                                        </p>
+                                        
+                                        <a class="trigger_popup_fricc">פרטים נוספים</a>
+
+                                        <div class="hover_bkgr_fricc">
+                                            <span class="helper"></span>
+                                            <div>
+                                                <div class="popupCloseButton">X</div>
+                                           <p>
+                                                    @Html.LabelFor(modelItem => item.Name):   @Html.DisplayFor(modelItem => item.Name)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Price):   @Html.DisplayFor(modelItem => item.Price)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Substance):@Html.DisplayFor(modelItem => item.Substance)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Category):@Html.DisplayFor(modelItem => item.Category)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.SubCategory):@Html.DisplayFor(modelItem => item.SubCategory)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Height):@Html.DisplayFor(modelItem => item.Height)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Width):@Html.DisplayFor(modelItem => item.Width)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Depth):@Html.DisplayFor(modelItem => item.Depth)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Description):@Html.DisplayFor(modelItem => item.Description)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Sale):@Html.DisplayFor(modelItem => item.Sale)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.DiscountPercentage):@Html.DisplayFor(modelItem => item.DiscountPercentage)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.Rented):@Html.DisplayFor(modelItem => item.Rented)
+                                                </p>
+                                                <p>
+                                                    @Html.LabelFor(modelItem => item.RentalPriceForDay):@Html.DisplayFor(modelItem => item.RentalPriceForDay)
+                                                </p>
+                                             
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                
+
+                                    <p class="text-center">
+                                        @Html.ActionLink("הוסף לסל", "AddToCart", "Transactions", new { ProductId = @Html.EditorFor(modelItem => item.ProductId) }, new { @class = "btn btn-info" })
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@*
+    <h2>
+        @Model.FirstOrDefault().Category
+    </h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId })
+                </td>
+            </tr>
+        }
+
+    </table>
+*@

@@ -49,7 +49,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TransacDate")] Transaction transaction)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,TransacDate")] Transaction transaction)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -135,5 +135,13 @@ namespace NedunyaAntiquesWebApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        public ActionResult AddToCart()
+        {
+            return View();
+        }
+
+        // POST: Transactions/Cre
     }
 }
