@@ -1,0 +1,73 @@
+﻿@model NedunyaAntiquesWebApp.ViewModels.ShoppingCartViewModel
+
+@{
+    ViewBag.Title = "Store Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3 class="text-right">
+    <span>עגלת הקניות שלך</span>
+</h3>
+
+@if (Model.CartItems.Count == 0)
+{
+    <a class="btn btn-danger text-right middle-block" href='@Url.Action("Shop", "Home")'>העגלה שלך ריקה, המשך לקנות</a>
+}
+else
+{
+    <table class="table-responsive table-bordered table-striped">
+        <tr class="text-right">
+            <th>
+                שם מוצר
+            </th>
+
+            <th>
+                מחיר
+            </th>
+
+            <th>
+                כמות
+            </th>
+            <th>מחיר כולל</th>
+        </tr>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr id="row-@item.ProductId">
+                <td>
+                    @Html.ActionLink(item.Product.Name, "Details", "Products", new { id = item.ProductId }, null);
+                </td>
+                <td>
+                    @item.Product.Price
+                </td>
+                <td id="item-count-@item.ProductId">
+                    @item.Count
+                </td>
+                <td>
+                    @((item.Product.Price * item.Count).ToString());
+                </td>
+                <td>
+                    <a herf="" class="product-remove text-right" data-id="@item.ProductId">
+                        הסר מעגלת הקניות
+                    </a>
+                </td>
+            </tr>
+        }
+        <tr class="text-right">
+            <td>
+                סה"כ
+            </td>
+            <td></td>
+            <td id="cart-total" class="text-right">
+                <b>@Model.CartTotal.ToString()</b>
+            </td>
+        </tr>
+    </table>
+
+    <p class="button">
+        <a class="btn btn-danger" href='@Url.Action("Index", "Home")'>המשך לקנות</a>
+    </p>
+    <p class="button">
+        @Html.ActionLink("עבור לתשלום", "AddressAndPayment", "Chekout");
+    </p>
+}
+
