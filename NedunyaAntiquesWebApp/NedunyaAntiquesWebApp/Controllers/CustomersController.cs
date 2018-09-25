@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using NedunyaAntiquesWebApp.Models;
+using WebGrease.Css.Extensions;
 
 namespace NedunyaAntiquesWebApp.Controllers
 {
@@ -96,6 +97,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             if (ModelState.IsValid)
             {
                 Customer cust = db.Customers.Find(customer.Email);
+          
                 if (cust == null)
                 {
                     db.Customers.Add(customer);

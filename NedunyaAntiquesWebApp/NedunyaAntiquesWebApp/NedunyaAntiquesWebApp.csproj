@@ -220,6 +220,14 @@
     <Compile Include="Migrations\201809231746338_Identity.Designer.cs">
       <DependentUpon>201809231746338_Identity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809242320293_EmailTransPropDel.cs" />
+    <Compile Include="Migrations\201809242320293_EmailTransPropDel.Designer.cs">
+      <DependentUpon>201809242320293_EmailTransPropDel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809242325167_EmailTransPropRet.cs" />
+    <Compile Include="Migrations\201809242325167_EmailTransPropRet.Designer.cs">
+      <DependentUpon>201809242325167_EmailTransPropRet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
@@ -513,6 +521,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809231746338_Identity.resx">
       <DependentUpon>201809231746338_Identity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809242320293_EmailTransPropDel.resx">
+      <DependentUpon>201809242320293_EmailTransPropDel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809242325167_EmailTransPropRet.resx">
+      <DependentUpon>201809242325167_EmailTransPropRet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
