@@ -163,13 +163,13 @@ namespace NedunyaAntiquesWebApp.Models
             return context.Session[CartSessionKey].ToString();
         }
 
-        // TODO: this function was copied, do we need it?
-        public void MigrateCart(string userName)
+        
+        public void MigrateCart(string Email)
         {
             var shoppingCart = db.Carts.Where(c => c.CartId == ShoppingCartId);
             foreach(Cart item in shoppingCart)
             {
-                item.CartId = userName;
+                item.CartId = Email;
             }
 
             db.SaveChanges();

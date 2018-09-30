@@ -16,6 +16,14 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
+        private void MigrateShoppingCart(string Email)
+        {
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+
+            cart.MigrateCart(Email);
+            Session[ShoppingCart.CartSessionKey] = Email;
+        }
+
         // GET: Customers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
@@ -36,7 +44,8 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 if (cust.Password != customer.Password)
                     message = "הסיסמא אינה תקינה";
-               
+
+                MigrateShoppingCart(customer.Email);
                 FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
 
                 ViewBag.Message = message;
@@ -55,6 +64,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            var cart = ShoppingCart.GetCart(this.HttpContext);
+            cart.emptyCart();
             return RedirectToAction("Index");
         }
 
@@ -102,6 +113,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 {
                     db.Customers.Add(customer);
                     db.SaveChanges();
+                    MigrateShoppingCart(customer.Email);
                     return RedirectToAction("Index");
                 }
                 string message = string.Empty;
@@ -110,6 +122,46 @@ namespace NedunyaAntiquesWebApp.Controllers
             }
             
             return View("CustomerForm", customer);
+        }
+
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+
+                // ChangePassword will throw an exception rather
+                // than return false in certain failure scenarios.
+                bool changePasswordSucceeded;
+                try
+                {
+                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                    changePasswordSucceeded = currentUser.ChangePassword(customer.OldPassword, customer.NewPassword);
+                }
+                catch (Exception)
+                {
+                    changePasswordSucceeded = false;
+                }
+
+                if (changePasswordSucceeded)
+                {
+                    return RedirectToAction("ChangePasswordSuccess");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "הסיסמא הישנה או החדשה שבחרת אינם חוקיים");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(customer);
         }
 
         // GET: Customers/Edit/5

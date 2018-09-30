@@ -185,6 +185,14 @@
     <Compile Include="Migrations\201809252024496_customer_key.Designer.cs">
       <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809301908275_NewUserProp.cs" />
+    <Compile Include="Migrations\201809301908275_NewUserProp.Designer.cs">
+      <DependentUpon>201809301908275_NewUserProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809301954578_OldPass.cs" />
+    <Compile Include="Migrations\201809301954578_OldPass.Designer.cs">
+      <DependentUpon>201809301954578_OldPass.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -443,6 +451,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
+    <Content Include="Views\Customers\ChangePassword.cshtml" />
+    <Content Include="Views\Customers\ChangePasswordSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809230852581_init.resx">
@@ -459,6 +469,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809252024496_customer_key.resx">
       <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809301908275_NewUserProp.resx">
+      <DependentUpon>201809301908275_NewUserProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809301954578_OldPass.resx">
+      <DependentUpon>201809301954578_OldPass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
