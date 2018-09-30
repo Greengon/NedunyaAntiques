@@ -103,7 +103,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
+        public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions,NewPassword,OldPassword,ConfirmNewPassword")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult ChangePassword(Customer customer)
+        public ActionResult ChangePassword([Bind(Include = "Email,NewPassword,OldPassword,ConfirmNewPassword")]Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -236,6 +236,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         public ActionResult CustomerLog()
+        {
+            return View();
+        }
+        public ActionResult ChangePasswordForm()
         {
             return View();
         }
