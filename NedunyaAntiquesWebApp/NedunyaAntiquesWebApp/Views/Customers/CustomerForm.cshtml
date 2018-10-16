@@ -3,7 +3,8 @@
     ViewBag.Title = "CustomerForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.maskedinput.js"></script>
 @using (Html.BeginForm("SaveClient", "Customers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -66,17 +67,20 @@
 
             <div class="form-group">
                 @Html.LabelFor(m => m.PhoneNum)
-                <p> @Html.EditorFor(m => m.PhoneNum, new { @class = "form-control" }) </p>
+                <p> @Html.EditorFor(m => m.PhoneNum, new { @class = "form-control", type = "phone" }) </p>
                 @Html.ValidationMessageFor(model => model.PhoneNum)
             </div>
 
+            <script type="text/javascript">
+                $('.phone').mask('999-999-9999');
+            </script>
             <div class="form-check">
                 <label>
                     @Html.CheckBoxFor(m => m.AdvertiseSalesNotification)  האם הינך מעוניין/ת שנעדכן אותך על מבצעים?
                 </label>
 
             </div>
-            
+
             <div class="form-group">
                 <button type="submit" value="SaveClient" class="btn btn-success">צור משתמש</button>
             </div>

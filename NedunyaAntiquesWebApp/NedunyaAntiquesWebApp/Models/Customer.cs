@@ -66,6 +66,7 @@ namespace NedunyaAntiquesWebApp.Models
         public int? AptNum { get; set; }
 
         [Required(ErrorMessage = "מספר הטלפון אינו חוקי")]
+        [DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
         [Display(Name = "פלאפון")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "מספר הטלפון אינו חוקי")]
