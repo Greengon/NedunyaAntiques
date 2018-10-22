@@ -25,6 +25,30 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(viewModel);
         }
 
+        // GET: ShoppingCart/Create
+        public ActionResult Create()
+        {
+            return View("~/Views/Cart/Create.cshtml");
+        }
+
+        // GET: ShoppingCart/Delete
+        public ActionResult Delete()
+        {
+            return View("~/Views/Cart/Delete.cshtml");
+        }
+
+        // GET: ShoppingCart/Edit
+        public ActionResult Edit()
+        {
+            return View("~/Views/Cart/Edit.cshtml");
+        }
+
+        // GET: ShoppingCart/List
+        public ActionResult List()
+        {
+            return View("~/Views/Cart/Edit.cshtml");
+        }
+
         public ActionResult AddToCart(int id)
         {
             var addedProduct = db.Products.Single(product => product.ProductId == id);
