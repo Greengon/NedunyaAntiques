@@ -15,7 +15,7 @@ namespace NedunyaAntiquesWebApp.Migrations
                         CartId = c.String(),
                         ProductId = c.Int(nullable: false),
                         Count = c.Int(nullable: false),
-                        DateCreated = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DateCreated = c.DateTime(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)

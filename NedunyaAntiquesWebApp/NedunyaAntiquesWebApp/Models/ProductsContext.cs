@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Web;
 
 namespace NedunyaAntiquesWebApp.Models
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<Customer>
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -21,7 +22,6 @@ namespace NedunyaAntiquesWebApp.Models
 
         public System.Data.Entity.DbSet<NedunyaAntiquesWebApp.Models.Product> Products { get; set; }
 
-        public System.Data.Entity.DbSet<NedunyaAntiquesWebApp.Models.Customer> Customers { get; set; }
 
         public System.Data.Entity.DbSet<NedunyaAntiquesWebApp.Models.Transaction> Transactions { get; set; }
 

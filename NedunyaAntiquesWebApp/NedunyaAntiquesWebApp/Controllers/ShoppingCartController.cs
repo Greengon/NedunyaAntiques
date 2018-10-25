@@ -24,7 +24,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             };
             return View(viewModel);
         }
-
+        
         public ActionResult AddToCart(int id)
         {
             var addedProduct = db.Products.Single(product => product.ProductId == id);

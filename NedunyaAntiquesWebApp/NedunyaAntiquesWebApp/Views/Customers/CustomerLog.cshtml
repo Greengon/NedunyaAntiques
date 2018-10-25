@@ -1,4 +1,4 @@
-﻿@model NedunyaAntiquesWebApp.Models.Customer
+﻿@model NedunyaAntiquesWebApp.ViewModels.LoginViewModel
 @{
     ViewBag.Title = "Customerlog";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,8 +22,8 @@
                     </div>
                     <div class="form-group centerlook">
                         <label>סיסמא </label>
-                        <p>@Html.PasswordFor(m => m.Password)*</p>
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })
+                        <p>@Html.PasswordFor(m => m.PasswordHash)*</p>
+                        @Html.ValidationMessageFor(m => m.PasswordHash, "", new { @class = "error" })
 
                     </div>
                     <div class="form-check">

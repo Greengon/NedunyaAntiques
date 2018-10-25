@@ -6,14 +6,14 @@ namespace NedunyaAntiquesWebApp.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class OldPass : IMigrationMetadata
+    [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
+    public sealed partial class UserDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(OldPass));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809301954578_OldPass"; }
+            get { return "201810252114570_UserDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -7,7 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using NedunyaAntiquesWebApp.Models;
+using NedunyaAntiquesWebApp.ViewModels;
 using WebGrease.Css.Extensions;
 
 namespace NedunyaAntiquesWebApp.Controllers
@@ -29,32 +33,58 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            return View(db.Users.ToList());
         }
+
+        /*    [HttpPost]
+            [AllowAnonymous]
+            [ValidateAntiForgeryToken]
+            public ActionResult LogIn([Bind(Include = "Email,Password,RememberMe")] Customer customer)
+            {
+
+                Customer cust = db.Customers.Find(customer.Email);
+                string message = string.Empty;
+                if (cust != null)
+                {
+                    if (cust.Password != customer.Password)
+                        message = "הסיסמא אינה תקינה";
+
+                    MigrateShoppingCart(customer.Email);
+                    FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
+
+                    ViewBag.Message = message;
+                    return RedirectToAction("Index");
+                }
+                message = "האימייל שהזנת אינו נמצא במערכת";
+                ViewBag.Message = message;
+                return View("CustomerLog", customer);
+
+            }*/
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult LogIn([Bind(Include = "Email,Password,RememberMe")] Customer customer)
+        public ActionResult LogIn(LoginViewModel login)
         {
-
-            Customer cust = db.Customers.Find(customer.Email);
-            string message = string.Empty;
-            if (cust != null)
+            if (ModelState.IsValid)
             {
-                if (cust.Password != customer.Password)
-                    message = "הסיסמא אינה תקינה";
+                var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+                var authManager = HttpContext.GetOwinContext().Authentication;
 
-                MigrateShoppingCart(customer.Email);
-                FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
-
-                ViewBag.Message = message;
-                return RedirectToAction("Index");
+                Customer customer = userManager.Find(login.Email, login.Password);
+                if (customer != null)
+                {
+                    var ident = userManager.CreateIdentity(customer,
+                        DefaultAuthenticationTypes.ApplicationCookie);
+                    FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
+                    //use the instance that has been created. 
+                    authManager.SignIn(
+                        new AuthenticationProperties { IsPersistent = false }, ident);
+                    return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));
+                }
             }
-            message = "האימייל שהזנת אינו נמצא במערכת";
-            ViewBag.Message = message;
-            return View("CustomerLog", customer);
-
+            ModelState.AddModelError("", "Invalid username or password");
+            return View(login);
         }
 
         // POST: /Customers/Logout
@@ -78,7 +108,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(Email);
+            Customer customer = db.Users.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -103,15 +133,15 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions,NewPassword,OldPassword,ConfirmNewPassword")] Customer customer)
+        public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
         {
             if (ModelState.IsValid)
             {
-                Customer cust = db.Customers.Find(customer.Email);
-          
+                Customer cust = db.Users.Find(customer.Email);
+                
                 if (cust == null)
                 {
-                    db.Customers.Add(customer);
+                    db.Users.Add(customer);
                     db.SaveChanges();
                     MigrateShoppingCart(customer.Email);
                     return RedirectToAction("Index");
@@ -130,9 +160,9 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
-        [Authorize]
+        /*[Authorize]
         [HttpPost]
-        public ActionResult ChangePassword([Bind(Include = "Email,NewPassword,OldPassword,ConfirmNewPassword")]Customer customer)
+        public ActionResult ChangePassword([Bind(Include = "Email")]Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +172,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true );
                     changePasswordSucceeded = currentUser.ChangePassword(customer.OldPassword, customer.NewPassword);
                 }
                 catch (Exception)
@@ -162,7 +192,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(customer);
-        }
+        }*/
 
         // GET: Customers/Edit/5
         // Using filter to allow access only to admin users.
@@ -173,7 +203,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(Email);
+            Customer customer = db.Users.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -186,7 +216,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
         {
@@ -197,7 +227,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 return RedirectToAction("Index");
             }
             return View(customer);
-        }
+        }*/
 
         // GET: Customers/Delete/5
         // Using filter to allow access only to admin users.
@@ -208,7 +238,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(Email);
+            Customer customer = db.Users.Find(Email);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -223,8 +253,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string Email)
         {
-            Customer customer = db.Customers.Find(Email);
-            db.Customers.Remove(customer);
+            Customer customer = db.Users.Find(Email);
+            db.Users.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -242,6 +272,12 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult ChangePasswordForm()
         {
             return View();
+        }
+        public ActionResult CreateLoginViewModel()
+        {
+            LoginViewModel login = new LoginViewModel();
+
+            return View(login);
         }
 
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,15 +9,9 @@ using System.Web;
 
 namespace NedunyaAntiquesWebApp.Models
 {
-    public class Customer
+    public class Customer : IdentityUser
     {
         
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Key]
-        [Display(Name = "האימייל שלך")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
-
         [Required] 
         [StringLength(255)]
         [Display(Name = "שם פרטי")]
@@ -25,33 +21,6 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name = "שם משפחה")]
         public string LastName { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [Display(Name = "סיסמא")]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "סיסמא חדשה")]
-        public string NewPassword { get; set; }
-
-        [Required]
-        [Display(Name = "אשר סיסמא")]
-        [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "הסיסמאות אינן תואמות, אנא נסה שנית")]
-        public string ConfirmPassword { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "אשר את סיסמתך החדשה")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
-        public string ConfirmNewPassword { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "סיסמא נוכחית")]
-        public string OldPassword { get; set; }
 
         [Display(Name = "עיר מגורים")]
         public string CityAddress { get; set; }
@@ -66,11 +35,10 @@ namespace NedunyaAntiquesWebApp.Models
         public int? AptNum { get; set; }
 
         [Required(ErrorMessage = "מספר הטלפון אינו חוקי")]
-        [DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
-        [Display(Name = "פלאפון")]
+        [Display(Name = "מספר טלפון")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "מספר הטלפון אינו חוקי")]
-        public String PhoneNum { get; set; }
+        public string PhoneNum { get; set; }
 
         [Display(Name = "האם הינך מעוניין/ת שנעדכן אותך על מבצעים?")]
         public bool AdvertiseSalesNotification { get; set; }
