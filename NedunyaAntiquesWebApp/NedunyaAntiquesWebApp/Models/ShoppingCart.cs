@@ -9,17 +9,23 @@ using System.Web.Mvc;
  https://github.com/shakeelosmani/MvcAffableBean/blob/master/MvcAffableBean/Models/ShoppingCart.cs
  TODO: work on it to adjust it to our project.
      
+ Shopping cart doesnt shown as a db table.
      */
 namespace NedunyaAntiquesWebApp.Models
 {
     public class ShoppingCart
     {
+        // Database
         ApplicationContext db = new ApplicationContext();
 
+
+        // Data
         public String ShoppingCartId { get; set; }
 
         public const String CartSessionKey = "cartId";
 
+
+        // Funcs
 
         public static ShoppingCart GetCart(HttpContextBase context)
         { //HttpContextBase - Serves as the base class for classes that contain HTTP-specific information about an individual HTTP request.
@@ -64,7 +70,6 @@ namespace NedunyaAntiquesWebApp.Models
             db.SaveChanges();
         }
 
-
         public int RemoveFromCart(int id)
         {
             // SingleOrDefault - Returns a single, specific element of a sequence, or a default value if that element is not found.
@@ -91,8 +96,6 @@ namespace NedunyaAntiquesWebApp.Models
             }
             return itemCount;
         }
-
-
 
         public void emptyCart()
         {
@@ -134,15 +137,6 @@ namespace NedunyaAntiquesWebApp.Models
             return total ?? decimal.Zero;
         }
 
-        /*
-         * Here needs to come CreateOrder 
-         * Which uses CustomerOrder
-         * and OrderedProduct which we dont have
-         * TODO: create this possiblity
-         * 
-         */
-
-
         // GetCartId will return CartId or will create one
         public string GetCartId(HttpContextBase context)
         {
@@ -163,7 +157,6 @@ namespace NedunyaAntiquesWebApp.Models
             return context.Session[CartSessionKey].ToString();
         }
 
-        
         public void MigrateCart(string Email)
         {
             var shoppingCart = db.Carts.Where(c => c.CartId == ShoppingCartId);
@@ -175,5 +168,12 @@ namespace NedunyaAntiquesWebApp.Models
             db.SaveChanges();
         }
 
+        /*
+        * Here needs to come CreateOrder 
+        * Which uses CustomerOrder
+        * and OrderedProduct which we dont have
+        * TODO: create this possiblity
+        * 
+        */
     }
 }
