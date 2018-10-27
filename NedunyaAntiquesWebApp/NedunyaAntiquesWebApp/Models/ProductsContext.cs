@@ -15,10 +15,11 @@ namespace NedunyaAntiquesWebApp.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
-  //      public ApplicationContext() : base("name=ApplicationContext")
-  //      {
-  //      }
+
+         public ApplicationContext() : base("name=NedunyaAntiquesWebApp.Models.ApplicationContext")
+         {
+         }
+       
 
         public System.Data.Entity.DbSet<NedunyaAntiquesWebApp.Models.Product> Products { get; set; }
 

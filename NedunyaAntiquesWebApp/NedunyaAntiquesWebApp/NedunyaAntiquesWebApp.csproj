@@ -198,29 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809230852581_init.cs" />
-    <Compile Include="Migrations\201809230852581_init.Designer.cs">
-      <DependentUpon>201809230852581_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809231746338_Identity.cs" />
-    <Compile Include="Migrations\201809231746338_Identity.Designer.cs">
-      <DependentUpon>201809231746338_Identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809241508444__Carts.cs" />
-    <Compile Include="Migrations\201809241508444__Carts.Designer.cs">
-      <DependentUpon>201809241508444__Carts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809240917293_Transction_AddToCart.cs" />
-    <Compile Include="Migrations\201809240917293_Transction_AddToCart.Designer.cs">
-      <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201809252024496_customer_key.cs" />
-    <Compile Include="Migrations\201809252024496_customer_key.Designer.cs">
-      <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201810252114570_UserDb.cs" />
-    <Compile Include="Migrations\201810252114570_UserDb.Designer.cs">
-      <DependentUpon>201810252114570_UserDb.cs</DependentUpon>
+    <Compile Include="Migrations\201810271713570_Init.cs" />
+    <Compile Include="Migrations\201810271713570_Init.Designer.cs">
+      <DependentUpon>201810271713570_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppCustomerManager.cs" />
@@ -507,23 +487,8 @@
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201809230852581_init.resx">
-      <DependentUpon>201809230852581_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809231746338_Identity.resx">
-      <DependentUpon>201809231746338_Identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809241508444__Carts.resx">
-      <DependentUpon>201809241508444__Carts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809240917293_Transction_AddToCart.resx">
-      <DependentUpon>201809240917293_Transction_AddToCart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809252024496_customer_key.resx">
-      <DependentUpon>201809252024496_customer_key.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201810252114570_UserDb.resx">
-      <DependentUpon>201810252114570_UserDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201810271713570_Init.resx">
+      <DependentUpon>201810271713570_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -13,7 +13,6 @@ namespace NedunyaAntiquesWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
 
-        public string CustomerEmail { get; set; }
 
         public bool Delivery { get; set; }
 
@@ -22,7 +21,7 @@ namespace NedunyaAntiquesWebApp.Models
 
         public Decimal Amount { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        
 
         public virtual ICollection<Product> Products { get; set; }
     }
