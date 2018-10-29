@@ -21,8 +21,8 @@ namespace NedunyaAntiquesWebApp.Models
 
         public Decimal Amount { get; set; }
 
-        
 
+        public virtual Customer customer { get; set; }
         public virtual ICollection<Product> Products { get; set; }
     }
 }
