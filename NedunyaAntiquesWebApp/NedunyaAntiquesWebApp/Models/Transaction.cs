@@ -17,13 +17,14 @@ namespace NedunyaAntiquesWebApp.Models
 
         public bool Delivery { get; set; }
 
+        // TODO: Lets see how we can secure this prop
+        public bool Paid { get; set; }
+
         [DataType(DataType.Date)]
         public DateTime TransDate { get; set; }
 
         public Decimal Amount { get; set; }
 
-        public virtual Customer Customer { get; set; }
-
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ShoppingCart Cart { get; set; }
     }
 }
