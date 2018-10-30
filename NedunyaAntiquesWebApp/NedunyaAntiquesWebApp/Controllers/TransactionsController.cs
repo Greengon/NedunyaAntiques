@@ -22,14 +22,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         // GET: Transactions/CheckOut/TransactionId
-        public ActionResult CheckOut(int TransactionId)
-        {
-            Transaction transaction = db.Transactions.Find(TransactionId);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transaction);
+        public ActionResult CheckOut(int ShopingCartId)
+        { 
+            // TODO: Need to cheak here if there was payment on paypal
+            return View();
         }
 
         // GET: Transactions/Complete/id
@@ -165,11 +161,5 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        public ActionResult AddToCart()
-        {
-            return View();
-        }
-
-        // POST: Transactions/Cre
     }
 }

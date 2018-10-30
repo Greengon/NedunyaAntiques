@@ -12,7 +12,10 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         ApplicationContext db = new ApplicationContext();
 
+        public string shoppingCartId { get; set; }
+
         // GET: ShoppingCart
+       
         public ActionResult Index()
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);
@@ -30,18 +33,18 @@ namespace NedunyaAntiquesWebApp.Controllers
             var addedProduct = db.Products.Single(product => product.ProductId == id);
             var cart = ShoppingCart.GetCart(this.HttpContext);
             cart.AddToCart(addedProduct);
-            return RedirectToAction("Index");
+            return RedirectToAction("Shop");
         }
 
         public ActionResult RemoveFromCart(int id)
         {
             var cart = ShoppingCart.GetCart(this.HttpContext);
-            string productName = db.Carts.FirstOrDefault(item => item.ProductId == id).Product.Name;
-            int itemCount = cart.RemoveFromCart(id);
+            Product product = db.Products.FirstOrDefault(item => item.ProductId == id);
+            int itemCount = cart.RemoveFromCart(product);
 
             var results = new ShoppingCartRemoveViewModel
             {
-                Message = Server.HtmlEncode(productName) + " has been removed from your shopping cart",
+                Message = Server.HtmlEncode(product.Name) + " has been removed from your shopping cart",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.getCount(),
                 ItemCount = itemCount,

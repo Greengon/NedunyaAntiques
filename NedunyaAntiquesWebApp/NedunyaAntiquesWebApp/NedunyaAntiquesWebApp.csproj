@@ -202,10 +202,13 @@
     <Compile Include="Migrations\201810292117405_CustomerTransaction.Designer.cs">
       <DependentUpon>201810292117405_CustomerTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810301744279__NewDBWithOutCart.cs" />
+    <Compile Include="Migrations\201810301744279__NewDBWithOutCart.Designer.cs">
+      <DependentUpon>201810301744279__NewDBWithOutCart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppCustomerManager.cs" />
     <Compile Include="Models\AppRole.cs" />
-    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Product.cs" />
@@ -529,6 +532,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810292117405_CustomerTransaction.resx">
       <DependentUpon>201810292117405_CustomerTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810301744279__NewDBWithOutCart.resx">
+      <DependentUpon>201810301744279__NewDBWithOutCart.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

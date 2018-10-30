@@ -20,13 +20,16 @@ namespace NedunyaAntiquesWebApp.Models
 
 
         // Data
-        public String ShoppingCartId { get; set; }
+        public string ShoppingCartId { get; set; }
 
         public const String CartSessionKey = "cartId";
 
 
         // Funcs
 
+
+        // Need get Cart func
+       
         public static ShoppingCart GetCart(HttpContextBase context)
         { //HttpContextBase - Serves as the base class for classes that contain HTTP-specific information about an individual HTTP request.
             var cart = new ShoppingCart();
@@ -36,26 +39,22 @@ namespace NedunyaAntiquesWebApp.Models
 
             return cart;
         }
+        
 
         public static ShoppingCart GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }
 
+
+
         public int AddToCart(Product product)
         {
-            // SingleOrDefault - Returns a single, specific element of a sequence, or a default value if that element is not found.
-            var cartItem = db.Carts.SingleOrDefault(c => c.CartId == ShoppingCartId && c.ProductId == product.ProductId);
-
-            if (cartItem == null)
+            
+            if (product.Sale == false && product.inCart == false)
             {
-                cartItem = new Cart
-                {
-                    ProductId = product.ProductId,
-                    CartId = ShoppingCartId,
-                    DateCreated = DateTime.Now
-                };
-                db.Carts.Add(cartItem);
+                product.CartId = ShoppingCartId;
+                product.inCart = true;
                 db.SaveChanges();
                 return 0;
             }
@@ -66,14 +65,12 @@ namespace NedunyaAntiquesWebApp.Models
 
         }
 
-        public int RemoveFromCart(int id)
+        public int RemoveFromCart(Product product)
         {
-            // SingleOrDefault - Returns a single, specific element of a sequence, or a default value if that element is not found.
-            var cartItem = db.Carts.SingleOrDefault(c => c.CartId == ShoppingCartId && c.ProductId == id);
-
-            if (cartItem != null)
+            if (product.inCart == true)
             {
-                db.Carts.Remove(cartItem);
+                product.CartId = null;
+                product.inCart = false;
                 db.SaveChanges();
                 return 0;
             }
@@ -84,26 +81,26 @@ namespace NedunyaAntiquesWebApp.Models
 
         public void emptyCart()
         {
-            var cartItems = db.Carts.Where(cart => cart.CartId == ShoppingCartId);
+            var cartItems = db.Products.Where(product => product.CartId == ShoppingCartId);
 
             foreach (var cartItem in cartItems)
             {
-                db.Carts.Remove(cartItem);
+                RemoveFromCart(cartItem);
             }
             db.SaveChanges();
         }
 
-        public List<Cart> GetCartItems()
+        public List<Product> GetCartItems()
         {
-            return db.Carts.Where(cart => cart.CartId == ShoppingCartId).ToList();
+            return db.Products.Where(Product => Product.CartId == ShoppingCartId).ToList();
         }
 
         public int getCount()
         {
             int? count = (
-                from cartItems in db.Carts
-                where cartItems.CartId == ShoppingCartId
-                select cartItems
+                from product in db.Products
+                where product.CartId == ShoppingCartId
+                select product
                 ).Count();
 
             // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
@@ -113,9 +110,9 @@ namespace NedunyaAntiquesWebApp.Models
         public decimal GetTotal()
         {
             decimal? total = (
-                from cartItems in db.Carts
-                where cartItems.CartId == ShoppingCartId
-                select cartItems.Product.Price)
+                from product in db.Products
+                where product.CartId == ShoppingCartId
+                select product.Price)
                 .Sum();
 
             // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
@@ -123,6 +120,7 @@ namespace NedunyaAntiquesWebApp.Models
         }
 
         // GetCartId will return CartId or will create one
+
         public string GetCartId(HttpContextBase context)
         {
             if (context.Session[CartSessionKey] == null)
@@ -142,24 +140,9 @@ namespace NedunyaAntiquesWebApp.Models
             return context.Session[CartSessionKey].ToString();
         }
 
-        public void MigrateCart(string Email)
-        {
-            var shoppingCart = db.Carts.Where(c => c.CartId == ShoppingCartId);
-            foreach(Cart item in shoppingCart)
-            {
-                item.CartId = Email;
-            }
+ 
 
-            db.SaveChanges();
-        }
 
-        /*
-        * Here needs to come CreateOrder 
-        * Which uses CustomerOrder
-        * and OrderedProduct which we dont have
-        * TODO: create this possiblity
-        * 
-        */
 
         public int CreateTransaction(Customer customer)
         {
