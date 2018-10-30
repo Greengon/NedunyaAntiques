@@ -82,6 +82,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(login);
         }
 
+
         // POST: /Customers/Logout
         [HttpPost]
         [Authorize]

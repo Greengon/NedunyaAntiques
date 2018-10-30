@@ -161,11 +161,11 @@ namespace NedunyaAntiquesWebApp.Models
         * 
         */
 
-        public int CreateTransaction(string Email)
+        public int CreateTransaction(Customer customer)
         {
             var transcation = new Transaction
             {
-                CustomerEmail = Email,
+                customer = customer,
                 Delivery = false,
                 Paid = false,
                 TransDate = DateTime.Now,
