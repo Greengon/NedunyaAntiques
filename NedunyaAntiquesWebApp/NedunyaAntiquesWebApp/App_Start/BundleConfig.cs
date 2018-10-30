@@ -26,7 +26,6 @@ namespace NedunyaAntiquesWebApp
             // TODO: find the right order of scripts loading
             bundles.Add(new ScriptBundle("~/bundles/Our-jqueryval").Include(
                      "~/Scripts/jquery-2.2.4.min.js",
-                     "~/Scripts/jquery-3.3.1.min.js",
                      "~/Scripts/bootstrap.min.js",
                      "~/Scripts/bootstrap.js",
                      "~/Scripts/classy-nav.min.js",

@@ -7,7 +7,7 @@
     if ($.fn.classyNav) {
         $('#essenceNav').classyNav();
     }
-
+    
     // :: Sliders Active Code
     if ($.fn.owlCarousel) {
         $('.popular-products-slides').owlCarousel({
@@ -46,7 +46,7 @@
             smartSpeed: 1000
         });
     }
-
+    
     // :: Header Cart Active Code
     var cartbtn1 = $('#essenceCartBtn');
     var cartOverlay = $(".cart-bg-overlay");
