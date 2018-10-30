@@ -97,13 +97,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Details/5
         // Using filter to allow access only to login users.
         //[Authorize] - TODO: uncomment before you go live
-        public ActionResult Details(string Email)
+        public ActionResult Details(int Id)
         {
-            if (Email == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Users.Find(Email);
+           
+            Customer customer = db.Users.Find(Id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -132,7 +129,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                Customer cust = db.Users.Find(customer.Email);
+                Customer cust = db.Users.Find(customer.Id);
+                
                 
                 if (cust == null)
                 {
@@ -227,13 +225,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Delete/5
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Delete(string Email)
+        public ActionResult Delete(int Id)
         {
-            if (Email == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Users.Find(Email);
+            
+            Customer customer = db.Users.Find(Id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -246,9 +241,9 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string Email)
+        public ActionResult DeleteConfirmed(int Id)
         {
-            Customer customer = db.Users.Find(Email);
+            Customer customer = db.Users.Find(Id);
             db.Users.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
