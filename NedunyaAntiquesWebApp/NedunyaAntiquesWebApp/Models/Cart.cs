@@ -29,11 +29,7 @@ namespace NedunyaAntiquesWebApp.Models
         public string CartId { get; set; }
 
         public int ProductId { get; set; }
-
-        // TODO: remove count form model
-        public int Count { get; set; }
-    
-        
+       
         public DateTime DateCreated { get; set; }
 
         public virtual Product Product { get; set; }

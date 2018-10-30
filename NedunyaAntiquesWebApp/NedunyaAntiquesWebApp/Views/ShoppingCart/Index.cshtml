@@ -39,12 +39,6 @@ else
                 <td>
                     @item.Product.Price
                 </td>
-                <td id="item-count-@item.ProductId">
-                    @item.Count
-                </td>
-                <td>
-                    @((item.Product.Price * item.Count).ToString());
-                </td>
                 <td>
                     <a herf="" class="product-remove text-right" data-id="@item.ProductId">
                         הסר מעגלת הקניות
@@ -67,7 +61,7 @@ else
         <a class="btn btn-danger" href='@Url.Action("Index", "Home")'>המשך לקנות</a>
     </p>
     <p class="button">
-        @Html.ActionLink("עבור לתשלום", "AddressAndPayment", "Chekout");
+        @Html.ActionLink("עבור לתשלום", "AddressAndPayment", "Transactions");
     </p>
 }
 

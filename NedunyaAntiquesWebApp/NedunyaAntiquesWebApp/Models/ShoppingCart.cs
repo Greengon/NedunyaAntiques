@@ -42,7 +42,7 @@ namespace NedunyaAntiquesWebApp.Models
             return GetCart(controller.HttpContext);
         }
 
-        public void AddToCart(Product product)
+        public int AddToCart(Product product)
         {
             // SingleOrDefault - Returns a single, specific element of a sequence, or a default value if that element is not found.
             var cartItem = db.Carts.SingleOrDefault(c => c.CartId == ShoppingCartId && c.ProductId == product.ProductId);
@@ -53,21 +53,17 @@ namespace NedunyaAntiquesWebApp.Models
                 {
                     ProductId = product.ProductId,
                     CartId = ShoppingCartId,
-                    Count = 1,
                     DateCreated = DateTime.Now
                 };
                 db.Carts.Add(cartItem);
+                db.SaveChanges();
+                return 0;
             }
             else
             {
-                /*
-                 *TODO: We need to chek if this else is needed here,
-                 * where there is no duplicated products.
-                 */
-                cartItem.Count++;
+                return -1;
             }
 
-            db.SaveChanges();
         }
 
         public int RemoveFromCart(int id)
@@ -75,26 +71,15 @@ namespace NedunyaAntiquesWebApp.Models
             // SingleOrDefault - Returns a single, specific element of a sequence, or a default value if that element is not found.
             var cartItem = db.Carts.SingleOrDefault(c => c.CartId == ShoppingCartId && c.ProductId == id);
 
-            int itemCount = 0;
-
             if (cartItem != null)
             {
-                /*
-                *TODO: We need to chek if this if statement is needed here,
-                * where there is no duplicated products.
-                */
-                if (cartItem.Count > 1)
-                {
-                    cartItem.Count--;
-                    itemCount = cartItem.Count;
-                }
-                else
-                {
-                    db.Carts.Remove(cartItem);
-                }
+                db.Carts.Remove(cartItem);
                 db.SaveChanges();
+                return 0;
             }
-            return itemCount;
+            else
+                return -1;
+            
         }
 
         public void emptyCart()
@@ -118,11 +103,11 @@ namespace NedunyaAntiquesWebApp.Models
             int? count = (
                 from cartItems in db.Carts
                 where cartItems.CartId == ShoppingCartId
-                select (int?)cartItems.Count
-                ).Sum();
+                select cartItems
+                ).Count();
 
             // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
-            return count ?? 0;
+            return count ?? -1;
         }
 
         public decimal GetTotal()
@@ -130,7 +115,7 @@ namespace NedunyaAntiquesWebApp.Models
             decimal? total = (
                 from cartItems in db.Carts
                 where cartItems.CartId == ShoppingCartId
-                select (int?)cartItems.Count * cartItems.Product.Price)
+                select cartItems.Product.Price)
                 .Sum();
 
             // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
@@ -175,5 +160,22 @@ namespace NedunyaAntiquesWebApp.Models
         * TODO: create this possiblity
         * 
         */
+
+        public int CreateTransaction(string Email)
+        {
+            var transcation = new Transaction
+            {
+                CustomerEmail = Email,
+                Delivery = false,
+                Paid = false,
+                TransDate = DateTime.Now,
+                Amount = this.GetTotal(),
+                Cart = this
+            };
+
+            db.Transactions.Add(transcation);
+            db.SaveChanges();
+            return transcation.TransactionId;
+        }    
     }
 }

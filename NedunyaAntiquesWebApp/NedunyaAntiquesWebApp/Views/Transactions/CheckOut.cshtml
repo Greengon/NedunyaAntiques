@@ -1,0 +1,52 @@
+﻿@model NedunyaAntiquesWebApp.Models.Transaction
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CheckOut</h2>
+
+
+ <table class="table-responsive table-bordered table-striped">
+     <tr class="text-right">
+         <th>
+             מספר הזמנה
+         </th>
+
+         <th>
+             אימייל הלקוח המזמין
+         </th>
+
+         <th>
+             משלוח
+         </th>
+
+         <th>
+             מחיר כולל
+         </th>
+
+         <th>
+             תשלום
+         </th>
+     </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.CustomerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Delivery)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Amount)
+            </td>
+            <td>                
+                <a href='@Url.Action("Complete", "Transactions",new { id = Model.TransactionId })'>
+                    <img src='@Url.Content("~/img/core-img/Paypal-Button.png")' />
+                </a>
+            </td>
+        </tr>
+</table>

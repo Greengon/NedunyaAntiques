@@ -21,6 +21,34 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(await db.Transactions.ToListAsync());
         }
 
+        // GET: Transactions/CheckOut/TransactionId
+        public ActionResult CheckOut(int TransactionId)
+        {
+            Transaction transaction = db.Transactions.Find(TransactionId);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            return View(transaction);
+        }
+
+        // GET: Transactions/Complete/id
+        public ActionResult Complete(int id)
+        {
+            bool isValid = db.Transactions.Any(
+                o => o.TransactionId == id 
+                );
+
+            if (isValid)
+            {
+                return View(id);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
         // GET: Transactions/Details/5
         public async Task<ActionResult> Details(int? id)
         {
