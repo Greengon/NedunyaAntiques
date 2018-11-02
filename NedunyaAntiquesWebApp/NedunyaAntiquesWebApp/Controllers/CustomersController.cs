@@ -132,7 +132,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 Customer cust = db.Users.Find(customer.Id);
                 
-                
+                //ToDo::Use createRole in save client in order to create a role for the registration
                 if (cust == null)
                 {
                     db.Users.Add(customer);
@@ -147,6 +147,15 @@ namespace NedunyaAntiquesWebApp.Controllers
             
             return View("CustomerForm", customer);
         }
+
+       /* public ActionResult CreateRole(string roleName)
+        {
+            var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
+
+            if (!roleManager.RoleExists(roleName))
+                roleManager.Create(new AppRole(roleName));
+            //ToDo: must return something in order to create a role for a user.
+        }*/
 
         [Authorize]
         public ActionResult ChangePassword()

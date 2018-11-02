@@ -25,7 +25,7 @@ namespace NedunyaAntiquesWebApp.Models
 
             // optionally configure your manager
             // ...
-
+            
             return manager;
         }
     }
