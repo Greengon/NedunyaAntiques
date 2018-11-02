@@ -15,14 +15,6 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        private void MigrateShoppingCart(string Email)
-        {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            cart.MigrateCart(Email);
-            Session[ShoppingCart.CartSessionKey] = Email;
-        }
-
         // GET: Customers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
@@ -90,8 +82,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-            cart.emptyCart();
             return RedirectToAction("Index");
         }
 
@@ -137,7 +127,6 @@ namespace NedunyaAntiquesWebApp.Controllers
                 {
                     db.Users.Add(customer);
                     db.SaveChanges();
-                    MigrateShoppingCart(customer.Email);
                     return RedirectToAction("Index");
                 }
                 string message = string.Empty;

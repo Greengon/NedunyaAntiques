@@ -13,8 +13,6 @@ namespace NedunyaAntiquesWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionId { get; set; }
 
-        
-
         public bool Delivery { get; set; }
 
         // TODO: Lets see how we can secure this prop

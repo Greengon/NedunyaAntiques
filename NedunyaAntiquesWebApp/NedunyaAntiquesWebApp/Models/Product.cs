@@ -14,6 +14,12 @@ namespace NedunyaAntiquesWebApp.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
 
+        public string CartId { get; set; }
+
+        public bool inCart { get; set; }
+
+        public bool sold { get; set; }
+
         [Required]
         [Display(Name = "שם המוצר")]
         public string Name { get; set; }
@@ -62,5 +68,6 @@ namespace NedunyaAntiquesWebApp.Models
 
         [Display(Name = "הוסף תמונה/ות")]
         public virtual ICollection<Image> Images { get; set; }
+
     }
 }

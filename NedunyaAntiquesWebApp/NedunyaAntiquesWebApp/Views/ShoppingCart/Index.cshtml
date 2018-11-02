@@ -34,10 +34,10 @@ else
         {
             <tr id="row-@item.ProductId">
                 <td>
-                    @Html.ActionLink(item.Product.Name, "Details", "Products", new { id = item.ProductId }, null);
+                    @Html.ActionLink(item.Name, "Details", "Products", new { id = item.ProductId }, null);
                 </td>
                 <td>
-                    @item.Product.Price
+                    @item.Price
                 </td>
                 <td>
                     <a herf="" class="product-remove text-right" data-id="@item.ProductId">

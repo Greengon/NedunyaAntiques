@@ -15,7 +15,7 @@ namespace NedunyaAntiquesWebApp.ViewModels
 {
     public class ShoppingCartViewModel
     {
-        public List<Cart> CartItems { get; set; }
+        public List<Product> CartItems { get; set; }
         public decimal CartTotal { get; set; }
     }
 }
