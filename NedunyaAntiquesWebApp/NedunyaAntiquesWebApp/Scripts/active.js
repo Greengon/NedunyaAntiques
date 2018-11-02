@@ -7,15 +7,24 @@
     if ($.fn.classyNav) {
         $('#essenceNav').classyNav();
     }
+
     
+    $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+            items: 4,
+            mouseDrag: false,
+            margin: 20
+        });
+    });
+    /*
     // :: Sliders Active Code
     if ($.fn.owlCarousel) {
         $('.popular-products-slides').owlCarousel({
             items: 4,
             margin: 30,
-            loop: true,
+            //loop: true,
             nav: false,
-            dots: false,
+            dots: true,
             autoplay: true,
             autoplayTimeout: 5000,
             smartSpeed: 1000,
@@ -34,7 +43,7 @@
                 }
             }
         });
-        $('.product_thumbnail_slides').owlCarousel({
+            $('.product_thumbnail_slides').owlCarousel({
             items: 1,
             margin: 0,
             loop: true,
@@ -46,7 +55,8 @@
             smartSpeed: 1000
         });
     }
-    
+    */
+
     // :: Header Cart Active Code
     var cartbtn1 = $('#essenceCartBtn');
     var cartOverlay = $(".cart-bg-overlay");
