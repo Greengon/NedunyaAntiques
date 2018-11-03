@@ -126,25 +126,26 @@ namespace NedunyaAntiquesWebApp.Controllers
                 if (cust == null)
                 {
                     db.Users.Add(customer);
+
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("CreateRole/ClientRole");
+                    //Redirect to index only for Admins--else Redirect to home page.
+                    //return RedirectToAction("Index");
                 }
-                string message = string.Empty;
-                message = "כתובת האימייל שהזנת כבר קיימת במערכת";
-                ViewBag.Message = message;
+                
             }
             
             return View("CustomerForm", customer);
         }
 
-       /* public ActionResult CreateRole(string roleName)
+        public ActionResult CreateRole(string roleName)
         {
             var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
 
             if (!roleManager.RoleExists(roleName))
                 roleManager.Create(new AppRole(roleName));
-            //ToDo: must return something in order to create a role for a user.
-        }*/
+            return RedirectToAction("Index", "Home");
+        }
 
         [Authorize]
         public ActionResult ChangePassword()
@@ -189,13 +190,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Customers/Edit/5
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Edit(string Email)
+        public ActionResult Edit(int Id)
         {
-            if (Email == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Users.Find(Email);
+           
+            Customer customer = db.Users.Find(Id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -226,27 +224,14 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Delete(int Id)
         {
-            
-            Customer customer = db.Users.Find(Id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
 
-        // POST: Customers/Delete/5
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int Id)
-        {
             Customer customer = db.Users.Find(Id);
             db.Users.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
 
 
         public ActionResult CustomerForm()
