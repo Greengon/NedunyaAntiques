@@ -24,7 +24,7 @@ namespace NedunyaAntiquesWebApp
             // Our bundels:
             // our scripts - BE careful order matter here , we still have problem here
             // TODO: find the right order of scripts loading
-            bundles.Add(new ScriptBundle("~/bundles/Our-jqueryval").Include(
+            bundles.Add(new ScriptBundle("~/bundles/bundleOur-jqueryval").Include(
                      "~/Scripts/jquery-2.2.4.min.js",
                      "~/Scripts/bootstrap.min.js",
                      "~/Scripts/bootstrap.js",
@@ -36,7 +36,7 @@ namespace NedunyaAntiquesWebApp
                 ));
 
             // our css
-            bundles.Add(new StyleBundle("~/bundles/our-css").Include(
+            bundles.Add(new StyleBundle("~/bundles/bundleour-css").Include(
           "~/Content/ourstyle.css",
           "~/Content/bootstrap.min.css",
           "~/Content/animate.css",
@@ -48,11 +48,13 @@ namespace NedunyaAntiquesWebApp
           "~/Content/jquery-ui.min.css",
           "~/Content/magnific-popup.css",
           "~/Content/nice-select.css",
+          "~/Content/bootstrap-grid.min.css",
           "~/Content/owl.carousel.css"
           ));
 
             // Bundle Optimization - minifize all scripts
             BundleTable.EnableOptimizations = false;
+
 
             // From here on there are pre made bundels by VS
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
