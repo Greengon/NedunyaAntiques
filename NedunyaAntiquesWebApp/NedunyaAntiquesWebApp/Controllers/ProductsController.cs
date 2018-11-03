@@ -86,9 +86,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (Images!= null)
+                if (Images.ElementAt(0)!= null)
                 {
                     var imageList = new List<Image>();
+                
                     foreach (var image in Images)
                     {
                         string imageName = System.IO.Path.GetFileName(image.FileName);
@@ -103,6 +104,10 @@ namespace NedunyaAntiquesWebApp.Controllers
                      }
                    
                     product.Images = imageList;
+                }
+                else
+                {
+                    return RedirectToAction("Create");
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
@@ -136,7 +141,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
+        public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
             {

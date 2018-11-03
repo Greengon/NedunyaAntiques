@@ -4,11 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>רשימת מוצרים</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -53,53 +51,59 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Substance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubCategory)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Height)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Width)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Depth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sale)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountPercentage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rented)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RentalPriceForDay)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Substance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Depth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountPercentage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rented)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentalPriceForDay)
+            </td>
+            <td>
+                @Html.ActionLink("ערוך", "Edit", new { id=item.ProductId }) |
+                @Html.ActionLink("פרטים נוספים", "Details", new { id=item.ProductId }) |
+                @Html.ActionLink("מחק", "Delete", new { id=item.ProductId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<p>
+    <input type="button" class="btn btn-success" value="צור מוצר חדש" onclick="location.href='@Url.Action("Create", "Products")'" />
+    <!--    @Html.ActionLink("Create New", "Create")
+        <button type="submit" value="Create" class="btn btn-success">צור מוצר</button>-->
+</p>
