@@ -14,10 +14,10 @@
 
 
     <!-- All of our CSS -->
-    @Styles.Render("~/bundles/our-css")
+    @Styles.Render("~/bundles/bundleour-css")
 
     <!-- All of our JavaScripts + defer attribute -->
-    @Scripts.RenderFormat("<script src='{0}' defer></script>", "~/bundles/Our-jqueryval")
+    @Scripts.RenderFormat("<script src='{0}' defer></script>", "~/bundles/bundleOur-jqueryval")
 
 </head>
 
@@ -98,6 +98,7 @@
             </nav>
 
             <!-- Header Meta Data -->
+            <!--this is the problem with the css rendering-->
             <div class="header-meta d-flex clearfix justify-content-end">
                 <!--FaceBook share and like btn-->
                 <div class="fb-like" data-href="https://he-il.facebook.com/Nedunya/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
