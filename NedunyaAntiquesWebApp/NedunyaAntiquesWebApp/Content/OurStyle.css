@@ -233,3 +233,7 @@ input[type=submit] {
     margin-right: auto;
     width: 35%;
 }
+
+.form-zone{
+    margin-bottom: 10px;
+}
