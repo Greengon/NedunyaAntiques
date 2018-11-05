@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
+using NedunyaAntiquesWebApp.ViewModels;
 
 namespace NedunyaAntiquesWebApp.Controllers
 {
@@ -21,28 +22,69 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(await db.Transactions.ToListAsync());
         }
 
-        // GET: Transactions/CheckOut/TransactionId
-        public ActionResult CheckOut(int ShopingCartId)
-        { 
-            // TODO: Need to cheak here if there was payment on paypal
-            return View();
-        }
-
-        // GET: Transactions/Complete/id
-        public ActionResult Complete(int id)
+        // GET: Transactions/AddressAndPayment
+        public ActionResult AddressAndPayment(Customer customer)
         {
-            bool isValid = db.Transactions.Any(
-                o => o.TransactionId == id 
-                );
-
-            if (isValid)
+            ShoppingCart shoppingCart = new ShoppingCart
             {
-                return View(id);
+                ShoppingCartId = customer.Id
+            };
+            Transaction transaction = shoppingCart.CreateTransaction(customer);
+            customer.Transactions.Add(transaction);
+            if (transaction != null)
+            {
+                TransactionViewModel transactionView = new TransactionViewModel
+                {
+                    CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
+                    amount = transaction.Amount
+                };
+                return View(transactionView);
             }
             else
-            {
                 return HttpNotFound();
+        }
+
+
+        // GET: Transactions/Complete/
+        // You can get here only thourgh paypal
+        public ActionResult Complete()
+        {
+            /*TODO : find how to get userId of a logged in user
+             *DO NOT DELETE
+             * var userID = User.Identity.GetUserId();
+                if (userID != null){
+                     customer = db.Customer.single(c => userID == c.ID);
+                     Transaction transaction = customer.transaction.pop();
+                     transaction.paid = ture;
+                     var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
+                     foreach (var item in CartItems)
+                        item.sold = true;
+                     customer.transaction.add(transaction);
             }
+            else{
+                return httpNotFound();
+            }
+             
+             */
+
+
+            return RedirectToAction("Index", "Home");
+        } 
+
+        // GET: Transactions/Failed
+        // You can get here only thourgh paypal
+        public ActionResult Failed()
+        {
+            /* TODO : find how to get userId of a logged in user
+             *DO NOT DELETE
+             * 
+             * var userID = User.Identity.GetUserId();
+                if (userID != null){
+                     customer = db.Customer.single(c => userID == c.ID);
+             *       Transaction transaction = customer.transaction.pop();
+             }
+             */
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Transactions/Details/5

@@ -144,7 +144,7 @@ namespace NedunyaAntiquesWebApp.Models
 
 
 
-        public int CreateTransaction(Customer customer)
+        public Transaction CreateTransaction(Customer customer)
         {
             var transcation = new Transaction
             {
@@ -158,7 +158,7 @@ namespace NedunyaAntiquesWebApp.Models
 
             db.Transactions.Add(transcation);
             db.SaveChanges();
-            return transcation.TransactionId;
+            return transcation;
         }    
     }
 }
