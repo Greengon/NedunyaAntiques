@@ -28,32 +28,39 @@
 .guest-area {
     top: 30px;
     right: 13px;
-    line-height: 40px;
+    line-height: 60px;
     width: 250px;
     -webkit-box-flex: 0;
-}
-
-.guest-text {
-    text-align: center;
-    line-height: 80px;
+    text-align: right;
 }
 
 @media screen and (max-width: 967px) {
     .guest-text {
-        text-align: center;
-        line-height: 40px;
+        text-align: right;
+        line-height: 60px;
+        right: 80%;
+    }
+}
+@media screen and (max-high: 967px) {
+    .guest-text {
+        text-align: right;
+        line-height: 60px;
+        right: 80%;
     }
 }
 
+
 @media screen and (max-width: 821px) {
     .guest-text {
-        line-height: 30px;
+        text-align: right;
+        line-height: 60px;
     }
 }
 
 @media screen and (max-width: 421px) {
     .guest-text {
         display:none;
+        left:50px;
     }
 }
 
@@ -174,6 +181,18 @@ input[type=submit] {
     z-index: 10000;
 }
 
+.search-header {
+    resize:horizontal;
+    right:2%;
+    position: center;
+}
+.guest-area  {
+    position: fixed;
+    move-to:normal;
+    right: 84%;
+    line-height: 30px;
+
+}
     .hover_bkgr_fricc .helper {
         display: inline-block;
         height: 50%;
