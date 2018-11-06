@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NedunyaAntiquesWebApp.Models;
@@ -120,32 +121,35 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Creating Normal role for regular user
+                string roleName = "NedunyaUser";
+                var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
+                if (!roleManager.RoleExists(roleName))
+                    roleManager.Create(new AppRole(roleName));
                 Customer cust = db.Users.Find(customer.Id);
-                
-                //ToDo::Use createRole in save client in order to create a role for the registration
                 if (cust == null)
                 {
                     db.Users.Add(customer);
 
                     db.SaveChanges();
-                    return RedirectToAction("CreateRole/ClientRole");
-                    //Redirect to index only for Admins--else Redirect to home page.
+                    var UserManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+                    //UserManager.AddToRole("customer.Id", "NedunyaUser");
+
+                    var userResult = UserManager.AddToRole(customer.Id, "NedunyaUser");
+                    if(userResult.Succeeded)
+                        return RedirectToAction("Index", "Home");
+
                     //return RedirectToAction("Index");
+                    //return RedirectToAction("CreateRole", "Customers", new { role = "NedunyaUser" });
+
+
                 }
-                
+
             }
             
             return View("CustomerForm", customer);
         }
-
-        public ActionResult CreateRole(string roleName)
-        {
-            var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
-
-            if (!roleManager.RoleExists(roleName))
-                roleManager.Create(new AppRole(roleName));
-            return RedirectToAction("Index", "Home");
-        }
+       
 
         [Authorize]
         public ActionResult ChangePassword()
@@ -206,32 +210,31 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(customer);
-        }*/
+        /* [HttpPost]
+         [ValidateAntiForgeryToken]
+         public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
+         {
+             if (ModelState.IsValid)
+             {
+                 db.Entry(customer).State = EntityState.Modified;
+                 db.SaveChanges();
+                 return RedirectToAction("Index");
+             }
+             return View(customer);
+         }*/
 
         // GET: Customers/Delete/5
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Delete(int Id)
-        {
-
-            Customer customer = db.Users.Find(Id);
+         [HttpPost]
+         public ActionResult Delete(string Id)
+         {
+             Customer customer = db.Users.Find(Id);
             db.Users.Remove(customer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        
+             db.SaveChanges();
+             
+             return RedirectToAction("Index");
+         }
 
 
         public ActionResult CustomerForm()
