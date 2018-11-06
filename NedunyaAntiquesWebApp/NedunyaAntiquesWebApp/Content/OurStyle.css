@@ -37,15 +37,13 @@
 @media screen and (max-width: 967px) {
     .guest-text {
         text-align: right;
-        line-height: 60px;
-        right: 80%;
+       padding-right:30px;
     }
 }
 @media screen and (max-high: 967px) {
     .guest-text {
         text-align: right;
-        line-height: 60px;
-        right: 80%;
+        padding-right: 30px;
     }
 }
 
