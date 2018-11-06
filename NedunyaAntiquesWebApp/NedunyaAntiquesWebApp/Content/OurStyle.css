@@ -34,8 +34,8 @@
     text-align: right;
 }
 
-@media screen and (max-width: 967px) {
-    .guest-text {
+@media screen and (max-width: 967px){
+    .guest-text{
         text-align: right;
        padding-right:30px;
     }
@@ -61,8 +61,6 @@
         left:50px;
     }
 }
-
-
 
 
 .titles {
@@ -173,7 +171,7 @@ input[type=submit] {
     height: 100%;
     position: fixed;
     text-align: center;
-    top: 0px;
+    top: 0.2px;
 	right:320px;
     width: 100%;
     z-index: 10000;
@@ -194,7 +192,7 @@ input[type=submit] {
     .hover_bkgr_fricc .helper {
         display: inline-block;
         height: 50%;
-       vertical-align: center;
+       vertical-align:auto;
 	   }
 
     .hover_bkgr_fricc > div {
