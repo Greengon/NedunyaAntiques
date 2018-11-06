@@ -59,7 +59,7 @@
                     <div class="classynav titles" style="margin-right:1px">
                         <ul>
                             <li>
-                                <span>@Html.ActionLink("חנות", "ShowCategory", "Products","furniture", null)</span>
+                                <span>@Html.ActionLink("חנות", "ShowCategory", "Products", "furniture", null)</span>
                                 <div class="megamenu">
                                     <ul class="single-mega cn-col-4">
                                         <li class="title">ריהוט</li>
@@ -99,34 +99,37 @@
 
             <!-- Header Meta Data -->
             <!--this is the problem with the css rendering-->
-            <div class="header-meta d-flex clearfix justify-content-end">
-                <!--FaceBook share and like btn-->
-                <div class="fb-like" data-href="https://he-il.facebook.com/Nedunya/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+            <object class=" search-header">
+                <div class="header-meta d-flex clearfix justify-content-end">
+                    <!--FaceBook share and like btn-->
+                    <div class="fb-like" data-href="https://he-il.facebook.com/Nedunya/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
-                <!--End of FaceBook share and like btn-->
-                <!-- Cart Area -->
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""></a>
-                </div>
-
-                <!-- Search Area -->
-                <div class="search-area">
-                    <form action="#" method="post">
-                        <input type="search" name="search" id="headerSearch" placeholder="חיפוש באתר">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-
-                <!-- Register and log in area -->
-                <div class="guest-area">
-                    <div>
-                        @Html.Partial("_LoginPartial")
+                    <!--End of FaceBook share and like btn-->
+                    <!-- Cart Area -->
+                    <div class="cart-area">
+                        <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""></a>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </header>
+                    <!-- Search Area -->
+                    <div class="serach">
+                        <div class="search-area">
+                            <form action="~/Products/Index" method="post">
+                                <input type="search" name="free" id="headerSearch" placeholder="חיפוש באתר">
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+            </object>
+
+                        <!-- Register and log in area -->
+                        <div class="guest-area">
+                            <div>
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                </div>
+
+</header>
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 

@@ -28,36 +28,39 @@
 .guest-area {
     top: 30px;
     right: 13px;
-    line-height: 40px;
+    line-height: 60px;
     width: 250px;
     -webkit-box-flex: 0;
+    text-align: right;
 }
 
-.guest-text {
-    text-align: center;
-    line-height: 80px;
+@media screen and (max-width: 967px){
+    .guest-text{
+        text-align: right;
+       padding-right:30px;
+    }
 }
-
-@media screen and (max-width: 967px) {
+@media screen and (max-high: 967px) {
     .guest-text {
-        text-align: center;
-        line-height: 40px;
+        text-align: right;
+        padding-right: 30px;
     }
 }
 
+
 @media screen and (max-width: 821px) {
     .guest-text {
-        line-height: 30px;
+        text-align: right;
+        line-height: 60px;
     }
 }
 
 @media screen and (max-width: 421px) {
     .guest-text {
         display:none;
+        left:50px;
     }
 }
-
-
 
 
 .titles {
@@ -168,16 +171,28 @@ input[type=submit] {
     height: 100%;
     position: fixed;
     text-align: center;
-    top: 0px;
+    top: 0.2px;
 	right:320px;
     width: 100%;
     z-index: 10000;
 }
 
+.search-header {
+    resize:horizontal;
+    right:2%;
+    position: center;
+}
+.guest-area  {
+    position: fixed;
+    move-to:normal;
+    right: 84%;
+    line-height: 30px;
+
+}
     .hover_bkgr_fricc .helper {
         display: inline-block;
         height: 50%;
-       vertical-align: center;
+       vertical-align:auto;
 	   }
 
     .hover_bkgr_fricc > div {
