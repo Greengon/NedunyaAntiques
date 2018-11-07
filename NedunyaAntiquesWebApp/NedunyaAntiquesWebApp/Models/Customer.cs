@@ -59,7 +59,7 @@ namespace NedunyaAntiquesWebApp.Models
         [Display(Name =  "תאריך הלידה שלך")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; }
 
 
         [Display(Name = "זכור אותי")]

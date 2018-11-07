@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201810301744279__NewDBWithOutCart.Designer.cs">
       <DependentUpon>201810301744279__NewDBWithOutCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811061602171_DateSetToNull.cs" />
+    <Compile Include="Migrations\201811061602171_DateSetToNull.Designer.cs">
+      <DependentUpon>201811061602171_DateSetToNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppCustomerManager.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -612,6 +616,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810301744279__NewDBWithOutCart.resx">
       <DependentUpon>201810301744279__NewDBWithOutCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811061602171_DateSetToNull.resx">
+      <DependentUpon>201811061602171_DateSetToNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
