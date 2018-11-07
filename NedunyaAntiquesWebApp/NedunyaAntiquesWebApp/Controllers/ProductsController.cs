@@ -32,11 +32,19 @@ namespace NedunyaAntiquesWebApp.Controllers
                                             orderby p.Category
                                             select p.Category;
 
+            IQueryable<string> subCatQuery = from p in db.Products
+                                          orderby p.SubCategory
+                                          select p.SubCategory;
+
             List<SelectListItem> items = new List<SelectListItem>();
             items.Add(new SelectListItem { Text = "הכל", Value = "", Selected = true });
             foreach (var cat in catQuery.Distinct())
             {
                 items.Add(new SelectListItem { Text = cat, Value = cat });
+            }
+            foreach (var subCat in subCatQuery.Distinct())
+            {
+                items.Add(new SelectListItem { Text = subCat, Value = subCat });
             }
             ViewBag.selectCat = items;
 
@@ -50,7 +58,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             if (!String.IsNullOrEmpty(selectCat))
             {
-                products = products.Where(x => x.Category == selectCat);
+                products = products.Where(x => x.Category == selectCat || x.SubCategory == selectCat);
             }
 
             if (!String.IsNullOrEmpty(priceMin))
