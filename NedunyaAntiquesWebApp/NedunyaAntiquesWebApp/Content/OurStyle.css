@@ -34,8 +34,8 @@
     text-align: right;
 }
 
-@media screen and (max-width: 967px){
-    .guest-text{
+@media screen and (max-width: 967px) {
+    .guest-text {
         text-align: right;
        padding-right:30px;
     }
@@ -63,13 +63,21 @@
 }
 
 
+
+
 .titles {
     margin-top: 15px;
     padding-right: 30px;
 }
 
 .pagetextheb {
-    padding: 50px 30px 50px 80px;
+    padding: 40px 30px 5px 80px;
+}
+
+.Weather {
+    position: absolute;
+    padding-right: 75%;
+    font: 600 30px/1.4 Oswald,Arial,sans-serif;
 }
 
 .OurBottomArea{

@@ -2,7 +2,17 @@
     ViewBag.Title = "Contact";
 }
 
+<script src="~/Scripts/jquery-2.2.4.min.js"></script>
+<h  class="Weather">
+<h3 class="Weather1">
+    Weather in Tel Aviv, IL
+</h3>
+<h4 >
+    <h id="reply"> </h>°C
+    <img class="weather-widget__img" src="https://openweathermap.org/img/w/01n.png" alt="Weather Tel Aviv , IL" width="50" height="50">
 
+</h4>
+</h>
 <address class="text-right pagetextheb">
     Nedunya Antiques<br />
     בן יהודה 116, תל אביב<br />
@@ -11,6 +21,18 @@
     Nedunyatlv@gmail.com
 </address>
 
+
+<script>
+
+    //6340126 zip code of the shop, [32.0809, 34.7806] coords of tel aviv
+    $(document).ready(function () {
+        $.get("http://api.openweathermap.org/data/2.5/weather?lat=32.0809&lon=34.7806&APPID=7888c8e438281215658fd4080f0b834c&units=metric", function (response) {
+
+            $("#reply").text(response.main.temp);
+        });
+    });
+
+</script>
 
 
 
@@ -58,12 +80,12 @@
     <form action="https://formspree.io/greengon1991@gmail.com" method="post" class="text-right">
         <label for="name">שם מלא: </label>
         <input type="text" id="username" name="name" placeholder="שם...">
-       
+
         <label for="email">מייל: </label>
         <input type="email" id="mail" name="_replyto" placeholder="השאר מייל לחזרה">
-        
-        <textarea id="subject" class="mail-textarea" name="subject" placeholder="כתוב כאן..."></textarea>  
-        
+
+        <textarea id="subject" class="mail-textarea" name="subject" placeholder="כתוב כאן..."></textarea>
+
         <input type="submit" value="שלח">
         <input type="hidden" name="_next" value="/Home/contact" />
     </form>
