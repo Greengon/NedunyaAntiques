@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NedunyaAntiquesWebApp.Models;
@@ -29,8 +28,6 @@ namespace NedunyaAntiquesWebApp.Controllers
                 roleManager.Create(new AppRole(roleAdminName));
         }
 
-        // GET: Customers
-        // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
@@ -48,8 +45,8 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
-
-                Customer customer = userManager.Find(login.UserLog, login.PasswordLog);
+                Customer customer = db.Users.Find(login.UserLog);
+               // Customer customer = userManager.Find(login.UserLog, login.PasswordLog);
                 if (customer != null)
                 {
                     var ident = userManager.CreateIdentity(customer,
@@ -66,7 +63,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // POST: /Customers/Logout
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
@@ -76,10 +72,8 @@ namespace NedunyaAntiquesWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: Customers/Details/5
-        // Using filter to allow access only to login users.
         //[Authorize] - TODO: uncomment before you go live
-        public ActionResult Details(int Id)
+        public ActionResult Details(string Id)
         {
            
             Customer customer = db.Users.Find(Id);
@@ -90,10 +84,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             return View(customer);
         }
-
-        // GET: Customers/Save
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         
         public ActionResult Save()
         {
@@ -101,9 +91,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
        
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
@@ -137,8 +124,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
       
 
-        // GET: Customers/Edit/5
-        // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Edit(string Id)
         {
@@ -152,12 +137,9 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        /* [HttpPost]
+         [HttpPost]
          [ValidateAntiForgeryToken]
-         public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
+         public ActionResult Edit([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
          {
              if (ModelState.IsValid)
              {
@@ -166,10 +148,10 @@ namespace NedunyaAntiquesWebApp.Controllers
                  return RedirectToAction("Index");
              }
              return View(customer);
-         }*/
+         }
 
         // [Authorize (Roles = "NedunyaUser")]
-        [HttpPost]
+        
         public ActionResult Delete(string Id)
          {
              Customer customer = db.Users.Find(Id);
@@ -201,8 +183,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         protected override void Dispose(bool disposing)
         {
             if (disposing)
