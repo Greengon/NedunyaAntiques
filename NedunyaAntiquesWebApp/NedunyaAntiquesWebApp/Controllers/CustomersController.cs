@@ -17,7 +17,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         private ApplicationContext db = new ApplicationContext();
 
         private void CreateRoles()
-        {
+        {   
             //Creating User role
             var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
             string roleUserName = "NedunyaUser";
@@ -34,7 +34,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Users.AsEnumerable().ToList());
         }
 
        
@@ -49,12 +49,12 @@ namespace NedunyaAntiquesWebApp.Controllers
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
 
-                Customer customer = userManager.Find(login.Email, login.Password);
+                Customer customer = userManager.Find(login.UserLog, login.PasswordLog);
                 if (customer != null)
                 {
                     var ident = userManager.CreateIdentity(customer,
                         DefaultAuthenticationTypes.ApplicationCookie);
-                    FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
+                    FormsAuthentication.SetAuthCookie(customer.UserName, customer.RememberMe);
                     //use the instance that has been created. 
                     authManager.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
@@ -168,11 +168,9 @@ namespace NedunyaAntiquesWebApp.Controllers
              return View(customer);
          }*/
 
-        // GET: Customers/Delete/5
-        // Using filter to allow access only to admin users.
         // [Authorize (Roles = "NedunyaUser")]
-         [HttpPost]
-         public ActionResult Delete(string Id)
+        [HttpPost]
+        public ActionResult Delete(string Id)
          {
              Customer customer = db.Users.Find(Id);
             db.Users.Remove(customer);

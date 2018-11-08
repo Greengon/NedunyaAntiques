@@ -279,6 +279,18 @@
     <Compile Include="Migrations\201811061602171_DateSetToNull.Designer.cs">
       <DependentUpon>201811061602171_DateSetToNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811080952040_SetToNull.cs" />
+    <Compile Include="Migrations\201811080952040_SetToNull.Designer.cs">
+      <DependentUpon>201811080952040_SetToNull.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811081017252_LogIn.cs" />
+    <Compile Include="Migrations\201811081017252_LogIn.Designer.cs">
+      <DependentUpon>201811081017252_LogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811081025378_NotNull.cs" />
+    <Compile Include="Migrations\201811081025378_NotNull.Designer.cs">
+      <DependentUpon>201811081025378_NotNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppCustomerManager.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -619,6 +631,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811061602171_DateSetToNull.resx">
       <DependentUpon>201811061602171_DateSetToNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080952040_SetToNull.resx">
+      <DependentUpon>201811080952040_SetToNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081017252_LogIn.resx">
+      <DependentUpon>201811081017252_LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811081025378_NotNull.resx">
+      <DependentUpon>201811081025378_NotNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
