@@ -9,6 +9,21 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<div class="text-left col-12 form-zone">
+    <div class="row" style="margin:10px; padding-right:10px">
+        <form asp-controller="Transactions" asp-action="Index">
+            <p>
+                <input type="date" name="dateStart" title="תאריך התחלה" />
+                <input type="date" name="dateEnd" title="תאריך סיום" />
+                <input type="number" name="totalMin" placeholder="סכום מינימלי" />
+                <input type="number" name="totalMax" placeholder="סכום מקסימלי" />
+                <input type="submit" value="חיפוש" />
+            </p>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <tr>
         <th>
@@ -17,20 +32,21 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TransDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
+            </td>
+        </tr>
+    }
 
 </table>

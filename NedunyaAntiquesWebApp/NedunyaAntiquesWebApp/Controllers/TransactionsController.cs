@@ -15,11 +15,44 @@ namespace NedunyaAntiquesWebApp.Controllers
     public class TransactionsController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
-
+        /*
         // GET: Transactions
         public async Task<ActionResult> Index()
         {
             return View(await db.Transactions.ToListAsync());
+        }
+        */
+
+        public async Task<ActionResult> Index(string dateStart, string dateEnd, string totalMin, string totalMax)
+        {
+            var transactions = from t in db.Transactions
+                                select t;
+
+            if(!String.IsNullOrEmpty(dateStart))
+            {
+                DateTime ds = Convert.ToDateTime(dateStart);
+                transactions = transactions.Where(s => s.TransDate >= ds);
+            }
+
+            if (!String.IsNullOrEmpty(dateEnd))
+            {
+                DateTime de = Convert.ToDateTime(dateEnd);
+                transactions = transactions.Where(s => s.TransDate <= de);
+            }
+
+            if (!String.IsNullOrEmpty(totalMax))
+            {
+                Decimal t = Convert.ToDecimal(totalMax);
+                transactions = transactions.Where(s => s.Amount <= t);
+            }
+
+            if (!String.IsNullOrEmpty(totalMin))
+            {
+                Decimal t = Convert.ToDecimal(totalMin);
+                transactions = transactions.Where(s => s.Amount >= t);
+            }
+
+            return View(await transactions.ToListAsync());
         }
 
         // GET: Transactions/AddressAndPayment
@@ -151,12 +184,20 @@ namespace NedunyaAntiquesWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
-            if (ModelState.IsValid)
+            if(db.Transactions.Find(transaction.TransactionId) != null)
             {
-                db.Entry(transaction).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(transaction).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
+            else
+            {
+                Response.Write(("<script>alert('Transaction was not found, please try another transaction');</script>"));
+            }
+            
             return View(transaction);
         }
 
