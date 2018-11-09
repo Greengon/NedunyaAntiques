@@ -1,5 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -38,24 +40,62 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult LogIn(LoginViewModel login)
-        {
+        {    
+            //TODO::fuiger out how to pull the user id from the db without the need for using the userlog!! IDEA will be
+            //to enherence the customer class in customer view model
+          /*  if (User.Identity is ClaimsIdentity claimsIdentity)
+            {
+                // the principal identity is a claims identity.
+                // now we need to find the NameIdentifier claim
+                var userIdClaim = claimsIdentity.Claims
+                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null)
+                {
+                    var userIdValue = userIdClaim.Value;
+                }
+            }*/
+
+
+
             if (ModelState.IsValid)
             {
+                var user = (
+                    from u in db.Users
+                    where (u.UserName == login.UserLog) && (u.PasswordHash == login.PasswordLog)
+
+                    select u).Single();
+
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
-                Customer customer = db.Users.Find(login.UserLog);
-               // Customer customer = userManager.Find(login.UserLog, login.PasswordLog);
+                Customer customer = db.Users.Find(user.Id);
                 if (customer != null)
                 {
-                    var ident = userManager.CreateIdentity(customer,
+                    //var identity = new ClaimsIdentity();
+                    //identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                    /* var ident = userManager.CreateIdentity(user,
+                         DefaultAuthenticationTypes.ApplicationCookie);
+                     FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
+                     //use the instance that has been created. 
+                     authManager.SignIn(
+                         new AuthenticationProperties { IsPersistent = false }, ident);
+                     return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));*/
+
+                    /***************************************************************************/
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+                    claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                    var id = new ClaimsIdentity(claims,
                         DefaultAuthenticationTypes.ApplicationCookie);
-                    FormsAuthentication.SetAuthCookie(customer.UserName, customer.RememberMe);
-                    //use the instance that has been created. 
-                    authManager.SignIn(
-                        new AuthenticationProperties { IsPersistent = false }, ident);
-                    return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));
+
+                    var ctx = Request.GetOwinContext();
+                    var authenticationManager = ctx.Authentication;
+                    authenticationManager.SignIn(id);
+                    Session["UserID"] = user.Id.ToString();
+                    Session["UserName"] = user.UserName.ToString();
+                    return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError("", "Invalid username or password");
@@ -70,6 +110,8 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
+           // HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+           //return RedirectToAction("Index", "Home");
         }
 
         //[Authorize] - TODO: uncomment before you go live
@@ -107,8 +149,6 @@ namespace NedunyaAntiquesWebApp.Controllers
                     var userResult = UserManager.AddToRole(customer.Id, "NedunyaUser");
                     if(userResult.Succeeded)
                         return RedirectToAction("Index", "Home");
-
-                    //return RedirectToAction("Index");
                 }
             }
             
@@ -141,13 +181,21 @@ namespace NedunyaAntiquesWebApp.Controllers
          [ValidateAntiForgeryToken]
          public ActionResult Edit([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
          {
-             if (ModelState.IsValid)
+             if (db.Users.Find(customer.Id) != null)
              {
-                 db.Entry(customer).State = EntityState.Modified;
-                 db.SaveChanges();
-                 return RedirectToAction("Index");
+                 if (ModelState.IsValid)
+                 {
+                     db.Entry(customer).State = EntityState.Modified;
+                     db.SaveChanges();
+                     return RedirectToAction("Index");
+                 }
              }
-             return View(customer);
+             else
+             {
+                 Response.Write(("<script>alert('Customer was not found, please try another customer');</script>"));
+             }
+
+            return View(customer);
          }
 
         // [Authorize (Roles = "NedunyaUser")]
