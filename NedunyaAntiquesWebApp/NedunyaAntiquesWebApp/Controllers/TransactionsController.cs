@@ -17,6 +17,19 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
+        public ActionResult Api()
+        {
+            var transactions = from t in db.Transactions
+                               select t;
+           
+            return Json(transactions, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Charts()
+        {
+            return View();
+        }
+
         // GET: Transactions/ + Smart Search
         public async Task<ActionResult> Index(string dateStart, string dateEnd, string totalMin, string totalMax)
         {
@@ -161,7 +174,8 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 db.Transactions.Add(transaction);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(transaction);

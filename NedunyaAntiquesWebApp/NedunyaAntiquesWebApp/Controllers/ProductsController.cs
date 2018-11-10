@@ -20,11 +20,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Products
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        /*public ActionResult Index()
-        {
-            return View(db.Products.ToList());
-        }*/
-
         public async Task<ActionResult> Index(string selectCat, string free, string priceMax, string priceMin,
             string hightMax, string hightMin, string onSale, string canRent)
         {
@@ -153,6 +148,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         public ActionResult Create([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
@@ -182,8 +178,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Create");
-                //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
 
             return View(product);
