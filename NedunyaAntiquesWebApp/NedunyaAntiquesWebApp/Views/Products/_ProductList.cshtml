@@ -1,0 +1,88 @@
+﻿@using System.ComponentModel
+@using NedunyaAntiquesWebApp.Models
+@model IEnumerable<NedunyaAntiquesWebApp.Models.Product>
+
+<script type="text/javascript" src="~/Scripts/global2.js"></script>
+<link type="text/css" media="all" href="~/Content/ourstyle.css">
+
+
+
+@foreach (var item in Model)
+{
+
+
+    <!--Single Product-->
+    <div class= "col-12 col-sm-6 col-lg-4">
+        <div class= "single-product-wrapper">
+            <div class= "last-try">
+                <!--Single Image-->
+                <div class="product-img">
+                    <img src="~/Images/Thumbs/@(item.Images.ElementAt(0).Name)" />
+                </div>
+                <!--Product Description-->
+                <div class="product-description">
+                    <p>
+                        <b>שם המוצר:</b> @Html.DisplayFor(modelItem => item.Name)
+                    </p>
+                    <p>
+                        <b>מחיר:</b> @Html.DisplayFor(modelItem => item.Price) ש"ח
+                    </p>
+
+                    <a class="trigger_popup_fricc">פרטים נוספים</a>
+                </div>
+            
+            
+
+            <div class="hover_bkgr_fricc">
+                <span class="helper"></span>
+                <div calss="helper_content">
+                    <div class="popupCloseButton">X</div>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Name): @Html.DisplayFor(modelItem => item.Name)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Price): @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Substance):@Html.DisplayFor(modelItem => item.Substance)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Category):@Html.DisplayFor(modelItem => item.Category)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.SubCategory):@Html.DisplayFor(modelItem => item.SubCategory)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Height):@Html.DisplayFor(modelItem => item.Height)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Width):@Html.DisplayFor(modelItem => item.Width)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Depth):@Html.DisplayFor(modelItem => item.Depth)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Description):@Html.DisplayFor(modelItem => item.Description)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Sale):@Html.DisplayFor(modelItem => item.Sale)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.DiscountPercentage):@Html.DisplayFor(modelItem => item.DiscountPercentage)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.Rented):@Html.DisplayFor(modelItem => item.Rented)
+                    </p>
+                    <p>
+                        @Html.LabelFor(modelItem => item.RentalPriceForDay):@Html.DisplayFor(modelItem => item.RentalPriceForDay)
+                    </p>
+
+                </div>
+            </div>
+            </div>
+            <p class="text-center">
+                @Html.ActionLink("הוסף לסל", "AddToCart", "Transactions", new {ProductId = @Html.EditorFor(modelItem => item.ProductId)}, new {@class = "btn btn-info"})
+            </p>
+        </div>
+    </div>
+}

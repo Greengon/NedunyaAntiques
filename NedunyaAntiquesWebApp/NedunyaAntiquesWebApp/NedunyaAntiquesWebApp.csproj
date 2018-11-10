@@ -244,6 +244,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\classy-nav.min.css" />
+    <Content Include="Content\core-style_old.css" />
     <Content Include="Content\core-style.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\jquery-ui.min.css" />
@@ -429,6 +430,7 @@
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\global.js" />
+    <Content Include="Scripts\global2.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -444,6 +446,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Products\ShowCategory.cshtml" />
+    <Content Include="Views\Products\_ProductList_not_in_use.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -474,7 +478,6 @@
     <Content Include="scss\_variables.scss" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Home\shop.cshtml" />
-    <Content Include="Views\Products\ShowCategory.cshtml" />
     <Content Include="Views\Rental\RentalView.cshtml" />
     <Content Include="Views\Transactions\Create.cshtml" />
     <Content Include="Views\Transactions\Delete.cshtml" />
@@ -504,6 +507,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Views\Products\ShowCategory1.cshtml" />
+    <Content Include="Views\Products\_ProductList.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

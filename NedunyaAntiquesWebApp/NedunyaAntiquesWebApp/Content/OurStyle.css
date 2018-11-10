@@ -161,6 +161,20 @@ input[type=submit] {
 }
 
 /* Popup box BEGIN */
+.last-try {
+    position: relative;
+    z-index: -1;
+}
+
+
+
+.helper_content {
+    position: relative;
+    z-index: 40;
+    margin: 100px 10px;
+}
+
+
 .hover_bkgr_fricc {
     background: rgba(0,0,0,.4);
     cursor: pointer;
@@ -169,19 +183,22 @@ input[type=submit] {
     position: fixed;
     text-align: center;
     top: 0px;
-	right:320px;
+    right: 320px;
     width: 100%;
-    z-index: 10000;
+    z-index: 40;
 }
 
     .hover_bkgr_fricc .helper {
+        position: relative;
+        z-index: 40;
         display: inline-block;
         height: 50%;
-       vertical-align: center;
-	   }
+        vertical-align: middle;
+    }
 
     .hover_bkgr_fricc > div {
-		z-index: -1;
+        position: relative;
+        z-index: 40;
         background-color: #fff;
         box-shadow: 10px 10px 60px #555;
         display: inline-block;
@@ -190,7 +207,6 @@ input[type=submit] {
         min-height: 100px;
         vertical-align: middle;
         width: 60%;
-        position: relative;
         border-radius: 8px;
         padding: 15px 5%;
     }
@@ -213,8 +229,10 @@ input[type=submit] {
     text-align: center;
 }
 
-    .popupCloseButton:hover {
+ .popupCloseButton:hover {
         background-color: #ccc;
+     position: relative;
+     z-index: 40;
     }
 
 .trigger_popup_fricc {
@@ -223,6 +241,8 @@ input[type=submit] {
     margin: 20px;
     display: inline-block;
     font-weight: bold;
+    position: relative;
+    z-index: 40;
 }
 /* Popup box BEGIN */
 
@@ -232,4 +252,26 @@ input[type=submit] {
     margin-left: auto;
     margin-right: auto;
     width: 35%;
+}
+
+#tabs a
+{
+    color: #00f;
+    display: inline-block;
+    margin: 15px 15px;
+    padding: 0px 0px;
+    text-align: center;
+}
+#tabs a:hover,
+#tabs a:focus
+{
+    background: #ddd;
+    text-decoration: underline;
+}
+
+#tabs a.selected
+{
+    background: #036;
+    color: #fff;
+    font-weight: bold;
 }
