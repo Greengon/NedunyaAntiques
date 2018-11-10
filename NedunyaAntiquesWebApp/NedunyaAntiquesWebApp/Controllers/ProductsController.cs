@@ -20,11 +20,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Products
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        /*public ActionResult Index()
-        {
-            return View(db.Products.ToList());
-        }*/
-
         public async Task<ActionResult> Index(string selectCat, string free, string priceMax, string priceMin,
             string hightMax, string hightMin, string onSale, string canRent)
         {
