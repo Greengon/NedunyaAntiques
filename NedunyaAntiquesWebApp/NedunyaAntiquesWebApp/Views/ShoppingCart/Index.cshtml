@@ -24,27 +24,26 @@ else
             <th>
                 מחיר
             </th>
-
             <th>
-                כמות
+                הסרה
             </th>
-            <th>מחיר כולל</th>
         </tr>
         @foreach (var item in Model.CartItems)
         {
-            <tr id="row-@item.ProductId">
-                <td>
-                    @Html.ActionLink(item.Name, "Details", "Products", new { id = item.ProductId }, null);
-                </td>
-                <td>
-                    @item.Price
-                </td>
-                <td>
-                    <a herf="" class="product-remove text-right" data-id="@item.ProductId">
-                        הסר מעגלת הקניות
-                    </a>
-                </td>
-            </tr>
+            if (item.sold == false)
+            {
+                <tr id="row-@item.ProductId">
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", "Products", new { id = item.ProductId }, null);
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td class="text-right">
+                        @Html.ActionLink("הסר מעגלת הקניות", "removefromcart", "ShoppingCart", new { id = item.ProductId }, null);
+                    </td>
+                </tr>
+            }
         }
         <tr class="text-right">
             <td>
@@ -61,7 +60,7 @@ else
         <a class="btn btn-danger" href='@Url.Action("Index", "Home")'>המשך לקנות</a>
     </p>
     <p class="button">
-        @Html.ActionLink("עבור לתשלום", "AddressAndPayment", "Transactions");
+        <a class="btn btn-danger" href='@Url.Action("AddressAndPayment", "Transactions")'>עבור לתשלום</a>
     </p>
 }
 

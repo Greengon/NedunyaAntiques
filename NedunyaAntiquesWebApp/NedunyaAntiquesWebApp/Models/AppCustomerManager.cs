@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 
 namespace NedunyaAntiquesWebApp.Models
@@ -22,10 +23,10 @@ namespace NedunyaAntiquesWebApp.Models
         {
             var manager = new AppCustomerManager(
                 new UserStore<Customer>(context.Get<ApplicationContext>()));
-
             // optionally configure your manager
             // ...
             
+
             return manager;
         }
     }

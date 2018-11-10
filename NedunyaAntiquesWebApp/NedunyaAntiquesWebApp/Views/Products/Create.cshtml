@@ -1,4 +1,4 @@
-﻿@model NedunyaAntiquesWebApp.Models.Product
+﻿                @model NedunyaAntiquesWebApp.Models.Product
 
 @{
     ViewBag.Title = "Add Product";
@@ -10,7 +10,6 @@
 @*using (Html.BeginForm()) *@
 @using (Html.BeginForm("Create", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
     <!--{
      @*   <div class="form-horizontal">
             <h4>Product</h4>

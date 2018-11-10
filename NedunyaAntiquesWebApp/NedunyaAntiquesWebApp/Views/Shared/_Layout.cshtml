@@ -19,7 +19,6 @@
 
     <!-- All of our JavaScripts + defer attribute -->
     @Scripts.RenderFormat("<script src='{0}' defer></script>", "~/bundles/bundleOur-jqueryval")
-
 </head>
 
 <body>
@@ -100,34 +99,37 @@
 
             <!-- Header Meta Data -->
             <!--this is the problem with the css rendering-->
-            <div class="header-meta d-flex clearfix justify-content-end">
-                <!--FaceBook share and like btn-->
-                <div class="fb-like" data-href="https://he-il.facebook.com/Nedunya/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+            <object class=" search-header">
+                <div class="header-meta d-flex clearfix justify-content-end">
+                    <!--FaceBook share and like btn-->
+                    <div class="fb-like" data-href="https://he-il.facebook.com/Nedunya/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
 
-                <!--End of FaceBook share and like btn-->
-                <!-- Cart Area -->
-                <div class="cart-area">
-                    <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""></a>
-                </div>
-
-                <!-- Search Area -->
-                <div class="search-area">
-                    <form action="#" method="post">
-                        <input type="search" name="search" id="headerSearch" placeholder="חיפוש באתר">
-                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                </div>
-
-                <!-- Register and log in area -->
-                <div class="guest-area">
-                    <div>
-                        @Html.Partial("_LoginPartial")
+                    <!--End of FaceBook share and like btn-->
+                    <!-- Cart Area -->
+                    <div class="cart-area">
+                        <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""></a>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </header>
+                    <!-- Search Area -->
+                    <div class="serach">
+                        <div class="search-area">
+                            <form action="~/Products/Index" method="post">
+                                <input type="search" name="free" id="headerSearch" placeholder="חיפוש באתר">
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </div>
+            </object>
+
+                        <!-- Register and log in area -->
+                        <div class="guest-area">
+                            <div>
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                </div>
+
+</header>
     <!-- ##### Right Side Cart Area ##### -->
     <div class="cart-bg-overlay"></div>
 
@@ -145,7 +147,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <!--  <img src="../img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" class="cart-thumb" alt="">-->
+                        <img src="../img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" class="cart-thumb" alt="">
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
@@ -161,7 +163,7 @@
                 <!-- Single Cart Item -->
                 <div class="single-cart-item">
                     <a href="#" class="product-image">
-                        <!--    <img src="img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה ראשונה.jpeg" class="cart-thumb" alt=""> -->
+                         <img src="img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה ראשונה.jpeg" class="cart-thumb" alt=""> 
                         <!-- Cart Item Desc -->
                         <div class="cart-item-desc">
                             <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>

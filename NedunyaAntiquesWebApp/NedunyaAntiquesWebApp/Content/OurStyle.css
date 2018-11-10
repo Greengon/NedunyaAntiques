@@ -28,32 +28,37 @@
 .guest-area {
     top: 30px;
     right: 13px;
-    line-height: 40px;
+    line-height: 60px;
     width: 250px;
     -webkit-box-flex: 0;
-}
-
-.guest-text {
-    text-align: center;
-    line-height: 80px;
+    text-align: right;
 }
 
 @media screen and (max-width: 967px) {
     .guest-text {
-        text-align: center;
-        line-height: 40px;
+        text-align: right;
+       padding-right:30px;
+    }
+}
+@media screen and (max-high: 967px) {
+    .guest-text {
+        text-align: right;
+        padding-right: 30px;
     }
 }
 
+
 @media screen and (max-width: 821px) {
     .guest-text {
-        line-height: 30px;
+        text-align: right;
+        line-height: 60px;
     }
 }
 
 @media screen and (max-width: 421px) {
     .guest-text {
         display:none;
+        left:50px;
     }
 }
 
@@ -66,7 +71,13 @@
 }
 
 .pagetextheb {
-    padding: 50px 30px 50px 80px;
+    padding: 40px 30px 5px 80px;
+}
+
+.Weather {
+    position: absolute;
+    padding-right: 75%;
+    font: 600 30px/1.4 Oswald,Arial,sans-serif;
 }
 
 .OurBottomArea{
@@ -188,13 +199,25 @@ input[type=submit] {
     z-index: 40;
 }
 
+.search-header {
+    resize:horizontal;
+    right:2%;
+    position: center;
+}
+.guest-area  {
+    position: fixed;
+    move-to:normal;
+    right: 84%;
+    line-height: 30px;
+
+}
     .hover_bkgr_fricc .helper {
         position: relative;
         z-index: 40;
         display: inline-block;
         height: 50%;
-        vertical-align: middle;
-    }
+       vertical-align:auto;
+	   }
 
     .hover_bkgr_fricc > div {
         position: relative;
@@ -254,24 +277,6 @@ input[type=submit] {
     width: 35%;
 }
 
-#tabs a
-{
-    color: #00f;
-    display: inline-block;
-    margin: 15px 15px;
-    padding: 0px 0px;
-    text-align: center;
-}
-#tabs a:hover,
-#tabs a:focus
-{
-    background: #ddd;
-    text-decoration: underline;
-}
-
-#tabs a.selected
-{
-    background: #036;
-    color: #fff;
-    font-weight: bold;
+.form-zone{
+    margin-bottom: 10px;
 }

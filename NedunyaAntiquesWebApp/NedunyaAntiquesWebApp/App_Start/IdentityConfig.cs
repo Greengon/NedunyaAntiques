@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace NedunyaAntiquesWebApp
 {
@@ -16,6 +17,7 @@ namespace NedunyaAntiquesWebApp
     {
         public void Configuration(IAppBuilder app)
         {
+            //UrlHelper url = new UrlHelper(HttpContext.Current.Request.RequestContext);
             app.CreatePerOwinContext(() => new ApplicationContext());
             app.CreatePerOwinContext<AppCustomerManager>(AppCustomerManager.Create);
             app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
@@ -25,7 +27,7 @@ namespace NedunyaAntiquesWebApp
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Home/LogIn"),
+                LoginPath = new PathString("/Customers/CustomerLog"),
             });
         }
     }

@@ -1,14 +1,14 @@
 ﻿@if (Request.IsAuthenticated)
 { // TODO: change this so it will fit our project
-    using (Html.BeginForm("Logout", "Customers", FormMethod.Post, new { id = "logoutForm", @class = "navbar-left" }))
+    using (Html.BeginForm("LogIn", "Customers", FormMethod.Post, new { id = "loginForm", @class = "navbar-left" }))
     {
-        @Html.AntiForgeryToken()
+        
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a herf="javascript:document.getElementById('logoutForm').sumbit()">Log off</a></li>
+            <li><a herf="javascript:document.getElementById('CustomerLog').sumbit()">Log out</a></li>
         </ul>
     }
 }

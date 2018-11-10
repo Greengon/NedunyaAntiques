@@ -7,16 +7,16 @@ using NedunyaAntiquesWebApp.Models;
 
 namespace NedunyaAntiquesWebApp.ViewModels
 {
-    public class LoginViewModel : Customer
+    public class LoginViewModel 
     {
-       
+        public string EmailLog { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string PasswordLog { get; set; }
 
-        
+        public string UserLog { get; set; }
+
+        public bool RemamberLog { get; set; }
+
         public string ReturnUrl { get; set; }
     }
 }

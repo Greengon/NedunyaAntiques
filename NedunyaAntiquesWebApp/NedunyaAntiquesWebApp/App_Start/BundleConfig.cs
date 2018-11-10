@@ -43,7 +43,6 @@ namespace NedunyaAntiquesWebApp
           "~/Content/bootstrap-rtl.css",
           "~/Content/classy-nav.min.css",
           "~/Content/core-style.css",
-       //   "~/Content/core-style.css.map",
           "~/Content/font-awesome.min.css",
           "~/Content/jquery-ui.min.css",
           "~/Content/magnific-popup.css",

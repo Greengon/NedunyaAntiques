@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -22,9 +22,77 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Products
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Index()
+        public async Task<ActionResult> Index(string selectCat, string free, string priceMax, string priceMin,
+            string hightMax, string hightMin, string onSale, string canRent)
         {
-            return View(db.Products.ToList());
+            IQueryable<string> catQuery = from p in db.Products
+                                            orderby p.Category
+                                            select p.Category;
+
+            IQueryable<string> subCatQuery = from p in db.Products
+                                          orderby p.SubCategory
+                                          select p.SubCategory;
+
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "הכל", Value = "", Selected = true });
+            foreach (var cat in catQuery.Distinct())
+            {
+                items.Add(new SelectListItem { Text = cat, Value = cat });
+            }
+            foreach (var subCat in subCatQuery.Distinct())
+            {
+                items.Add(new SelectListItem { Text = subCat, Value = subCat });
+            }
+            ViewBag.selectCat = items;
+
+            var products = from p in db.Products
+                         select p;
+
+            if (!String.IsNullOrEmpty(free))
+            {
+                products = products.Where(s => s.Description.Contains(free));
+            }
+
+            if (!String.IsNullOrEmpty(selectCat))
+            {
+                products = products.Where(x => x.Category == selectCat || x.SubCategory == selectCat);
+            }
+
+            if (!String.IsNullOrEmpty(priceMin))
+            {
+                var p = Convert.ToDecimal(priceMin);
+                products = products.Where(x => x.Price >= p);
+            }
+
+            if (!String.IsNullOrEmpty(priceMax))
+            {
+                var p = Convert.ToDecimal(priceMax);
+                products = products.Where(x => x.Price <= p);
+            }
+
+            if (!String.IsNullOrEmpty(hightMin))
+            {
+                var h = Convert.ToDouble(hightMin);
+                products = products.Where(x => x.Height >= h);
+            }
+
+            if (!String.IsNullOrEmpty(hightMax))
+            {
+                var h = Convert.ToDouble(hightMax);
+                products = products.Where(x => x.Height <= h);
+            }
+
+            if (!String.IsNullOrEmpty(onSale))
+            {
+                products = products.Where(x => x.Sale == true);
+            }
+
+            if (!String.IsNullOrEmpty(canRent))
+            {
+                products = products.Where(x => x.Rented == true);
+            }
+
+            return View(await products.ToListAsync());
         }
 
         // GET: Products/Details/5
@@ -102,7 +170,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
@@ -163,10 +230,12 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
-            if (ModelState.IsValid)
+
+            if (db.Products.Find(product.ProductId) != null)
+            {
+                if (ModelState.IsValid)
             {
                 if (Images.ElementAt(0) != null)
                 {
@@ -199,7 +268,15 @@ namespace NedunyaAntiquesWebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           
+
+
+
+            }
+            else
+            {
+                Response.Write(("<script>alert('Product was not found, please try another product');</script>"));
+            }
+
 
             return View(product);
         }
@@ -225,7 +302,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);

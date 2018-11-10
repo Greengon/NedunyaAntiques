@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
+using NedunyaAntiquesWebApp.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace NedunyaAntiquesWebApp.Controllers
 {
@@ -15,34 +17,128 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        // GET: Transactions
-        public async Task<ActionResult> Index()
+        public ActionResult Api()
         {
-            return View(await db.Transactions.ToListAsync());
+            var transactions = from t in db.Transactions
+                               select t;
+           
+            return Json(transactions, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Transactions/CheckOut/TransactionId
-        public ActionResult CheckOut(int ShopingCartId)
-        { 
-            // TODO: Need to cheak here if there was payment on paypal
+        public ActionResult Charts()
+        {
             return View();
         }
 
-        // GET: Transactions/Complete/id
-        public ActionResult Complete(int id)
+        // GET: Transactions/ + Smart Search
+        public async Task<ActionResult> Index(string dateStart, string dateEnd, string totalMin, string totalMax)
         {
-            bool isValid = db.Transactions.Any(
-                o => o.TransactionId == id 
-                );
+            var transactions = from t in db.Transactions
+                                select t;
 
-            if (isValid)
+            if(!String.IsNullOrEmpty(dateStart))
             {
-                return View(id);
+                DateTime ds = Convert.ToDateTime(dateStart);
+                transactions = transactions.Where(s => s.TransDate >= ds);
             }
-            else
+
+            if (!String.IsNullOrEmpty(dateEnd))
             {
+                DateTime de = Convert.ToDateTime(dateEnd);
+                transactions = transactions.Where(s => s.TransDate <= de);
+            }
+
+            if (!String.IsNullOrEmpty(totalMax))
+            {
+                Decimal t = Convert.ToDecimal(totalMax);
+                transactions = transactions.Where(s => s.Amount <= t);
+            }
+
+            if (!String.IsNullOrEmpty(totalMin))
+            {
+                Decimal t = Convert.ToDecimal(totalMin);
+                transactions = transactions.Where(s => s.Amount >= t);
+            }
+
+            return View(await transactions.ToListAsync());
+        }
+
+        // GET: Transactions/AddressAndPayment/
+        public ActionResult AddressAndPayment()
+        {
+            var userID = Session["userID"];
+            if (userID != null)
+            {
+                Customer customer = db.Users.Single(user => user.Id == (string)userID);
+              /*  if (customer.Transactions.Last() != null && customer.Transactions.Last().Paid == false)
+                {
+                    var transId = customer.Transactions.Last().TransactionId;
+                    customer.Transactions.Remove(customer.Transactions.Last());
+                    db.Transactions.Remove(db.Transactions.Single(T => T.TransactionId == transId));
+                }
+                */
+                ShoppingCart shoppingCart = new ShoppingCart
+                {
+                    ShoppingCartId = customer.Id
+                };
+                Transaction transaction = shoppingCart.CreateTransaction(customer);
+                if (transaction.Amount != 0)
+                {
+                    customer.Transactions.Add(transaction);
+                    db.SaveChanges();
+                    if (transaction != null)
+                    {
+                        TransactionViewModel transactionView = new TransactionViewModel
+                        {
+                            CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
+                            amount = transaction.Amount
+                        };
+                        return View(transactionView);
+                    }
+                    else
+                        return HttpNotFound();
+                }
+
+            }
+            return RedirectToAction("shop", "Home");
+
+        }
+
+
+        // GET: Transactions/Complete/
+        // You can get here only thourgh paypal
+        public ActionResult Complete() { 
+            var userID = Session["userID"];
+            if (userID != null){
+                    Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
+                    Transaction transaction = customer.Transactions.Last();
+                    transaction.Paid = true;
+                    var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
+                    foreach (var item in CartItems)
+                        item.sold = true;
+                    db.SaveChanges();
+            }
+            else{
                 return HttpNotFound();
             }
+           
+
+            return RedirectToAction("Index", "Home");
+        } 
+
+        // GET: Transactions/Failed
+        // You can get here only thourgh paypal
+        public ActionResult Failed()
+        {
+            var userID = Session["userID"];
+            if (userID != null){
+                Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
+                var transId = customer.Transactions.Last().TransactionId;
+                customer.Transactions.Remove(customer.Transactions.Last());
+                db.Transactions.Remove(db.Transactions.Single(T => T.TransactionId == transId));
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index","Home");
         }
 
         // GET: Transactions/Details/5
@@ -72,14 +168,14 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,TransDate")] Transaction transaction)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TransDate,Amount")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
                 db.Transactions.Add(transaction);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(transaction);
@@ -106,15 +202,22 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
-            if (ModelState.IsValid)
+            if(db.Transactions.Find(transaction.TransactionId) != null)
             {
-                db.Entry(transaction).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(transaction).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
             }
+            else
+            {
+                Response.Write(("<script>alert('Transaction was not found, please try another transaction');</script>"));
+            }
+            
             return View(transaction);
         }
 
@@ -139,7 +242,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Transaction transaction = await db.Transactions.FindAsync(id);
@@ -149,8 +251,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
+        //https://stackoverflow.com/questions/10134406/why-is-there-need-for-an-explicit-dispose-method-in-asp-net-mvc-controllers-c
         protected override void Dispose(bool disposing)
         {
             if (disposing)

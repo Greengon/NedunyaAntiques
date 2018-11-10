@@ -1,5 +1,8 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -15,59 +18,86 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        // GET: Customers
-        // Using filter to allow access only to admin users.
+        private void CreateRoles()
+        {   
+            //Creating User role
+            var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
+            string roleUserName = "NedunyaUser";
+            if (!roleManager.RoleExists(roleUserName))
+                roleManager.Create(new AppRole(roleUserName));
+            //Cerating Admin role
+            string roleAdminName = "Admin";
+            if (!roleManager.RoleExists(roleAdminName))
+                roleManager.Create(new AppRole(roleAdminName));
+            //ask a query in order to check if there is an admin  user un the db
+            /*var user = (
+        from u in db.Users
+        where (u.UserName == "admin") && (u.PasswordHash == "adminadmin")
+
+        select u).FirstOrDefault();
+    if (user == null)
+    {
+        Customer AdminUser = new Customer
+        {
+            Email = "admin@gmail.com",
+            UserName = "admin",
+            PasswordHash = "adminadmin",
+            FirstName = "admin",
+            LastName = "admin",
+            HomeNum = 1,
+            PhoneNum = "050-111-1111",
+        };
+        var UserManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+        var result = UserManager.Create(AdminUser, AdminUser.PasswordHash);
+        // if ((result.Succeeded))
+        // {
+        result = UserManager.AddToRole(AdminUser.Id, "Admin"); 
+    }*/
+            // db.Users.Add(AdminUser);
+            // db.SaveChanges();
+            //  }
+
+
+        }
+
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            return View(db.Users.AsEnumerable().ToList());
         }
 
-        /*    [HttpPost]
-            [AllowAnonymous]
-            [ValidateAntiForgeryToken]
-            public ActionResult LogIn([Bind(Include = "Email,Password,RememberMe")] Customer customer)
-            {
-
-                Customer cust = db.Customers.Find(customer.Email);
-                string message = string.Empty;
-                if (cust != null)
-                {
-                    if (cust.Password != customer.Password)
-                        message = "הסיסמא אינה תקינה";
-
-                    MigrateShoppingCart(customer.Email);
-                    FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
-
-                    ViewBag.Message = message;
-                    return RedirectToAction("Index");
-                }
-                message = "האימייל שהזנת אינו נמצא במערכת";
-                ViewBag.Message = message;
-                return View("CustomerLog", customer);
-
-            }*/
+       
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        
         public ActionResult LogIn(LoginViewModel login)
-        {
+        {    
             if (ModelState.IsValid)
             {
+                var user = (
+                    from u in db.Users
+                    where (u.UserName == login.UserLog) && (u.PasswordHash == login.PasswordLog)
+
+                    select u).Single();
+
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
-
-                Customer customer = userManager.Find(login.Email, login.Password);
+                Customer customer = db.Users.Find(user.Id); 
                 if (customer != null)
                 {
-                    var ident = userManager.CreateIdentity(customer,
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
+                    claims.Add(new Claim(ClaimTypes.Email, user.Email));
+                    var id = new ClaimsIdentity(claims,
                         DefaultAuthenticationTypes.ApplicationCookie);
-                    FormsAuthentication.SetAuthCookie(customer.Email, customer.RememberMe);
-                    //use the instance that has been created. 
-                    authManager.SignIn(
-                        new AuthenticationProperties { IsPersistent = false }, ident);
-                    return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));
+
+                    var ctx = Request.GetOwinContext();
+                    var authenticationManager = ctx.Authentication;
+                    authenticationManager.SignIn(id);
+                    Session["UserID"] = user.Id.ToString();
+                    Session["UserName"] = user.UserName.ToString();
+                    return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError("", "Invalid username or password");
@@ -75,20 +105,18 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // POST: /Customers/Logout
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index");
+           // HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+           //return RedirectToAction("Index", "Home");
         }
 
-        // GET: Customers/Details/5
-        // Using filter to allow access only to login users.
         //[Authorize] - TODO: uncomment before you go live
-        public ActionResult Details(int Id)
+        public ActionResult Details(string Id)
         {
            
             Customer customer = db.Users.Find(Id);
@@ -99,134 +127,58 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             return View(customer);
         }
-
-        // GET: Customers/Save
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         
         public ActionResult Save()
         {
             return View();
         }
 
-        // POST: Customers/Save
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+                CreateRoles();
                 Customer cust = db.Users.Find(customer.Id);
-                
-                //ToDo::Use createRole in save client in order to create a role for the registration
+
                 if (cust == null)
                 {
                     db.Users.Add(customer);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    var UserManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+                    if (customer.UserName == "admin")
+                    {
+                        if (customer.Email == "admin@gmail.com")
+                        {
+                            var AdminuserResult = UserManager.AddToRole(customer.Id, "Admin");
+                            if (AdminuserResult.Succeeded)
+                                return RedirectToAction("Index", "Home");
+                        }
+
+                    }
+                    var userResult = UserManager.AddToRole(customer.Id, "NedunyaUser");
+                    if(userResult.Succeeded)
+                        return RedirectToAction("Index", "Home");
                 }
-                string message = string.Empty;
-                message = "כתובת האימייל שהזנת כבר קיימת במערכת";
-                ViewBag.Message = message;
             }
             
             return View("CustomerForm", customer);
         }
 
-       /* public ActionResult CreateRole(string roleName)
-        {
-            var roleManager = HttpContext.GetOwinContext().GetUserManager<RoleManager<AppRole>>();
 
-            if (!roleManager.RoleExists(roleName))
-                roleManager.Create(new AppRole(roleName));
-            //ToDo: must return something in order to create a role for a user.
-        }*/
-
-        [Authorize]
+        [Authorize(Roles = "NedunyaUser")]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        /*[Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword([Bind(Include = "Email")]Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
+      
 
-                // ChangePassword will throw an exception rather
-                // than return false in certain failure scenarios.
-                bool changePasswordSucceeded;
-                try
-                {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true );
-                    changePasswordSucceeded = currentUser.ChangePassword(customer.OldPassword, customer.NewPassword);
-                }
-                catch (Exception)
-                {
-                    changePasswordSucceeded = false;
-                }
-
-                if (changePasswordSucceeded)
-                {
-                    return RedirectToAction("ChangePasswordSuccess");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "הסיסמא הישנה או החדשה שבחרת אינם חוקיים");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(customer);
-        }*/
-
-        // GET: Customers/Edit/5
-        // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Edit(string Email)
+        public ActionResult Edit(string Id)
         {
-            if (Email == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Users.Find(Email);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
-
-        // POST: Customers/Edit/5
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-       /* [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Email,Password")] Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(customer);
-        }*/
-
-        // GET: Customers/Delete/5
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        public ActionResult Delete(int Id)
-        {
-            
+           
             Customer customer = db.Users.Find(Id);
             if (customer == null)
             {
@@ -235,18 +187,37 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int Id)
-        {
-            Customer customer = db.Users.Find(Id);
+
+         [HttpPost]
+         public ActionResult Edit([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
+         {
+             if (db.Users.Find(customer.Id) != null)
+             {
+                 if (ModelState.IsValid)
+                 {
+                     db.Entry(customer).State = EntityState.Modified;
+                     db.SaveChanges();
+                     return RedirectToAction("Index");
+                 }
+             }
+             else
+             {
+                 Response.Write(("<script>alert('Customer was not found, please try another customer');</script>"));
+             }
+
+            return View(customer);
+         }
+
+        // [Authorize (Roles = "NedunyaUser")]
+        
+        public ActionResult Delete(string Id)
+         {
+             Customer customer = db.Users.Find(Id);
             db.Users.Remove(customer);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+             db.SaveChanges();
+             
+             return RedirectToAction("Index");
+         }
 
 
         public ActionResult CustomerForm()
@@ -270,8 +241,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         protected override void Dispose(bool disposing)
         {
             if (disposing)
