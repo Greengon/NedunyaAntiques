@@ -63,6 +63,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 };
                 Transaction transaction = shoppingCart.CreateTransaction(customer);
                 customer.Transactions.Add(transaction);
+                db.SaveChanges();
                 if (transaction != null)
                 {
                     TransactionViewModel transactionView = new TransactionViewModel
@@ -90,7 +91,8 @@ namespace NedunyaAntiquesWebApp.Controllers
                     transaction.Paid = true;
                     var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
                     foreach (var item in CartItems)
-                    item.sold = true;
+                        item.sold = true;
+                    db.SaveChanges();
             }
             else{
                 return HttpNotFound();
@@ -108,6 +110,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             if (userID != null){
                     Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
                     customer.Transactions.Remove(customer.Transactions.Last());
+                    db.SaveChanges();
             }
             return RedirectToAction("Index","Home");
         }
