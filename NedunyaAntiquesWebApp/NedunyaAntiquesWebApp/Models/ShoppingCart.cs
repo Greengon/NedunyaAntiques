@@ -102,7 +102,7 @@ namespace NedunyaAntiquesWebApp.Models
 
         public decimal GetTotal()
         {
-            var list = new List<decimal>(from product in db.Products where product.CartId == ShoppingCartId select product.Price).ToList();
+            var list = new List<decimal>(from product in db.Products where product.CartId == ShoppingCartId && product.sold != true select product.Price).ToList();
             if (list != null){
                 // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
                 return list.Sum();
@@ -148,8 +148,8 @@ namespace NedunyaAntiquesWebApp.Models
                 // Cart = this
             };
 
-            db.Transactions.Add(transcation);
-            db.SaveChanges();
+           // db.Transactions.Add(transcation);
+          //  db.SaveChanges();
             return transcation;
         }    
     }

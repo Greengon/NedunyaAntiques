@@ -57,26 +57,37 @@ namespace NedunyaAntiquesWebApp.Controllers
             if (userID != null)
             {
                 Customer customer = db.Users.Single(user => user.Id == (string)userID);
+              /*  if (customer.Transactions.Last() != null && customer.Transactions.Last().Paid == false)
+                {
+                    var transId = customer.Transactions.Last().TransactionId;
+                    customer.Transactions.Remove(customer.Transactions.Last());
+                    db.Transactions.Remove(db.Transactions.Single(T => T.TransactionId == transId));
+                }
+                */
                 ShoppingCart shoppingCart = new ShoppingCart
                 {
                     ShoppingCartId = customer.Id
                 };
                 Transaction transaction = shoppingCart.CreateTransaction(customer);
-                customer.Transactions.Add(transaction);
-                db.SaveChanges();
-                if (transaction != null)
+                if (transaction.Amount != 0)
                 {
-                    TransactionViewModel transactionView = new TransactionViewModel
+                    customer.Transactions.Add(transaction);
+                    db.SaveChanges();
+                    if (transaction != null)
                     {
-                        CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
-                        amount = transaction.Amount
-                    };
-                    return View(transactionView);
+                        TransactionViewModel transactionView = new TransactionViewModel
+                        {
+                            CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
+                            amount = transaction.Amount
+                        };
+                        return View(transactionView);
+                    }
+                    else
+                        return HttpNotFound();
                 }
-                else
-                    return HttpNotFound();
+
             }
-            return RedirectToAction("CustomerLog", "Customers");
+            return RedirectToAction("shop", "Home");
 
         }
 
@@ -108,9 +119,11 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             var userID = Session["userID"];
             if (userID != null){
-                    Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
-                    customer.Transactions.Remove(customer.Transactions.Last());
-                    db.SaveChanges();
+                Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
+                var transId = customer.Transactions.Last().TransactionId;
+                customer.Transactions.Remove(customer.Transactions.Last());
+                db.Transactions.Remove(db.Transactions.Single(T => T.TransactionId == transId));
+                db.SaveChanges();
             }
             return RedirectToAction("Index","Home");
         }

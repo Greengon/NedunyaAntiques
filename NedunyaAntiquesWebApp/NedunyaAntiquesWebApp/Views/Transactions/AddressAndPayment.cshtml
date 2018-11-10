@@ -24,33 +24,22 @@ else
             <th>
                 מחיר
             </th>
-
-            <th>
-                כמות
-            </th>
-            <th>מחיר כולל</th>
         </tr>
         @foreach (var item in Model.CartItems)
         {
-            <tr id="row-@item.ProductId">
-                <td>
-                    @Html.ActionLink(item.Name, "Details", "Products", new { id = item.ProductId }, null);
-                </td>
-                <td>
-                    @item.Price
-                </td>
-                <td>
-                    <a herf="" class="product-remove text-right" data-id="@item.ProductId">
-                        הסר מעגלת הקניות
-                    </a>
-                </td>
-            </tr>
+        <tr id="row-@item.ProductId">
+            <td>
+                @Html.ActionLink(item.Name, "Details", "Products", new { id = item.ProductId }, null);
+            </td>
+            <td>
+                @item.Price
+            </td>
+        </tr>
         }
         <tr class="text-right">
             <td>
                 סה"כ
             </td>
-            <td></td>
             <td id="cart-total" class="text-right">
                 <b>@Model.amount.ToString()</b>
             </td>
@@ -58,7 +47,7 @@ else
     </table>
 
     <p class="button">
-        <a class="btn btn-danger" href='@Url.Action("Index", "Home")'>המשך לקנות</a>
+        <a class="btn btn-danger" href='@Url.Action("failed", "Transactions")'>המשך לקנות</a>
     </p>
 
     <!--Paypal button-->
