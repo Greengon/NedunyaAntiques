@@ -76,6 +76,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 };
                 Transaction transaction = shoppingCart.CreateTransaction(customer);
                 customer.Transactions.Add(transaction);
+                db.SaveChanges();
                 if (transaction != null)
                 {
                     TransactionViewModel transactionView = new TransactionViewModel
@@ -103,7 +104,8 @@ namespace NedunyaAntiquesWebApp.Controllers
                     transaction.Paid = true;
                     var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
                     foreach (var item in CartItems)
-                    item.sold = true;
+                        item.sold = true;
+                    db.SaveChanges();
             }
             else{
                 return HttpNotFound();
@@ -121,6 +123,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             if (userID != null){
                     Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
                     customer.Transactions.Remove(customer.Transactions.Last());
+                    db.SaveChanges();
             }
             return RedirectToAction("Index","Home");
         }
@@ -152,7 +155,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,TransDate,Amount")] Transaction transaction)
         {
             if (ModelState.IsValid)
@@ -187,7 +189,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
             if(db.Transactions.Find(transaction.TransactionId) != null)
@@ -228,7 +229,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Transaction transaction = await db.Transactions.FindAsync(id);

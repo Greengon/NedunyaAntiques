@@ -148,8 +148,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (ModelState.IsValid)
@@ -179,7 +177,8 @@ namespace NedunyaAntiquesWebApp.Controllers
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
+                //return RedirectToAction("Index");
             }
 
             return View(product);
@@ -208,7 +207,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
             if (db.Products.Find(product.ProductId) != null)
@@ -248,7 +246,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
