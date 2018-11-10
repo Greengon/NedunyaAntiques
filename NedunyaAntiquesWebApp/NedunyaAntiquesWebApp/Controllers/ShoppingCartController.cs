@@ -1,9 +1,8 @@
-﻿using NedunyaAntiquesWebApp.Models;
+﻿using Microsoft.AspNet.Identity;
+using NedunyaAntiquesWebApp.Models;
 using NedunyaAntiquesWebApp.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace NedunyaAntiquesWebApp.Controllers
@@ -14,44 +13,56 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         public string shoppingCartId { get; set; }
 
+      
         // GET: ShoppingCart
        
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            var viewModel = new ShoppingCartViewModel
+            var userID = Session["UserID"];
+            if (userID != null)
             {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
-            };
-            return View(viewModel);
+                var cart = ShoppingCart.GetCart(userID.ToString());
+
+                var viewModel = new ShoppingCartViewModel
+                {
+                    CartItems = cart.GetCartItems(),
+                    CartTotal = cart.GetTotal()
+                };
+                return View(viewModel);
+            }
+            else
+                return RedirectToAction("CustomerLog", "Customers");
         }
         
+        // GET: ShoppingCart/AddToCart/id
         public ActionResult AddToCart(int id)
         {
-            var addedProduct = db.Products.Single(product => product.ProductId == id);
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-            cart.AddToCart(addedProduct);
-            return RedirectToAction("Shop");
+            var userID = Session["UserID"];
+            if (userID != null)
+            {
+                var addedProduct = db.Products.Single(product => product.ProductId == id);
+                var cart = ShoppingCart.GetCart(userID.ToString());
+                cart.AddToCart(addedProduct);
+                return RedirectToAction("Shop", "Home");
+            }
+            else
+                return RedirectToAction("CustomerLog", "Customers");
         }
 
+        // GET: ShoppingCart/RemoveFromCart/id
         public ActionResult RemoveFromCart(int id)
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-            Product product = db.Products.FirstOrDefault(item => item.ProductId == id);
-            int itemCount = cart.RemoveFromCart(product);
-
-            var results = new ShoppingCartRemoveViewModel
+            var userID = Session["UserID"];
+            if (userID != null)
             {
-                Message = Server.HtmlEncode(product.Name) + " has been removed from your shopping cart",
-                CartTotal = cart.GetTotal(),
-                CartCount = cart.getCount(),
-                ItemCount = itemCount,
-                DeleteId = id
-            };
+                var cart = ShoppingCart.GetCart(userID.ToString());
+                Product product = db.Products.FirstOrDefault(item => item.ProductId == id);
+                cart.RemoveFromCart(product);
+                return RedirectToAction("Shop", "Home");
+            }
+            else
+                return RedirectToAction("CustomerLog", "Customers");
 
-            return Json(results);
         }
 
         /*
@@ -61,11 +72,27 @@ namespace NedunyaAntiquesWebApp.Controllers
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var userID = Session["UserID"];
+            if (userID != null)
+            {
+                var cart = ShoppingCart.GetCart(userID.ToString());
 
-            ViewData["CartCount"] = cart.getCount();
+                ViewData["CartCount"] = cart.getCount();
 
-            return PartialView("CartSummary");
+                return PartialView("CartSummary");
+            }
+            else
+                return RedirectToAction("CustomerLog", "Customers");
+        }
+
+        //https://stackoverflow.com/questions/10134406/why-is-there-need-for-an-explicit-dispose-method-in-asp-net-mvc-controllers-c
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

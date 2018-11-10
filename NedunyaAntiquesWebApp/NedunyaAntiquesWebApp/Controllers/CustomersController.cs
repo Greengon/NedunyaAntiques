@@ -189,7 +189,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
 
          [HttpPost]
-         [ValidateAntiForgeryToken]
          public ActionResult Edit([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
          {
              if (db.Users.Find(customer.Id) != null)
