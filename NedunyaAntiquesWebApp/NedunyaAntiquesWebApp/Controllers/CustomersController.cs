@@ -105,7 +105,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -134,7 +133,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
        
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
         {
             if (ModelState.IsValid)
@@ -178,7 +176,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
 
          [HttpPost]
-         [ValidateAntiForgeryToken]
          public ActionResult Edit([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
          {
              if (db.Users.Find(customer.Id) != null)
