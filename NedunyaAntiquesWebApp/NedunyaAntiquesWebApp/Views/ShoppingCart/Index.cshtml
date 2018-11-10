@@ -28,7 +28,6 @@ else
             <th>
                 כמות
             </th>
-            <th>מחיר כולל</th>
         </tr>
         @foreach (var item in Model.CartItems)
         {
@@ -61,7 +60,7 @@ else
         <a class="btn btn-danger" href='@Url.Action("Index", "Home")'>המשך לקנות</a>
     </p>
     <p class="button">
-        @Html.ActionLink("עבור לתשלום", "AddressAndPayment", "Transactions");
+        <a class="btn btn-danger" href='@Url.Action("AddressAndPayment", "Transactions")'>עבור לתשלום</a>
     </p>
 }
 

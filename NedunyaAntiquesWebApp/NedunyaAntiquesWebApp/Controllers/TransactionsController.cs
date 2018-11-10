@@ -9,20 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
 using NedunyaAntiquesWebApp.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace NedunyaAntiquesWebApp.Controllers
 {
     public class TransactionsController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
-        /*
-        // GET: Transactions
-        public async Task<ActionResult> Index()
-        {
-            return View(await db.Transactions.ToListAsync());
-        }
-        */
 
+        // GET: Transactions/ + Smart Search
         public async Task<ActionResult> Index(string dateStart, string dateEnd, string totalMin, string totalMax)
         {
             var transactions = from t in db.Transactions
@@ -55,51 +50,52 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(await transactions.ToListAsync());
         }
 
-        // GET: Transactions/AddressAndPayment
-        public ActionResult AddressAndPayment(Customer customer)
+        // GET: Transactions/AddressAndPayment/
+        public ActionResult AddressAndPayment()
         {
-            ShoppingCart shoppingCart = new ShoppingCart
+            var userID = Session["userID"];
+            if (userID != null)
             {
-                ShoppingCartId = customer.Id
-            };
-            Transaction transaction = shoppingCart.CreateTransaction(customer);
-            customer.Transactions.Add(transaction);
-            if (transaction != null)
-            {
-                TransactionViewModel transactionView = new TransactionViewModel
+                Customer customer = db.Users.Single(user => user.Id == (string)userID);
+                ShoppingCart shoppingCart = new ShoppingCart
                 {
-                    CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
-                    amount = transaction.Amount
+                    ShoppingCartId = customer.Id
                 };
-                return View(transactionView);
+                Transaction transaction = shoppingCart.CreateTransaction(customer);
+                customer.Transactions.Add(transaction);
+                if (transaction != null)
+                {
+                    TransactionViewModel transactionView = new TransactionViewModel
+                    {
+                        CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList(),
+                        amount = transaction.Amount
+                    };
+                    return View(transactionView);
+                }
+                else
+                    return HttpNotFound();
             }
-            else
-                return HttpNotFound();
+            return RedirectToAction("CustomerLog", "Customers");
+
         }
 
 
         // GET: Transactions/Complete/
         // You can get here only thourgh paypal
-        public ActionResult Complete()
-        {
-            /*TODO : find how to get userId of a logged in user
-             *DO NOT DELETE
-             * var userID = User.Identity.GetUserId();
-                if (userID != null){
-                     customer = db.Customer.single(c => userID == c.ID);
-                     Transaction transaction = customer.transaction.pop();
-                     transaction.paid = ture;
-                     var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
-                     foreach (var item in CartItems)
-                        item.sold = true;
-                     customer.transaction.add(transaction);
+        public ActionResult Complete() { 
+            var userID = Session["userID"];
+            if (userID != null){
+                    Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
+                    Transaction transaction = customer.Transactions.Last();
+                    transaction.Paid = true;
+                    var CartItems = db.Products.Where(product => product.CartId == customer.Id).ToList();
+                    foreach (var item in CartItems)
+                    item.sold = true;
             }
             else{
-                return httpNotFound();
+                return HttpNotFound();
             }
-             
-             */
-
+           
 
             return RedirectToAction("Index", "Home");
         } 
@@ -108,15 +104,11 @@ namespace NedunyaAntiquesWebApp.Controllers
         // You can get here only thourgh paypal
         public ActionResult Failed()
         {
-            /* TODO : find how to get userId of a logged in user
-             *DO NOT DELETE
-             * 
-             * var userID = User.Identity.GetUserId();
-                if (userID != null){
-                     customer = db.Customer.single(c => userID == c.ID);
-             *       Transaction transaction = customer.transaction.pop();
-             }
-             */
+            var userID = Session["userID"];
+            if (userID != null){
+                    Customer customer = db.Users.Single(c => userID.ToString() == c.Id);
+                    customer.Transactions.Remove(customer.Transactions.Last());
+            }
             return RedirectToAction("Index","Home");
         }
 
@@ -232,8 +224,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        // Using filter to allow access only to admin users.
-        //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
+        //https://stackoverflow.com/questions/10134406/why-is-there-need-for-an-explicit-dispose-method-in-asp-net-mvc-controllers-c
         protected override void Dispose(bool disposing)
         {
             if (disposing)

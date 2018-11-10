@@ -28,22 +28,13 @@ namespace NedunyaAntiquesWebApp.Models
         // Funcs
 
 
-        // Need get Cart func
+        // GetCart will return an object of shopping cart with the userId as ShoppingCartId
        
-        public static ShoppingCart GetCart(HttpContextBase context)
-        { //HttpContextBase - Serves as the base class for classes that contain HTTP-specific information about an individual HTTP request.
+        public static ShoppingCart GetCart(string UserId)
+        { 
             var cart = new ShoppingCart();
-
-            // There is GetCartId method in this class.
-            cart.ShoppingCartId = cart.GetCartId(context);
-
+            cart.ShoppingCartId = UserId;
             return cart;
-        }
-        
-
-        public static ShoppingCart GetCart(Controller controller)
-        {
-            return GetCart(controller.HttpContext);
         }
 
 
@@ -51,10 +42,11 @@ namespace NedunyaAntiquesWebApp.Models
         public int AddToCart(Product product)
         {
             
-            if (product.Sale == false && product.inCart == false)
+            if (product.sold == false && product.inCart == false)
             {
-                product.CartId = ShoppingCartId;
-                product.inCart = true;
+                var addedProduct = db.Products.Single(p => product.ProductId == p.ProductId);
+                addedProduct.CartId = ShoppingCartId;
+                addedProduct.inCart = true;
                 db.SaveChanges();
                 return 0;
             }
@@ -69,8 +61,9 @@ namespace NedunyaAntiquesWebApp.Models
         {
             if (product.inCart == true)
             {
-                product.CartId = null;
-                product.inCart = false;
+                var addedProduct = db.Products.Single(p => product.ProductId == p.ProductId);
+                addedProduct.CartId = null;
+                addedProduct.inCart = false;
                 db.SaveChanges();
                 return 0;
             }
@@ -109,14 +102,13 @@ namespace NedunyaAntiquesWebApp.Models
 
         public decimal GetTotal()
         {
-            decimal? total = (
-                from product in db.Products
-                where product.CartId == ShoppingCartId
-                select product.Price)
-                .Sum();
-
-            // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
-            return total ?? decimal.Zero;
+            var list = new List<decimal>(from product in db.Products where product.CartId == ShoppingCartId select product.Price).ToList();
+            if (list != null){
+                // ?? - this operator is called the null-coalescing operator. It returns the left-hand operand if the operand is not null; otherwise it returns the right hand operand.
+                return list.Sum();
+            }
+                else
+                    return 0;
         }
 
         // GetCartId will return CartId or will create one
@@ -148,12 +140,12 @@ namespace NedunyaAntiquesWebApp.Models
         {
             var transcation = new Transaction
             {
-                customer = customer,
+               // customer = customer,
                 Delivery = false,
                 Paid = false,
                 TransDate = DateTime.Now,
                 Amount = this.GetTotal(),
-                Cart = this
+                // Cart = this
             };
 
             db.Transactions.Add(transcation);
