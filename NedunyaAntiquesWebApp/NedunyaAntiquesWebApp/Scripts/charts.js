@@ -59,8 +59,7 @@ d3.json("http://localhost:51144/Transactions/api", function (error, data) {
         .attr("transform", "rotate(-90)")
         .attr("y", 5)
         .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("Amount");
+        .style("text-anchor", "end");
 
 
     // Add bar chart
@@ -72,5 +71,4 @@ d3.json("http://localhost:51144/Transactions/api", function (error, data) {
         .attr("width", x.rangeBand())
         .attr("y", function (d) { return y(d.Amount); })
         .attr("height", function (d) { return height - y(d.Amount); });
-
 });

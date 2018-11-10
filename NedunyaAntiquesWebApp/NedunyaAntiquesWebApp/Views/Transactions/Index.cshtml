@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "Index";
 }
+<h2>גרף הטרנזקציות</h2>
+<link rel="stylesheet" type="text/css" media="all" href="~/Content/chart.css">
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="~/Scripts/charts.js"></script>
+
 
 <h2>Index</h2>
 
@@ -27,6 +32,9 @@
 <table class="table text-right">
     <tr>
         <th>
+            מספר
+        </th>
+        <th>
             תאריך
         </th>
         <th>
@@ -40,22 +48,25 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TransDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Paid)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Paid)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.TransactionId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.TransactionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.TransactionId })
+        </td>
+    </tr>
     }
 
 </table>
