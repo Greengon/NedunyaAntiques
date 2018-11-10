@@ -291,6 +291,10 @@
     <Compile Include="Migrations\201811081025378_NotNull.Designer.cs">
       <DependentUpon>201811081025378_NotNull.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811101204125_DateTimeToNull.cs" />
+    <Compile Include="Migrations\201811101204125_DateTimeToNull.Designer.cs">
+      <DependentUpon>201811101204125_DateTimeToNull.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppCustomerManager.cs" />
     <Compile Include="Models\AppRole.cs" />
@@ -640,6 +644,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811081025378_NotNull.resx">
       <DependentUpon>201811081025378_NotNull.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811101204125_DateTimeToNull.resx">
+      <DependentUpon>201811101204125_DateTimeToNull.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

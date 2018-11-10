@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -28,6 +29,35 @@ namespace NedunyaAntiquesWebApp.Controllers
             string roleAdminName = "Admin";
             if (!roleManager.RoleExists(roleAdminName))
                 roleManager.Create(new AppRole(roleAdminName));
+            //ask a query in order to check if there is an admin  user un the db
+            /*var user = (
+        from u in db.Users
+        where (u.UserName == "admin") && (u.PasswordHash == "adminadmin")
+
+        select u).FirstOrDefault();
+    if (user == null)
+    {
+        Customer AdminUser = new Customer
+        {
+            Email = "admin@gmail.com",
+            UserName = "admin",
+            PasswordHash = "adminadmin",
+            FirstName = "admin",
+            LastName = "admin",
+            HomeNum = 1,
+            PhoneNum = "050-111-1111",
+        };
+        var UserManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+        var result = UserManager.Create(AdminUser, AdminUser.PasswordHash);
+        // if ((result.Succeeded))
+        // {
+        result = UserManager.AddToRole(AdminUser.Id, "Admin"); 
+    }*/
+            // db.Users.Add(AdminUser);
+            // db.SaveChanges();
+            //  }
+
+
         }
 
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
@@ -43,23 +73,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         
         public ActionResult LogIn(LoginViewModel login)
         {    
-            //TODO::fuiger out how to pull the user id from the db without the need for using the userlog!! IDEA will be
-            //to enherence the customer class in customer view model
-          /*  if (User.Identity is ClaimsIdentity claimsIdentity)
-            {
-                // the principal identity is a claims identity.
-                // now we need to find the NameIdentifier claim
-                var userIdClaim = claimsIdentity.Claims
-                    .FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null)
-                {
-                    var userIdValue = userIdClaim.Value;
-                }
-            }*/
-
-
-
             if (ModelState.IsValid)
             {
                 var user = (
@@ -70,20 +83,9 @@ namespace NedunyaAntiquesWebApp.Controllers
 
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
-                Customer customer = db.Users.Find(user.Id);
+                Customer customer = db.Users.Find(user.Id); 
                 if (customer != null)
                 {
-                    //var identity = new ClaimsIdentity();
-                    //identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
-                    /* var ident = userManager.CreateIdentity(user,
-                         DefaultAuthenticationTypes.ApplicationCookie);
-                     FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
-                     //use the instance that has been created. 
-                     authManager.SignIn(
-                         new AuthenticationProperties { IsPersistent = false }, ident);
-                     return Redirect(login.ReturnUrl ?? Url.Action("Index", "Home"));*/
-
-                    /***************************************************************************/
                     var claims = new List<Claim>();
                     claims.Add(new Claim(ClaimTypes.Name, user.FirstName));
                     claims.Add(new Claim(ClaimTypes.Email, user.Email));
@@ -105,7 +107,6 @@ namespace NedunyaAntiquesWebApp.Controllers
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
@@ -134,18 +135,28 @@ namespace NedunyaAntiquesWebApp.Controllers
 
        
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult SaveClient([Bind(Exclude = "RememberMe,Transactions")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 CreateRoles();
                 Customer cust = db.Users.Find(customer.Id);
+
                 if (cust == null)
                 {
                     db.Users.Add(customer);
                     db.SaveChanges();
                     var UserManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
+                    if (customer.UserName == "admin")
+                    {
+                        if (customer.Email == "admin@gmail.com")
+                        {
+                            var AdminuserResult = UserManager.AddToRole(customer.Id, "Admin");
+                            if (AdminuserResult.Succeeded)
+                                return RedirectToAction("Index", "Home");
+                        }
+
+                    }
                     var userResult = UserManager.AddToRole(customer.Id, "NedunyaUser");
                     if(userResult.Succeeded)
                         return RedirectToAction("Index", "Home");
