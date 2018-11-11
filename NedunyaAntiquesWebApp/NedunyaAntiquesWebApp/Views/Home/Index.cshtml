@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<NedunyaAntiquesWebApp.Models.Product>
+@{
     ViewBag.Title = "Home Page";
 }
 <script type="text/javascript" src="~/Scripts/global.js"></script>
@@ -7,7 +8,7 @@
         <div class="row h-100 align-items-center">
             <div class="col-12">
                 <div class="hero-content text-right" style="margin-top:230px;">
-                 <input type="button" class="btn essence-btn" value="למעבר לחנות לחצו כאן!" onclick="location.href='@Url.Action("ShowCategory", "Products")'" />
+                    <input type="button" class="btn essence-btn" value="למעבר לחנות לחצו כאן!" onclick="location.href='@Url.Action("ShowCategory", "Products")'" />
                     <!--   <a href="#" class="btn essence-btn">לכל המבצעים לחצו כאן!</a>-->
                 </div>
             </div>
@@ -65,168 +66,36 @@
         <div class="row">
             <div class="col-12">
                 <div class="popular-products-slides owl-carousel text-right">
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="~/img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="~/img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה שניה.jpeg">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
+                    @foreach (var item in Model)
+                    {
+                        <!-- Single Product -->
+                        <div class="single-product-wrapper">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <img src="~/Images/Thumbs/@item.Images.ElementAt(1).Name" alt="">
+                                <!-- Hover Thumb -->
+                                <img class="hover-img" src="~/Images/Thumbs/@item.Images.ElementAt(0).Name">
                             </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>כד מים צרפתי</span>
-                            <a href="single-product-details.html">
-                                <h6>תחילת המאה ה-20</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
+                            <!-- Product Description -->
+                            <div class="product-description">
+                                <span>@item.Name</span>
+                                <a href="single-product-details.html">
+                                    <h6>@item.Description</h6>
+                                </a>
+                                <p class="product-price">@item.Price</p>
 
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">הוסף לסל</a>
+                                <!-- Hover Content -->
+                                <div class="hover-content">
+                                    <!-- Add to Cart -->
+                                    <div>
+                                        @Html.ActionLink("הוסף לסל", "AddToCart", "ShoppingCart", new { id = item.ProductId }, new { @class = "btn btn-info" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
 
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="~/img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה ראשונה.jpeg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="~/img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה שניה.jpeg" alt="">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>כד מים מעוטר</span>
-                            <a href="single-product-details.html">
-                                <h6>סוף המאה ה-19</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">הוסף לסל</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="~/img/product-img/מגש גבינות, עיטור כחול , בלגיה, תמונה ראשונה.jpeg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="~/img/product-img/מגש גבינות, עיטור כחול , בלגיה, תמונה שנייה.jpeg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge offer-badge">
-                                <span>-30%</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>מגש גבינות</span>
-                            <a href="single-product-details.html">
-                                <h6>עיטור כחול מבלגיה</h6>
-                            </a>
-                            <p class="product-price"><span class="old-price">$75.00</span> $55.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">הוסף לסל</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="~/img/product-img/כלי תליה לאכסון בצל , גרמניה , תחילת המאה ה-20 תמונה ראשונה.jpeg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="~/img/product-img/כלי תליה לאכסון בצל , גרמניה , תחילת המאה ה-20 תמונה שניה.jpeg" alt="">
-
-                            <!-- Product Badge -->
-                            <div class="product-badge new-badge">
-                                <span>חדש!</span>
-                            </div>
-
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>כלי תליה לאחסון בצל</span>
-                            <a href="single-product-details.html">
-                                <h6>גרמניה, תחילת המאה ה-20</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">הוסף לסל</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Product -->
-                    <div class="single-product-wrapper">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="~/img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" alt="">
-                            <!-- Hover Thumb -->
-                            <img class="hover-img" src="~/img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה שניה.jpeg">
-                            <!-- Favourite -->
-                            <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <span>כד מים צרפתי</span>
-                            <a href="single-product-details.html">
-                                <h6>תחילת המאה ה-20</h6>
-                            </a>
-                            <p class="product-price">$80.00</p>
-
-                            <!-- Hover Content -->
-                            <div class="hover-content">
-                                <!-- Add to Cart -->
-                                <div class="add-to-cart-btn">
-                                    <a href="#" class="btn essence-btn">הוסף לסל</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>

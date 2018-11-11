@@ -9,10 +9,13 @@ namespace NedunyaAntiquesWebApp.ViewModels
 {
     public class LoginViewModel 
     {
+        [Display(Name = "אימייל")]
         public string EmailLog { get; set; }
 
+        [Display(Name = "סיסמא")]
         public string PasswordLog { get; set; }
 
+        [Display(Name = "שם משתמש")]
         public string UserLog { get; set; }
 
         public bool RemamberLog { get; set; }

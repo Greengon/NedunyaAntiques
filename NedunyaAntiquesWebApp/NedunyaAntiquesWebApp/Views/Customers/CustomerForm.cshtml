@@ -16,12 +16,12 @@
                 <div class="hero-content text-right">
                     <h2>לקוח חדש</h2>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Email)
+                        @Html.LabelFor(m => m.Email,"אימייל")
                         <p>  @Html.EditorFor(m => m.Email, new { @placeholder = "Email Address *", @type = "email" }) </p>
 
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.UserName)
+                        @Html.LabelFor(m => m.UserName,"שם משתמש")
                         <p>  @Html.EditorFor(m => m.UserName, new { @class = "form-control" }) </p>
 
                     </div>
@@ -37,7 +37,7 @@
                         @Html.ValidationMessageFor(m => m.LastName)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.PasswordHash)
+                        @Html.LabelFor(m => m.PasswordHash,"סיסמא")
                         <p> @Html.EditorFor(m => m.PasswordHash, new { @class = "form-control" })</p>
 
                     </div>
