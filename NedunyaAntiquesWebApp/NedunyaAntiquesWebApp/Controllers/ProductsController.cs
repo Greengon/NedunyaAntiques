@@ -240,7 +240,8 @@ namespace NedunyaAntiquesWebApp.Controllers
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             return View(product);
@@ -350,6 +351,18 @@ namespace NedunyaAntiquesWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        /*
+        [HttpGet]
+        public ActionResult DeleteAll()
+        {
+            foreach (Product p in db.Products)
+            {
+                db.Products.Remove(p);
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        */
 
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
