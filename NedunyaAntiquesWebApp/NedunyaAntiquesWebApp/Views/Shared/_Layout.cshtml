@@ -107,7 +107,7 @@
                     <!--End of FaceBook share and like btn-->
                     <!-- Cart Area -->
                     <div class="cart-area">
-                        <a href="#" id="essenceCartBtn"><img src="/img/core-img/bag.svg" alt=""></a>
+                        <a href="@Url.Action("Index", "ShoppingCart")" id="rightSideCart"><img src="/img/core-img/bag.svg" alt=""></a>
                     </div>
 
                     <!-- Search Area -->
@@ -130,71 +130,6 @@
         </div>
 
     </header>
-    <!-- ##### Right Side Cart Area ##### -->
-    <div class="cart-bg-overlay"></div>
-
-    <div class="right-side-cart-area">
-
-        <!-- Cart Button -->
-        <div class="cart-button">
-            <a href="@Url.Action("Index", "ShoppingCart")" id="rightSideCart"><img src="/img/core-img/bag.svg" alt=""></a>
-        </div>
-
-        <div class="cart-content d-flex">
-
-            <!-- Cart List Area -->
-            <div class="cart-list text-right">
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="../img/product-img/כד מים צרפתי,תחילת המאה ה-20 תמונה ראשונה.jpeg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">כד מים</span>
-                            <h6>כד מים צרפתי</h6>
-                            <p class="size">גודל: גדול</p>
-                            <p class="color">צבע: לבן</p>
-                            <p class="price">ש"ח 120</p>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Cart Item -->
-                <div class="single-cart-item">
-                    <a href="#" class="product-image">
-                        <img src="img/product-img/כד מים קטן מעוטר צרפת, סוף המאה ה-19 תמונה ראשונה.jpeg" class="cart-thumb" alt="">
-                        <!-- Cart Item Desc -->
-                        <div class="cart-item-desc">
-                            <span class="product-remove"><i class="fa fa-close" aria-hidden="true"></i></span>
-                            <span class="badge">כד מים</span>
-                            <h6>כד מים קטן מעוטר צרפת</h6>
-                            <p class="size">גודל: קטן</p>
-                            <p class="color">צבע: חום</p>
-                            <p class="price">80 ש"ח</p>
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-
-            <!-- Cart Summary -->
-            <div class="cart-amount-summary">
-
-                <h2 class="text-right">סיכום</h2>
-                <ul class="summary-table">
-                    <li><span>סכום כולל:</span> <span>200 ש"ח</span></li>
-                    <li><span>משלוח:</span> <span>חינם</span></li>
-                    <li><span>הנחה:</span> <span>-10%</span></li>
-                    <li><span>סה"כ:</span> <span>180 ש"ח</span></li>
-                </ul>
-                <div class="checkout-btn mt-100">
-                    <a href="*" class="btn essence-btn">מעבר לתשלום</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Right Side Cart End ##### -->
 
     @RenderBody()
 
