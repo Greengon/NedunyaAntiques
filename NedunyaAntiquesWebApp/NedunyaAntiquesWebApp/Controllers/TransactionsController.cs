@@ -171,7 +171,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             var userID = Session["userID"];
             if(userID != null && userID.ToString() == AdminId)
             {
-                
+
                 return View();
             }
             return RedirectToAction("CustomerLog", "Customers");
