@@ -18,7 +18,6 @@ namespace NedunyaAntiquesWebApp.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-
         // GET: Products
         // Using filter to allow access only to admin users.
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
