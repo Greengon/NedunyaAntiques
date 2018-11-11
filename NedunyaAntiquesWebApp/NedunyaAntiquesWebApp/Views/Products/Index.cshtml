@@ -4,71 +4,72 @@
     ViewBag.Title = "Index";
 }
 
-    <h2>רשימת מוצרים</h2>
+<h2>רשימת מוצרים</h2>
 
-    <div class="text-left col-12 form-zone">
-        <div class="row" style="margin:10px; padding-right:10px">
-            <form asp-controller="Products" asp-action="Index">
-                <p>
-                    @Html.DropDownList("selectCat")
-                    <input type="text" name="free" placeholder="חיפוש חופשי">
-                    <input type="number" name="priceMax" placeholder="מחיר מקסימלי" />
-                    <input type="number" name="priceMin" placeholder="מחיר מינימלי" />
-                    <input type="number" name="hightMax" placeholder="גובה מקסימלי" />
-                    <input type="number" name="hightMin" placeholder="גובה מינימלי" />
-                    <input type="checkbox" name="onSale" /><b style="padding:5px">במבצע</b>
-                    <input type="checkbox" name="canRent" /><b style="padding:5px">ניתן להשכרה</b>
-                    <input type="submit" value="חיפוש" />
-                </p>
-            </form>
-        </div>
+<div class="text-left col-12 form-zone">
+    <div class="row" style="margin:10px; padding-right:10px">
+        <form asp-controller="Products" asp-action="Index">
+            <p>
+                @Html.DropDownList("selectCat")
+                <input type="text" name="free" placeholder="חיפוש חופשי">
+                <input type="number" name="priceMax" placeholder="מחיר מקסימלי" />
+                <input type="number" name="priceMin" placeholder="מחיר מינימלי" />
+                <input type="number" name="hightMax" placeholder="גובה מקסימלי" />
+                <input type="number" name="hightMin" placeholder="גובה מינימלי" />
+                <input type="checkbox" name="onSale" /><b style="padding:5px">במבצע</b>
+                <input type="checkbox" name="canRent" /><b style="padding:5px">ניתן להשכרה</b>
+                <input type="submit" value="חיפוש" />
+            </p>
+        </form>
     </div>
+</div>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Substance)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Height)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Width)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Depth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sale)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DiscountPercentage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Rented)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RentalPriceForDay)
-            </th>
-            <th></th>
-        </tr>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Substance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountPercentage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rented)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentalPriceForDay)
+        </th>
+        <th></th>
+    </tr>
 
-        @foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -115,12 +116,19 @@
                 @Html.ActionLink("מחק", "Delete", new { id = item.ProductId })
             </td>
         </tr>
-        }
+    }
 
-    </table>
+</table>
 
-    <p>
-        <input type="button" class="btn btn-success" value="צור מוצר חדש" onclick="location.href='@Url.Action("Create", "Products")'" />
-        <!--    @Html.ActionLink("Create New", "Create")
-            <button type="submit" value="Create" class="btn btn-success">צור מוצר</button>-->
-    </p>
+<div id="canvas">
+    <h2>סוגי המוצרים</h2>
+    <link rel="stylesheet" href="~/Content/productsChart.css" />
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="~/Scripts/d3.legend.js"></script>
+    <script src="~/Scripts/productsChart.js"></script>
+</div>
+<p>
+    <input type="button" class="btn btn-success" value="צור מוצר חדש" onclick="location.href='@Url.Action("Create", "Products")'" />
+    <!--    @Html.ActionLink("Create New", "Create")
+        <button type="submit" value="Create" class="btn btn-success">צור מוצר</button>-->
+</p>

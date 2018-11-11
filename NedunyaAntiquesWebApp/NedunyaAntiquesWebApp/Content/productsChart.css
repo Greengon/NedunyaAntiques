@@ -1,0 +1,13 @@
+﻿body {
+    font: 10px sans-serif;
+}
+
+.arc path {
+    stroke: #fff;
+}
+
+.legend rect {
+    fill: white;
+    stroke: black;
+}
+

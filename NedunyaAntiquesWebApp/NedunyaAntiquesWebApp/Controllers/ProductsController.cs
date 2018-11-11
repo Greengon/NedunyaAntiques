@@ -93,6 +93,46 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(await products.ToListAsync());
         }
 
+        private class categoryCount
+        {
+            public string catName { get; }
+            public int count { get; set; }
+            public categoryCount(string catName, int count)
+            {
+                this.catName = catName;
+                this.count = count;
+            }
+        }
+
+        public ActionResult Api()
+        {
+            IQueryable<string> subCatQuery = from p in db.Products
+                                             orderby p.SubCategory
+                                             select p.SubCategory;
+
+            List<categoryCount> subCat = new List<categoryCount>();
+
+            foreach (var s in subCatQuery.Distinct())
+            {
+                subCat.Add(new categoryCount(s, 0));
+            }
+            foreach (var s in subCatQuery)
+            {
+                foreach (categoryCount c in subCat)
+                {
+                    if (c.catName.Equals(s))
+                        c.count++;
+                }
+            }
+
+            return Json(subCat, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Charts()
+        {
+           return View();
+        }
+
         // GET: Products/Details/5
         public ActionResult Details(int? id)
         {
