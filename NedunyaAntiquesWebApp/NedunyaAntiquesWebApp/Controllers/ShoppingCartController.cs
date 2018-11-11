@@ -43,7 +43,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 var addedProduct = db.Products.Single(product => product.ProductId == id);
                 var cart = ShoppingCart.GetCart(userID.ToString());
                 cart.AddToCart(addedProduct);
-                return RedirectToAction("Shop", "Home");
+                return RedirectToAction("ShowCategory", "Products");
             }
             else
                 return RedirectToAction("CustomerLog", "Customers");
@@ -58,7 +58,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 var cart = ShoppingCart.GetCart(userID.ToString());
                 Product product = db.Products.FirstOrDefault(item => item.ProductId == id);
                 cart.RemoveFromCart(product);
-                return RedirectToAction("Shop", "Home");
+                return RedirectToAction("ShowCategory", "Products");
             }
             else
                 return RedirectToAction("CustomerLog", "Customers");

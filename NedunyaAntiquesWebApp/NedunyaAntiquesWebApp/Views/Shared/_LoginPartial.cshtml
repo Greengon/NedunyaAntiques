@@ -4,11 +4,13 @@
     {
         
 
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right text-right">
             <li>
                 @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            @Html.ActionLink("Log out", "Logout","Customers");
+            <li>
+                @Html.ActionLink("התנתק", "Logout", "Customers");
+            </li>
         </ul>
     }
 }
