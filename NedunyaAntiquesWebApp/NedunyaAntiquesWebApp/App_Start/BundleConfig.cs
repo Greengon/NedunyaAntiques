@@ -23,7 +23,6 @@ namespace NedunyaAntiquesWebApp
 
             // Our bundels:
             // our scripts - BE careful order matter here , we still have problem here
-            // TODO: find the right order of scripts loading
             bundles.Add(new ScriptBundle("~/bundles/bundleOur-jqueryval").Include(
                      "~/Scripts/jquery-2.2.4.min.js",
                      "~/Scripts/bootstrap.min.js",

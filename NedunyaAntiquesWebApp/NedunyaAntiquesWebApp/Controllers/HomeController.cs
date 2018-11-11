@@ -8,6 +8,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -20,6 +21,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View();
         }
 
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -30,15 +32,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Contact()
         {
             ViewBag.TheMessage = "זיהית בעיה באתר? שלח לנו הודעה.";
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Contact(string message)
-        {
-            //TODO: send messaage to HQ
-            ViewBag.TheMessage = "תודה. הודעתך התקבלה.";
 
             return View();
         }
