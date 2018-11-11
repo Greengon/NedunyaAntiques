@@ -6,9 +6,9 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Detalis", "Customer", routeValues: null , htmlAttributes: new { title = "Detalis" })
             </li>
-            <li><a herf="javascript:document.getElementById('CustomerLog').sumbit()">Log out</a></li>
+            <li><a herf="javascript:document.getElementById('Logout').sumbit()">Log out</a></li>
         </ul>
     }
 }

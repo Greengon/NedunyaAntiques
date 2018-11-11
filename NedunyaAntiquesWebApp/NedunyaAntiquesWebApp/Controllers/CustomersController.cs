@@ -79,7 +79,9 @@ namespace NedunyaAntiquesWebApp.Controllers
                     from u in db.Users
                     where (u.UserName == login.UserLog) && (u.PasswordHash == login.PasswordLog)
 
-                    select u).Single();
+                    select u).SingleOrDefault();
+                if (user == null)
+                    return View(login);
 
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
@@ -100,7 +102,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
-            ModelState.AddModelError("", "Invalid username or password");
+            
             return View(login);
         }
 
