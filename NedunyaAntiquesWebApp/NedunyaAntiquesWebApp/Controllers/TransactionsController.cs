@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NedunyaAntiquesWebApp.Models;
 using NedunyaAntiquesWebApp.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity.Migrations;
 
 namespace NedunyaAntiquesWebApp.Controllers
 {
@@ -233,7 +234,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        db.Entry(transaction).State = EntityState.Modified;
+                        db.Transactions.AddOrUpdate(transaction);
                         await db.SaveChangesAsync();
                         return RedirectToAction("Index");
                     }

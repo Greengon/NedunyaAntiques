@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -321,7 +322,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                             product.Images = imageList;
                         }
 
-                        db.Entry(product).State = EntityState.Modified;
+                        db.Products.AddOrUpdate(product);
                         db.SaveChanges();
                         return RedirectToAction("Index");
                     }

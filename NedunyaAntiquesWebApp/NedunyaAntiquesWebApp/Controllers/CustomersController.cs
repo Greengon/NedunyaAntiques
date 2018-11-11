@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -201,9 +202,9 @@ namespace NedunyaAntiquesWebApp.Controllers
              {
                  if (ModelState.IsValid)
                  {
-                     db.Entry(customer).State = EntityState.Modified;
-                     db.SaveChanges();
-                     return RedirectToAction("Index");
+                    db.Users.AddOrUpdate(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                  }
              }
              else

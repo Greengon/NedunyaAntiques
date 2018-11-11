@@ -1,4 +1,6 @@
-﻿$('.showList').click(function (e) {
+﻿$(document).ready(function () {
+
+$('.showList').click(function (e) {
     var category = this.getAttribute("choice");
     var subcategory = this.getAttribute("subchoice");
     $.ajax({
@@ -11,6 +13,8 @@
         error: function () {
             alert("Something went wrong in controller");
         }
+    });
+
     });
 
 });
