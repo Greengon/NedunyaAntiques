@@ -30,9 +30,9 @@ namespace NedunyaAntiquesWebApp
                      "~/Scripts/classy-nav.min.js",
                      "~/Scripts/popper.min.js",
                      "~/Scripts/plugins.js",
-                     "~/Scripts/active.js",
-                     "~/Scripts/global.js"
-                ));
+                     "~/Scripts/active.js"));
+                     /*"~/Scripts/global.js"*/
+               
 
             // our css
             bundles.Add(new StyleBundle("~/bundles/bundleour-css").Include(
