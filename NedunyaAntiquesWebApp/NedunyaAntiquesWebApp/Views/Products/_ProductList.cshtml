@@ -81,7 +81,7 @@
             </div>
             </div>
             <p class="text-center">
-                @Html.ActionLink("הוסף לסל", "AddToCart", "Transactions", new {ProductId = @Html.EditorFor(modelItem => item.ProductId)}, new {@class = "btn btn-info"})
+                @Html.ActionLink("הוסף לסל", "AddToCart", "ShoppingCart", new { id = item.ProductId }, new {@class = "btn btn-info"})
             </p>
         </div>
     </div>

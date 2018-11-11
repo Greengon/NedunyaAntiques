@@ -240,8 +240,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 }
                 db.Products.Add(product);
                 db.SaveChanges();
-                //return RedirectToAction("Index");
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
             return View(product);
