@@ -162,7 +162,7 @@ namespace NedunyaAntiquesWebApp.Controllers
 
             ViewBag.Category=category;
             ViewBag.SubCategory = subcategory;
-            return View(db.Products.ToList());
+            return View();
          }
 
         public ActionResult _ProductList(string category, string subcategory)

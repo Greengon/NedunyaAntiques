@@ -74,6 +74,16 @@
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
+        <dt>
+            @Html.DisplayName("תמונות")
+        </dt>
+
+        <dd>
+            <img src="~/Images/Thumbs/@Model.Images.ElementAt(0).Name" />
+            <img src="~/Images/Thumbs/@Model.Images.ElementAt(1).Name" />
+            <img src="~/Images/Thumbs/@Model.Images.ElementAt(2).Name" />
+        </dd>
+
     </dl>
 </div>
 <p>

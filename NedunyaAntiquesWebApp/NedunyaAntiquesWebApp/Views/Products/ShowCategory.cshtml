@@ -60,15 +60,15 @@
                             <div class="card-header" id="headingTwo">
                                 <h5 class="mb-0">
                                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        @Html.Label("דקורציות", htmlAttributes: new { @class = "showList", choice = "דקורציות" ,subchoice="null" })
+                                        @Html.Label("דקורציות", htmlAttributes: new { @class = "showList", choice = "null", subchoice = "כלי איחסון" })
                                     </button>
                                 </h5>
                             </div>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body">
-                                    <p> @Html.Label("אגרטלים", htmlAttributes: new { @class = "showList", choice = "null", subchoice = "אגרטלים" })</p>
+                                    @*<p> @Html.Label("אגרטלים", htmlAttributes: new { @class = "showList", choice = "null", subchoice = "אגרטלים" })</p>*@
                                     <p> @Html.Label("כלי איחסון", htmlAttributes: new { @class = "showList", choice = "null", subchoice = "כלי איחסון" })</p>
-                                    <p> @Html.Label("פמוטים", htmlAttributes: new { @class = "showList", choice = "null",subchoice = "פמוטים" })</p>
+                                    <p> @Html.Label("פמוטים", htmlAttributes: new { @class = "showList", choice = "null", subchoice = "פמוטים" })</p>
                                 </div>
                             </div>
                             <div class="card">
@@ -100,25 +100,7 @@
                         <div id="product_list_container">
 
                         </div>
-                        <script>
-                              $('.showList').click(function (e) {
-                                  var category = this.getAttribute("choice");
-                                   var subcategory = this.getAttribute("subchoice");
-                              $.ajax({
-                                         type: "GET",
-                                         url: "/Products/_ProductList",
-                                         data: { Category: category, SubCategory: subcategory},
-                                        success: function (data) {
-                                        $("#product_list_container").html(data);
-                                      },
-                                        error: function () {
-                                        alert("Something went wrong in controller");
-                                        }                   
-                                });
-
-                              });
-
-                        </script>
+                        <script src="~/Scripts/showCategoryScriptjs.js"></script>
                     </div>
                 </div>
             </div>

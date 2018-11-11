@@ -2,8 +2,6 @@
 { // TODO: change this so it will fit our project
     using (Html.BeginForm("LogIn", "Customers", FormMethod.Post, new { id = "loginForm", @class = "navbar-left" }))
     {
-        
-
         <ul class="nav navbar-nav navbar-right text-right">
             <li>
                 @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
