@@ -70,13 +70,12 @@ namespace NedunyaAntiquesWebApp.Controllers
             if (userID != null)
             {
                 Customer customer = db.Users.Single(user => user.Id == (string)userID);
-              /*  if (customer.Transactions.Last() != null && customer.Transactions.Last().Paid == false)
+                if (customer.Transactions.Count != 0 && customer.Transactions.Last() != null && customer.Transactions.Last().Paid == false)
                 {
                     var transId = customer.Transactions.Last().TransactionId;
                     customer.Transactions.Remove(customer.Transactions.Last());
                     db.Transactions.Remove(db.Transactions.Single(T => T.TransactionId == transId));
                 }
-                */
                 ShoppingCart shoppingCart = new ShoppingCart
                 {
                     ShoppingCartId = customer.Id
