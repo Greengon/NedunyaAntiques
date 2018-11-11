@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace NedunyaAntiquesWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        
+       
         public ActionResult Index()
         {
             return View();
@@ -18,7 +19,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         {
             ViewBag.Message = "Your product shop page.";
 
-            return View();
+            return RedirectToAction("ShowCategory", "Products");
         }
 
         
@@ -38,3 +39,15 @@ namespace NedunyaAntiquesWebApp.Controllers
 
     }
 }
+
+/*
+ *  string AdminId = "954da09c-478f-4012-bd0e-76180a40d039";
+ * var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
+            {
+                ViewBag.Message = "Your application description page.";
+
+                return View();
+            }
+            return RedirectToAction("CustomerLog", "Customers");
+            */

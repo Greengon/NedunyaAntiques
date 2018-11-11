@@ -16,6 +16,7 @@ namespace NedunyaAntiquesWebApp.Controllers
     public class TransactionsController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
+        string AdminId = "954da09c-478f-4012-bd0e-76180a40d039";
 
         public ActionResult Api()
         {
@@ -33,34 +34,41 @@ namespace NedunyaAntiquesWebApp.Controllers
         // GET: Transactions/ + Smart Search
         public async Task<ActionResult> Index(string dateStart, string dateEnd, string totalMin, string totalMax)
         {
-            var transactions = from t in db.Transactions
-                                select t;
-
-            if(!String.IsNullOrEmpty(dateStart))
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
             {
-                DateTime ds = Convert.ToDateTime(dateStart);
-                transactions = transactions.Where(s => s.TransDate >= ds);
-            }
+                var transactions = from t in db.Transactions
+                                   select t;
 
-            if (!String.IsNullOrEmpty(dateEnd))
-            {
-                DateTime de = Convert.ToDateTime(dateEnd);
-                transactions = transactions.Where(s => s.TransDate <= de);
-            }
+                if (!String.IsNullOrEmpty(dateStart))
+                {
+                    DateTime ds = Convert.ToDateTime(dateStart);
+                    transactions = transactions.Where(s => s.TransDate >= ds);
+                }
 
-            if (!String.IsNullOrEmpty(totalMax))
-            {
-                Decimal t = Convert.ToDecimal(totalMax);
-                transactions = transactions.Where(s => s.Amount <= t);
-            }
+                if (!String.IsNullOrEmpty(dateEnd))
+                {
+                    DateTime de = Convert.ToDateTime(dateEnd);
+                    transactions = transactions.Where(s => s.TransDate <= de);
+                }
 
-            if (!String.IsNullOrEmpty(totalMin))
-            {
-                Decimal t = Convert.ToDecimal(totalMin);
-                transactions = transactions.Where(s => s.Amount >= t);
-            }
+                if (!String.IsNullOrEmpty(totalMax))
+                {
+                    Decimal t = Convert.ToDecimal(totalMax);
+                    transactions = transactions.Where(s => s.Amount <= t);
+                }
 
-            return View(await transactions.ToListAsync());
+                if (!String.IsNullOrEmpty(totalMin))
+                {
+                    Decimal t = Convert.ToDecimal(totalMin);
+                    transactions = transactions.Where(s => s.Amount >= t);
+                }
+
+                return View(await transactions.ToListAsync());
+            }
+            return RedirectToAction("CustomerLog", "Customers");
+           
+            
         }
 
         // GET: Transactions/AddressAndPayment/
@@ -99,7 +107,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                 }
 
             }
-            return RedirectToAction("shop", "Home");
+            return RedirectToAction("ShowCategory", "Products");
 
         }
 
@@ -160,7 +168,14 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize] - TODO: uncomment before you go live
         public ActionResult Create()
         {
-            return View();
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
+            {
+                
+                return View();
+            }
+            return RedirectToAction("CustomerLog", "Customers");
+            
         }
 
         // POST: Transactions/Create
@@ -169,6 +184,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "Id,TransDate,Amount")] Transaction transaction)
         {
+
             if (ModelState.IsValid)
             {
                 db.Transactions.Add(transaction);
@@ -185,16 +201,23 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Transaction transaction = await db.Transactions.FindAsync(id);
+                if (transaction == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(transaction);
             }
-            Transaction transaction = await db.Transactions.FindAsync(id);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transaction);
+            return RedirectToAction("CustomerLog", "Customers");
+            
+            
         }
 
         // POST: Transactions/Edit/5
@@ -203,21 +226,28 @@ namespace NedunyaAntiquesWebApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TransDate")] Transaction transaction)
         {
-            if(db.Transactions.Find(transaction.TransactionId) != null)
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
             {
-                if (ModelState.IsValid)
+                if (db.Transactions.Find(transaction.TransactionId) != null)
                 {
-                    db.Entry(transaction).State = EntityState.Modified;
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+                    if (ModelState.IsValid)
+                    {
+                        db.Entry(transaction).State = EntityState.Modified;
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("Index");
+                    }
                 }
+                else
+                {
+                    Response.Write(("<script>alert('Transaction was not found, please try another transaction');</script>"));
+                }
+
+                return View(transaction);
             }
-            else
-            {
-                Response.Write(("<script>alert('Transaction was not found, please try another transaction');</script>"));
-            }
-            
-            return View(transaction);
+            return RedirectToAction("CustomerLog", "Customers");
+           
+           
         }
 
         // GET: Transactions/Delete/5
@@ -225,16 +255,22 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Transaction transaction = await db.Transactions.FindAsync(id);
+                if (transaction == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(transaction);
             }
-            Transaction transaction = await db.Transactions.FindAsync(id);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transaction);
+            return RedirectToAction("CustomerLog", "Customers");
+            
         }
 
         // POST: Transactions/Delete/5

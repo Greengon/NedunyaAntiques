@@ -17,6 +17,8 @@ namespace NedunyaAntiquesWebApp.Controllers
     public class CustomersController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
+        string AdminId = "954da09c-478f-4012-bd0e-76180a40d039";
+
 
         private void CreateRoles()
         {   
@@ -63,10 +65,18 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Index()
         {
-            return View(db.Users.AsEnumerable().ToList());
+            return View(db.Users.AsEnumerable().ToList()); ;
+            /*
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
+            {
+                 
+            }
+            return RedirectToAction("CustomerLog", "Customers");
+            */
         }
 
-       
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -108,6 +118,7 @@ namespace NedunyaAntiquesWebApp.Controllers
         public ActionResult Logout()
         {
            HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+           Session["userID"] = null;
            return RedirectToAction("Index", "Home");
         }
 
@@ -174,7 +185,6 @@ namespace NedunyaAntiquesWebApp.Controllers
         //[Authorize (Roles ="administor")] - TODO: uncomment before you go live
         public ActionResult Edit(string Id)
         {
-           
             Customer customer = db.Users.Find(Id);
             if (customer == null)
             {
@@ -204,15 +214,20 @@ namespace NedunyaAntiquesWebApp.Controllers
             return View(customer);
          }
 
-        // [Authorize (Roles = "NedunyaUser")]
         
         public ActionResult Delete(string Id)
          {
-             Customer customer = db.Users.Find(Id);
-            db.Users.Remove(customer);
-             db.SaveChanges();
-             
-             return RedirectToAction("Index");
+            var userID = Session["userID"];
+            if(userID != null && userID.ToString() == AdminId)
+            {
+                Customer customer = db.Users.Find(Id);
+                db.Users.Remove(customer);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("CustomerLog", "Customers");
+           
          }
 
 

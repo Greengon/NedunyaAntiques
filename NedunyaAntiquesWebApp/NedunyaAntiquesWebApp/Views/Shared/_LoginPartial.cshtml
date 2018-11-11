@@ -6,10 +6,10 @@
 
         <ul class="nav navbar-nav navbar-right text-right">
             <li>
-                @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + @Session["UserName"].ToString() + "!", "edit", "Customers", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li>
-                @Html.ActionLink("התנתק", "Logout", "Customers");
+                @Html.ActionLink("התנתק", "Logout", "Customers")
             </li>
         </ul>
     }
