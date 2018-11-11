@@ -737,17 +737,25 @@ img {
           padding-right: 0; } }
 
 /* :: 8.0 Popular Products Area CSS */
+.nudnik {
+    position: relative;
+    z-index: -1;
+
+}
 .single-product-wrapper {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 50px;
-  overflow: hidden;
-  background-color: #ffffff; }
+    position: relative;
+    z-index: -1;
+    margin-bottom: 50px;
+    overflow: hidden;
+    background-color: #ffffff;
+}
   .single-product-wrapper .product-img {
     position: relative;
     z-index: -1;
     overflow: hidden; }
     .single-product-wrapper .product-img img {
+        position: relative;
+        z-index: -1;
       width: 100%;
       -webkit-transition-duration: 500ms;
       transition-duration: 500ms; }
@@ -758,7 +766,7 @@ img {
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 10;
+      z-index: -1;
       opacity: 0;
       visibility: hidden; }
     .single-product-wrapper .product-img .product-badge {
@@ -774,7 +782,7 @@ img {
       position: absolute;
       top: 20px;
       left: 20px;
-      z-index: 10; }
+      z-index: -1; }
       .single-product-wrapper .product-img .product-badge.offer-badge {
         background-color: #dc0345; }
       .single-product-wrapper .product-img .product-badge.new-badge {
@@ -787,7 +795,7 @@ img {
       color: #ccc;
       top: 20px;
       right: 20px;
-      z-index: 10;
+      z-index: -1;
       line-height: 25px;
       background-color: #ffffff;
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
@@ -799,7 +807,7 @@ img {
         visibility: visible; }
   .single-product-wrapper .product-description {
     position: relative;
-    z-index: 10;
+    z-index: -1;
     padding-top: 25px; }
     .single-product-wrapper .product-description span {
       font-size: 10px;
@@ -932,11 +940,19 @@ img {
         margin-bottom: 30px; } }
 
 /* :: 10.0 Single Product Details Area CSS */
+
+#product_list_container {
+    position: relative;
+    z-index: 1;
+
+}
+
 .single_product_details_area {
-  position: relative;
-  z-index: 100;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
+    position: relative;
+    z-index: 1;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
   .single_product_details_area .single_product_thumb,
   .single_product_details_area .single_product_desc {
     -webkit-box-flex: 0;
@@ -1627,7 +1643,7 @@ img {
             display: flex;
             -webkit-box-align: center;
             -ms-flex-align: center;
-            /*  -ms-grid-row-align: center;*/
+            /*   -ms-grid-row-align: center;*/
             align-items: center;
             -webkit-box-pack: justify;
             -ms-flex-pack: justify;

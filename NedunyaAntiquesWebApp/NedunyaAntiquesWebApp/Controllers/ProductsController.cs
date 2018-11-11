@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using NedunyaAntiquesWebApp.Models;
 
 namespace NedunyaAntiquesWebApp.Controllers
@@ -109,20 +111,39 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
         //GET : Products/Show
-        public ActionResult ShowCategory(string category)
+        public ActionResult ShowCategory(string category,string subcategory)
         {
 
             // List<Product> _productList;
-            var productList = from p in db.Products where p.Category.Equals(category) select p;
-            if (!productList.Any())
+        //    var productList = from p in db.Products where p.Category.Equals(category) select p;
+          /*  if (!productList.Any())
             {
                 return RedirectToAction("Index", "Home");
-            }
+            }*/
 
             ViewBag.Category=category;
-            return View(productList.ToList());
+            ViewBag.SubCategory = subcategory;
+            return View(db.Products.ToList());
          }
-        
+
+        public ActionResult _ProductList(string category, string subcategory)
+        {
+            IQueryable<Product> productList;
+
+            if (category != "null") { 
+               productList = from p in db.Products where p.Category.Equals(category) select p;
+            }
+            else
+            {
+               productList = from p in db.Products where p.SubCategory.Equals(subcategory) select p;
+            }
+            ViewBag.Category = category;
+            return PartialView(productList.ToList());
+        }
+
+
+
+
         public ActionResult ShowProdOnSale()
         {
             var productList = from p in db.Products where p.Sale.Equals(true) select p;
@@ -167,6 +188,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                         photo.Save("~/Images/Thumbs/" + imageName);
                         var img = new Image { ProductId = product.ProductId};                        
                         img.Name = imageName;
+                        img.Product = product;
                         imageList.Add(img);
                      }
                    
@@ -198,6 +220,7 @@ namespace NedunyaAntiquesWebApp.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(product);
         }
 
@@ -209,19 +232,52 @@ namespace NedunyaAntiquesWebApp.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "ProductId,Name,Price,Substance,Category,SubCategory,Height,Width,Depth,Sale,DiscountPercentage,Rented,RentalPriceForDay,Description")] Product product, IEnumerable<HttpPostedFileBase> Images)
         {
+
             if (db.Products.Find(product.ProductId) != null)
             {
                 if (ModelState.IsValid)
+            {
+                if (Images.ElementAt(0) != null)
                 {
-                    db.Entry(product).State = EntityState.Modified;
+                    var productImages = db.Images.Where(n => n.ProductId == product.ProductId).ToList();
+                    foreach (var image in productImages) {
+                        db.Images.Remove(image);
+                    }
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+
+                    var imageList = new List<Image>();
+                    foreach (var image in Images)
+                    {
+                        string imageName = System.IO.Path.GetFileName(image.FileName);
+                        string physicalPath = Server.MapPath("~/Images/" + imageName);
+                        image.SaveAs(physicalPath);
+                        WebImage photo = new WebImage(physicalPath);
+                        photo.Resize(640, 480);
+                        photo.Save("~/Images/Thumbs/" + imageName);
+                        var img = new Image { ProductId = product.ProductId };
+                        img.Name = imageName;
+                        img.Product = product;
+                        imageList.Add(img);
+                        db.Images.Add(img);
+                    }
+
+                    product.Images = imageList;
                 }
+
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+
+
             }
             else
             {
                 Response.Write(("<script>alert('Product was not found, please try another product');</script>"));
             }
+
+
             return View(product);
         }
 
