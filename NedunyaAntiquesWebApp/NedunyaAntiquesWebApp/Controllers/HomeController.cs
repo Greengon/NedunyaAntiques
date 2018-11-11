@@ -1,8 +1,10 @@
-﻿using System;
+﻿using NedunyaAntiquesWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 
 namespace NedunyaAntiquesWebApp.Controllers
@@ -12,7 +14,9 @@ namespace NedunyaAntiquesWebApp.Controllers
        
         public ActionResult Index()
         {
-            return View();
+            k_means kmeans1 = new k_means();
+            List<Product> showOnFooter = kmeans1.distans();
+            return View(showOnFooter);
         }
 
         public ActionResult Shop()
