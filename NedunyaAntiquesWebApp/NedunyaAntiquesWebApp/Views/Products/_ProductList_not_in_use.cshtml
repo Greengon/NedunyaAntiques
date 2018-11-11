@@ -1,0 +1,28 @@
+﻿@using System.ComponentModel
+@using NedunyaAntiquesWebApp.Models
+@model IEnumerable<NedunyaAntiquesWebApp.Models.Product>
+
+
+
+@foreach (var item in Model)
+{
+
+
+    <!--Single Product-->
+    <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card">
+            <img class="card-img-top" src="~/Images/Thumbs/@(item.Images.ElementAt(0).Name)" alt="Card image cap" >
+            <div class="card-body">
+                <!--Product Description-->
+                <h5 class="card-title">
+                    <b>שם המוצר:</b> @Html.DisplayFor(modelItem => item.Name)
+                </h5>
+                <p class="card-text">
+                <p> <b>מחיר:</b> @Html.DisplayFor(modelItem => item.Price) ש"ח</p>
+                    @*  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@item.Name">Open modal for @item.Name</button>*@
+                     <p>@Html.ActionLink("הוסף לסל", "AddToCart", "Transactions", new { ProductId = @Html.EditorFor(modelItem => item.ProductId) }, new { @class = "btn btn-info" })</p>
+                </p>
+            </div>
+        </div>
+     </div>
+ }

@@ -79,7 +79,7 @@ namespace NedunyaAntiquesWebApp.Controllers
                     from u in db.Users
                     where (u.UserName == login.UserLog) && (u.PasswordHash == login.PasswordLog)
 
-                    select u).Single();
+                    select u).SingleOrDefault();
 
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppCustomerManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
@@ -105,14 +105,10 @@ namespace NedunyaAntiquesWebApp.Controllers
         }
 
 
-        [HttpPost]
-        [Authorize]
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index");
-           // HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-           //return RedirectToAction("Index", "Home");
+           HttpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+           return RedirectToAction("Index", "Home");
         }
 
         //[Authorize] - TODO: uncomment before you go live
